@@ -11,6 +11,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(ProductPropertiesSeeder::class);
+       
     }
+}
+class ProductSeeder extends Seeder 
+{
+     public function run()
+    {
+        DB::table('product')->insert([
+            ['name'=>'NIKE AIR FOAMPOSITE PRO',"slug_name"=>'NIKE AIR FOAMPOSITE PRO',"meta_name"=>"NIKE AIR FOAMPOSITE PRO","image_product"=>'anh3.jpg',"description"=>"giày nhẹ thoáng mát","detail"=>"chất liệu vải cavans kết hợp da","unit_price"=>2500000,"new"=>1,"cate_id"=>1,"brand_id"=>1],
+            ['name'=>'NIKE LUNAR FORCE 1 DUCKBOOT',"slug_name"=>'NIKE LUNAR FORCE 1 DUCKBOOT',"meta_name"=>"NIKE LUNAR FORCE 1 DUCKBOOT","image_product"=>'anh4.jpg',"description"=>"giày nhẹ thoáng mát","detail"=>"chất liệu vải cavans kết hợp da","unit_price"=>2500000,"new"=>1,"cate_id"=>1,"brand_id"=>1]
+        ]);
+    }
+}
+class SizeSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('size')->insert([
+            ['name'=>"35"],['name'=>"36"],['name'=>"37"],['name'=>"38"],["name"=>"39"],["name"=>"40"],
+            ["name"=>"41"]
+        ]);
+    }
+}
+class ProductPropertiesSeeder extends Seeder
+{
+	public function run()
+	{
+		DB::table('product_properties')->insert([
+			['product_id'=>1,"size_id"=>1,"quantity"=>10],
+			['product_id'=>1,"size_id"=>2,"quantity"=>13],
+			['product_id'=>1,"size_id"=>3,"quantity"=>13],
+			['product_id'=>2,"size_id"=>4,"quantity"=>12],
+			['product_id'=>2,"size_id"=>3,"quantity"=>34],
+		]);
+	}
 }
