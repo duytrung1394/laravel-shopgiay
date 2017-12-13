@@ -14,7 +14,7 @@ class CreateTwoPrimaryKey2 extends Migration
     public function up()
     {
         Schema::table('product_properties', function (Blueprint $table) {
-            $table->primary(['product_id','size_id']);
+            // $table->primary(['product_id','size_id']);
         });
     }
 

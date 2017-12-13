@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ProductPropertiesSeeder::class);
+        // $this->call(CategorySeeder::class);
        
     }
 }
@@ -47,4 +47,16 @@ class ProductPropertiesSeeder extends Seeder
 			['product_id'=>2,"size_id"=>3,"quantity"=>34],
 		]);
 	}
+}
+class CategorySeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('category')->insert([
+            ['name'=>"Giày Nam","slug_name"=>"giay-nam","parent_id"=>0],
+            ['name'=>"Giày Nữ","slug_name"=>"giay-nam","parent_id"=>0],
+            ['name'=>"Thể thao","slug_name"=>"the-thao","parent_id"=>1],
+            ['name'=>"Boot","slug_name"=>"boot","parent_id"=>1]
+        ]);
+    }
 }

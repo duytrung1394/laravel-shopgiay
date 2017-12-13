@@ -19,7 +19,6 @@ class PageController extends Controller
     		$size_id = $value['size_id'];
     	}
     	
-    	$size = Size::find($size_id)->toArray();
-    	print_r($size);
+    	$size = Size::find($size_id)->toArray();  
     }
 }
