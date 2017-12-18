@@ -53,6 +53,7 @@
     <!-- DataTables JavaScript -->
     <script src="admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="admin_asset/ckeditor/ckeditor.js"></script>
     @yield('script')
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>

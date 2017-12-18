@@ -37,5 +37,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
 		
 		Route::get("them",['as'=>'themsanpham','uses'=>'ProductController@getAddProduct']);
 
+		Route::post("them",['as'=>'themsanpham','uses'=>'ProductController@postAddProduct']);
+
 	});
 });

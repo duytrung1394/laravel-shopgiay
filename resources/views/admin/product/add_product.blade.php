@@ -9,69 +9,79 @@
                             <small>Add</small>
                         </h1>
                     </div>
+
                     <!-- /.col-lg-12 -->
-                    <div class="col-lg-7" style="padding-bottom:120px">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="col-lg-7" style="padding-bottom:120px">
+                    @if(count($errors)>0)
+                        <div class="alert alert-warning" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        @foreach($errors->all() as $err)
+                            {{$err}} <br>
+                        @endforeach
+                        </div>
+                    @endif
                             <div class="form-group">
-                                <label>Name</label>
-                                <input class="form-control" name="txtName" placeholder="Please Enter Username" />
+                                <label>Danh mục cha</label>
+                                <select class="form-control" name="selectParentId">
+                                    <?php listcate($cate, 0, $str = "", old('selectParentId') ) ?>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label>Price</label>
-                                <input class="form-control" name="txtPrice" placeholder="Please Enter Password" />
+                                <label>Tên sản phẩm</label>
+                                <input class="form-control" name="txtName" placeholder="Nhập tên đầy đủ" value=""/>
+                            </div> 
+                            <div class="form-group">
+                                <label>Hình đại diện</label>
+                                <input type="file" class="form-control" name="txtHinh"  />
                             </div>
                             <div class="form-group">
-                                <label>Intro</label>
-                                <textarea class="form-control" rows="3" name="txtIntro"></textarea>
+                                <label>Mô tả</label>
+                                <textarea class="form-control ckeditor" rows="3" id="editor1" name="txtDescription"></textarea>
+                            </div> 
+                            <div class="form-group">
+                                <label>Chi tiết</label>
+                                <textarea class="form-control ckeditor" rows="3" id="editor1" name="txtDetail"></textarea>
                             </div>
                             <div class="form-group">
-                                <label>Content</label>
-                                <textarea class="form-control" rows="3" name="txtContent"></textarea>
+                                <label>Đơn giá</label>
+                                <input class="form-control" name="txtUnitPrice" placeholder="Nhập đơn giá" value=""/>
+                            </div> 
+                            <div class="form-group">
+                                <label>Giá khuyến mãi</label>
+                                <input class="form-control" name="txtPromoPrice" placeholder="Nhập giá khuyến mãi" value=""/>
                             </div>
                             <div class="form-group">
-                                <label>Images</label>
-                                <input type="file" name="fImages">
-                            </div>
-                            <div class="form-group">
-                                <label>Product Keywords</label>
-                                <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
-                            </div>
-                            <div class="form-group">
-                                <label>Product Description</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Product Status</label>
+                                <label>Trạng thái</label>
                                 <label class="radio-inline">
-                                    <input name="rdoStatus" value="1" checked="" type="radio">Visible
+                                    <input name="rdoNew" value="1" checked="" type="radio">Mới
                                 </label>
                                 <label class="radio-inline">
-                                    <input name="rdoStatus" value="2" type="radio">Invisible
+                                    <input name="rdoNew" value="2" type="radio">Cũ
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-default">Product Add</button>
+
+                            <button type="submit" class="btn btn-default">Thêm</button>
                             <button type="reset" class="btn btn-default">Reset</button>
-                       
-                    </div>
-                    <div class="col-lg-5" >
-                        <div class="row" style="margin-bottom: 30px">
-                             <button type="button" class="btn btn-primary" id="btn-add-file">Thêm hình</button>
-                             <button type="button" class="btn btn-warning" id="reset-image" >reset</button>
-                            <button type="button" class="btn btn-danger" id="del-input" name='del'>xóa</button>
                         </div>
-                        <div class="row">
-                            <div class ="col-lg-7">
-                               
-                                <div class="form-group" id="add-image">
-                                    <input type="file" name="image[]" class="form-control input-image upload-1" data-inputid='1'>
+                            <div class="col-lg-5" >
+                                <div class="row" style="margin-bottom: 30px">
+                                     <button type="button" class="btn btn-primary" id="btn-add-file">Thêm hình</button>
+                                     <button type="button" class="btn btn-warning" id="reset-image" >reset</button>
+                                    <button type="button" class="btn btn-danger" id="del-input" name='del'>xóa</button>
                                 </div>
+                                <div class="row">
+                                    <div class ="col-lg-7">
+                                        <div class='form-group' id="divUpload">
+                                            <input type='file' class='form-control upload-1 file-upload' name='hinh[]' data-inputid="1" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5" id="preview">
+                                        <img class='box-preview-img img-1'/>
+                                    </div>
+                                </div>
+                                
                             </div>
-                            <div class="col-lg-5" id="preview">
-                                <img class='box-preview-img img-1'/>
-                            </div>
-                        </div>
-                        
-                    </div>
                     {{csrf_field()}}
                     <form>
                 </div>
@@ -87,24 +97,24 @@
         $(document).ready(function (){
             $("#btn-add-file").click(function ()
             {   
-                if($('#add-image input').length < 9)
+                if($('#divUpload input').length < 9)
                 {   
-                    var i = $('#add-image input').length + 1;
-                    $('#add-image').append("<input type='file' name='image[]' class='form-control input-image upload-"+i+"' data-inputid='"+i+"'/>");
+                    var i = $('#divUpload input').length + 1;
+                    $("#divUpload").append("<input type='file' class='form-control upload-"+i+" file-upload' name='hinh[]'  data-inputid='"+i+"' >");                    
                     $("#preview").append("<img class='box-preview-img img-"+i+"'/>");
                 }
             });
 
-            $("#add-image").delegate(".input-image","change",function (event){
+            $("#divUpload").delegate(".file-upload","change",function (event){
                 var id = $(this).attr('data-inputid');
                 $('#preview .img-'+id).css("visibility","visible")
-            $('#preview .img-'+id).attr('src', URL.createObjectURL(event.target.files[0])); 
+                $('#preview .img-'+id).attr('src', URL.createObjectURL(event.target.files[0])); 
             });
 
             $("#del-input").click(function (){
-                if($("#add-image input").length>1){
-                    var i = $("#add-image input").length;
-                    $("#add-image .upload-"+i).remove();
+                if($("#divUpload input").length>1){
+                    var i = $("#divUpload input").length;
+                    $("#divUpload .upload-"+i).remove();
                     $("#preview .img-"+i).remove();
                 }
             });
