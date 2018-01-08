@@ -7,16 +7,12 @@
 			$name = $value['name'];
 			if($value['parent_id'] == $parent_id)
 			{
-				$arr = "";
-				if($value['parent_id'] == 0 )
-				{
-					$arr = "disabled"; 
-				}
+				
 				if($select == $id && $select !=0){
-					echo "<option value='" .$id."' selected='selected' ". $arr.">". $str. " ".$name . "</option>";
+					echo "<option value='" .$id."' selected='selected'>". $str. " ".$name . "</option>";
 				}
 				else{
-					echo "<option value='" .$id."'  ". $arr." >". $str. " ".$name . "</option>";
+					echo "<option value='" .$id."' >". $str. " ".$name . "</option>";
 				}
 				
 				listcate($data, $id, $str . "---",$select);

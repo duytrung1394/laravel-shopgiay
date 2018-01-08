@@ -12,22 +12,22 @@
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
                         <div class="col-lg-7" style="padding-bottom:120px">
-                             @if(count($errors)>0)
-                            <div class="alert alert-danger">
+                         @if(count($errors)>0)
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <strong>Warning!!</strong>
+                            @foreach($errors->all() as $err)
+                                {{$err}}<br>
+                            @endforeach
+                        </div>
+                        @endif
+                         @if(session('message'))
+                            <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <strong>Warning!!</strong>
-                                @foreach($errors->all() as $err)
-                                    {{$err}}<br>
-                                @endforeach
+                                <strong>Success</strong>
+                                {{session('message')}}
                             </div>
-                            @endif
-                             @if(session('message'))
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                    <strong>Success</strong>
-                                    {{session('message')}}
-                                </div>
-                            @endif
+                        @endif
                         <form action="admin/danh-muc/sua/{{$item->id}}" method="POST">
                             <div class="form-group">
                                 <label>Danh mục cha</label>

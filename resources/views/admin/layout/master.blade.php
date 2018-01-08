@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Khóa Học Lập Trình Laravel Framework 5.x Tại Khoa Phạm">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Trang addmin</title>
     <base href="{{asset('')}}" >
     <!-- Bootstrap Core CSS -->
@@ -54,6 +55,13 @@
     <script src="admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
     <script src="admin_asset/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+       $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('script')
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
@@ -62,6 +70,7 @@
                 responsive: true
         });
     });
+    
     </script>
 </body>
 

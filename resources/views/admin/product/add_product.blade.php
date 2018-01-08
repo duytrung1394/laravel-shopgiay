@@ -21,12 +21,27 @@
                         @endforeach
                         </div>
                     @endif
+                    @if(!empty(session('message')))
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {{session('message')}}
+                        </div>
+                    @endif
                             <div class="form-group">
-                                <label>Danh mục cha</label>
+                                <label>Danh mục</label>
                                 <select class="form-control" name="selectParentId">
                                     <?php listcate($cate, 0, $str = "", old('selectParentId') ) ?>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Thương hiệu</label>
+                                <select class="form-control" name="selectBrandId">
+                                    @foreach($brands as $brand)
+                                        <option value='{{$brand->id}}'>{{$brand->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <label>Tên sản phẩm</label>
                                 <input class="form-control" name="txtName" placeholder="Nhập tên đầy đủ" value=""/>

@@ -72,4 +72,23 @@ class CategoryController extends Controller
 
         return redirect('admin/danh-muc/sua/'.$id)->with("message","Sửa thành công");
     }
+
+    public function getDelCate($id)
+    {
+        $count = Category::where('parent_id',$id)->count();
+        if($count == 0)
+        {
+            $cate = Category::find($id);
+            $cate->delete();
+            return redirect('admin/danh-muc/danh-sach')->with('message','xóa thành công');
+        }else{
+            echo "<script type='text/javascript'>
+                alert('Bạn không thể xóa chuyên mục này');
+                window.location ='";
+           echo route('listdanhmuc');
+            echo "'
+            </script>";
+         
+        }
+    }
 }
