@@ -1,0 +1,42 @@
+/**ADMIN style**/
+.file-upload{
+	margin-bottom: 44px;
+}
+.box-preview-img {width: 130px; height: 73px; border: 1px solid #ccc; margin-right: 5px; margin-bottom: 3px; visibility: hidden
+}
+#size-quantity input[type='text'] {
+	width: 50px;
+	padding: 0px 5px;
+}
+#size-quantity td{
+	padding: 5px;
+}
+.item-image img{
+	width: 200px;
+	height: 140px;
+	padding: 10px 15px 10px 10px;
+	border-radius: 5px;
+}
+.item-image button{
+	margin: 9px 0px;
+}
+
+.item-image .btn-submit, .item-image input[type='file']{
+	/*display: none;*/
+}
+.icon_del{
+	position: relative;
+	top: -142px;
+	left: 172px;
+}
+#list_size td{
+	padding: 10px;
+}
+#list_size th{
+	padding: 10px;
+}
+#list_size input[type='text']
+{
+	width: 40px;
+	padding: 5px 5px;
+}

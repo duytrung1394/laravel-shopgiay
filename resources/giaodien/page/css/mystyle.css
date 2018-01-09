@@ -351,14 +351,13 @@ a:hover{
 .thumbnail:hover{
 	border: 1px solid #ddd;
 	cursor: pointer;
+	opacity: 0.9;
 }
 .block_wrap .product-item{
 	padding-right: 4px;
     padding-left: 4px;
     margin: 5px 0px;
-
 }
-
 /** badge status product**/
 .badge{
 	position: absolute;

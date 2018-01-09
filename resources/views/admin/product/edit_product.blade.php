@@ -9,7 +9,7 @@
                         <small>Sửa</small>
                     </h1>
                 </div>
-
+                <a href="admin/san-pham/danh-sach" class="btn btn-default">Trở về</a>
                 <!-- /.col-lg-12 -->
                 <form action="" method="POST" enctype="multipart/form-data">
                 <div class="col-lg-7" style="padding-bottom:100px">

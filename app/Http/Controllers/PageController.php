@@ -5,20 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Product;
-
 use App\ProductProperties;
-
+use App\Category;
+use App\ImageProduct;
 use App\Size;
-
+use \Cart;
 class PageController extends Controller
 {
-    function getDanhsach()
+	public function __construct()
+	{	//truyyền viewshare . loai san pham tới kahcs mọi trang trong page
+		
+		$cateShare = Category::all();
+		view()->share(['cateShare'=>$cateShare]);
+	}
+    public function getIndexPage()
     {
-    	$product = Product::find(1)->product_properties()->where("size_id","=",2)->select("quantity","size_id")->get()->toArray();
-    	foreach ($product as $value) {
-    		$size_id = $value['size_id'];
-    	}
+    	$new_product = Product::where('new',1)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->get();
     	
-    	$size = Size::find($size_id)->toArray();  
+    	$sale_product = Product::where('promotion_price','>',0)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->get();
+    	
+    	return view('page.index',compact('new_product','sale_product'));
+    }
+    public function getCategory($id)
+    {   
+        $products = Product::where('cate_id',$id)->get();
+        
+        return view('page.category',compact('products'));
+        
+    }
+    public function getDetailProduct($id)
+    {
+        $product = Product::find($id);
+        $image_products = ImageProduct::where('product_id', $id)->get();
+        return view('page.detail',compact('product','image_products'));
+        
+    }
+    public function getAddCart($id)
+    {
+        $product = Product::find($id);
+        Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1, 'price' => $product->unit_price, 'options' => ['size_id' => '1']]);
+        
     }
 }

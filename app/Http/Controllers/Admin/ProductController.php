@@ -86,7 +86,8 @@ class ProductController extends Controller
     }
     public function getListProduct()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id','DESC')->get();
+      
         return view('admin.product.list_product',compact('products'));
     }
 

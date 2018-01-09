@@ -21,6 +21,7 @@
     <!-- Custom Fonts -->
     <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 </head>
 
 <body>
@@ -28,14 +29,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Đăng nhập</h3>
-                    </div>
+                    
+                <div class='register-block form-register' style="margin-top: 20%">
+                    <p class="login-title text-center">Đăng Nhập</p>
+                    <form role="form" action="admin/dang-nhap" method="POST">
+                        <div class="field field__input-wrapper">
+                            <label class="field__label" for="input-email">Email</label>
+                            <input class="field__input" id="input-email" name="txtEmail" type="email" placeholder="Email">
+                        </div>
+                        <div class="field field__input-wrapper">
+                            <label class="field__label" for="input-email">Mật khẩu</label>
+                            <input class="field__input" id="input-email" type="password" name="txtPass"  placeholder="Mật khẩu">
+                        </div>
+                        <div class="field__input-wrapper" style="margin-top: 15px;">
+                            <input type="submit" name="login" value="Đăng nhập" class="btn__submit" >
+                        </div>
+                          {{csrf_field()}}
+
+                    </form>
+                    <div style="clear:both"></div>
                         @if(count($errors)>0)
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <strong>Warning!!</strong><br>
                                 @foreach($errors->all() as $err)
                                     {{$err}}<br>
                                 @endforeach
@@ -45,24 +60,9 @@
                         @if(session('loi'))
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <strong>Warning</strong>
                                 {{session('loi')}}
                             </div>
                         @endif
-                    <div class="panel-body">
-                        <form role="form" action="admin/dang-nhap" method="POST">
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="txtEmail" type="email" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Mật khẩu" name="txtPass" type="password" value="">
-                                </div>
-                                <button type="submit" class="btn btn-lg btn-primary btn-block">Đăng nhập</button>
-                            </fieldset>
-                             {{csrf_field()}}
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +79,16 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="admin_asset/dist/js/sb-admin-2.js"></script>
-
+    <script type="text/javascript">
+        $('.field__input').on('input', function (){
+            var field = $(this).closest('.field__input-wrapper');
+            if (this.value) {
+                field.addClass('field__input-active');
+            } else {
+                field.removeClass('field__input-active');
+            }
+        });
+    </script>
 </body>
 
 </html>

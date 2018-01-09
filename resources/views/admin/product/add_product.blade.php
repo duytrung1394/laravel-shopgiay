@@ -27,6 +27,7 @@
                             {{session('message')}}
                         </div>
                     @endif
+                    <a href="admin/san-pham/danh-sach" class="btn btn-default">Trở về</a>
                             <div class="form-group">
                                 <label>Danh mục</label>
                                 <select class="form-control" name="selectParentId">
@@ -44,7 +45,7 @@
 
                             <div class="form-group">
                                 <label>Tên sản phẩm</label>
-                                <input class="form-control" name="txtName" placeholder="Nhập tên đầy đủ" value=""/>
+                                <input class="form-control" name="txtName" placeholder="Nhập tên đầy đủ" value="{{old('txtName')}}"/>
                             </div> 
                             <div class="form-group">
                                 <label>Hình đại diện</label>
@@ -52,19 +53,19 @@
                             </div>
                             <div class="form-group">
                                 <label>Mô tả</label>
-                                <textarea class="form-control ckeditor" rows="3" id="editor1" name="txtDescription"></textarea>
+                                <textarea class="form-control ckeditor" rows="3" id="editor1" name="txtDescription">{{old('txtDescription')}}</textarea>
                             </div> 
                             <div class="form-group">
                                 <label>Chi tiết</label>
-                                <textarea class="form-control ckeditor" rows="3" id="editor1" name="txtDetail"></textarea>
+                                <textarea class="form-control ckeditor" rows="3" id="editor1" name="txtDetail" >{{old('txtDetail')}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Đơn giá</label>
-                                <input class="form-control" name="txtUnitPrice" placeholder="Nhập đơn giá" value=""/>
+                                <input class="form-control" name="txtUnitPrice" placeholder="Nhập đơn giá" value="{{old('txtUnitPrice')}}"/>
                             </div> 
                             <div class="form-group">
                                 <label>Giá khuyến mãi</label>
-                                <input class="form-control" name="txtPromoPrice" placeholder="Nhập giá khuyến mãi" value=""/>
+                                <input class="form-control" name="txtPromoPrice" placeholder="Nhập giá khuyến mãi" value="{{old('txtPromoPrice')}}"/>
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>

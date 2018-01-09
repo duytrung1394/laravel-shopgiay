@@ -11,11 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',['as'=>'trang-chu','uses'=>'PageController@getIndexPage']);
 
-Route::get("danhsach","PageController@getDanhsach");
+Route::get('danh-muc/{id}/{url}',['as'=>'chuyen-muc','uses'=>'PageController@getCategory']);
+
+Route::get('san-pham/{id}/{url}',['as'=>'san-pham','uses'=>'PageController@getDetailProduct']);
+
+Route::get('mua-hang/{id}',['as'=>'muahang','uses'=>'PageController@getAddCart']);
+
+// Route::get("danhsach","PageController@getDanhsach");
+
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 
