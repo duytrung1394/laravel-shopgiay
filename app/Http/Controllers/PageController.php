@@ -58,9 +58,10 @@ class PageController extends Controller
         //lay cate cha
         $cates_parent   = Category::find($cates->parent_id);
         
+        $diff_products = Product::where('cate_id',$cate_id)->where('id',"<>",$id)->limit(4)->get();
         $image_products = ImageProduct::where('product_id', $id)->get();
 
-        return view('page.detail',compact('product','image_products','cate_id','cates','cates_parent'));
+        return view('page.detail',compact('product','image_products','cate_id','cates','cates_parent','diff_products'));
         
     }
     public function postAjaxAddtoCart(Request $request)
@@ -116,39 +117,45 @@ class PageController extends Controller
             $product_size  = $size->name;
             $total_price   = Cart::subtotal(0,"","");
             //nếu đơn hàng hơn 200000 thì free ship
-            if($total_price > 2000000)
-            {
-                $ship_price = 0;
-            }else{
-                $ship_price = 50000;
-            }
+            // if($total_price > 2000000)
+            // {
+            //     $ship_price = 0;
+            // }else{
+            //     $ship_price = 50000;
+            // }
+            $ship_price = 0;
             //Tổng tiền bằng tổng trừ ship 
-            $total       = $total_price - $ship_price;
+            $total       = $total_price + $ship_price;
             $total       =  number_format($total);
             $total_price = number_format($total_price);
             $ship_price  = number_format($ship_price);
-            
             
             $valid['success'] = true;
             $valid['messages'] = "Thành công";
             $cart_count  = Cart::count();
             echo json_encode(
                 array( 
-                    "product_id"    => "$product_id",
-                    "product_name"  => "$product_name",
-                    "image_product" => "$image_product",
-                    "product_size"  => "$product_size",
-                    "total"         => "$total",
-                    "qty"           => "$qty",
-                    "price"         => "$price",
-                    "ship_price"    => "$ship_price",
-                    "total_price"   => "$total_price",
-                    "cart_count"    => "$cart_count",
-                    'quantity_on_cart'      => "$quantity_on_cart",
-                    'valid'         => $valid
+                    "product_id"       => "$product_id",
+                    "product_name"     => "$product_name",
+                    "image_product"    => "$image_product",
+                    "product_size"     => "$product_size",
+                    "total"            => "$total",
+                    "qty"              => "$qty",
+                    "price"            => "$price",
+                    "ship_price"       => "$ship_price",
+                    "total_price"      => "$total_price",
+                    "cart_count"       => "$cart_count",
+                    'quantity_on_cart' => "$quantity_on_cart",
+                    'valid'            => $valid
                 )
             );
         }
-        
+    }
+    public function getShowCart(){
+        return view('page.cart');
+    }
+
+    public function getShowCheckout(){
+        return view('page.checkout');
     }
 }

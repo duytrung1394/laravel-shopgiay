@@ -19,6 +19,10 @@ Route::get('san-pham/{id}/{url}',['as'=>'san-pham','uses'=>'PageController@getDe
 
 Route::get('mua-hang/{id}',['as'=>'muahang','uses'=>'PageController@getAddCart']);
 
+Route::get('gio-hang',['as'=>'giohang','uses'=>'PageController@getShowCart']);
+
+Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getShowCheckout']);
+
 // Route::get("danhsach","PageController@getDanhsach");
 Route::post('ajax/add-to-cart','PageController@postAjaxAddtoCart');
 

@@ -3,6 +3,7 @@
 <div id='wrapper'>
 	<div class="row">
 		@include('layout.sider_nav')
+
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 block-main-content">
 			<div class='main-content'>
 			<hr class="hr--border-top small-hidden"></hr>
@@ -46,10 +47,12 @@
 								@if($product->promotion_price > 0 )
 								<span class="badge badge--sale"><span>Sale</span></span>
 								@endif
+								@if($product->new == 1 )
 						   		<span class="badge badge--new"><span>New</span></span>
+						   		@endif
 						      	<img src="uploaded/product/{{$product->image_product}}" alt="...">
 						     	<div class="product-caption text-left">
-						        	<p class='product-title'><a href="">{{$product->name}}</a></p>
+						        	<p class='product-title'><a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html">{{$product->name}}</a></p>
 						        	<p class='product-price'>
 					        		@if($product->promotion_price > 0 )
 							        	<span class="product__price-on-sale">{{$product->promotion_price}}</span>
@@ -58,7 +61,7 @@
 										<span> {{$product->unit_price}}</span>
 									@endif
 						        	</p>
-						        <p class='product-btn__p' ><a href="detail.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a> <a href="san-pham/{{$product->id}}/{{$product->slug_name}}.hmtl" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
+						        <p class='product-btn__p' ><a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
 						      	</div>
 						    </div>
 					  	</div>
@@ -69,7 +72,7 @@
 			</div>
 			<!--block_wrap-->
 		</div>
-		<!--end-maincontent-->
+		<!--end-main-content-->
 	</div>
 	<!--block-main-content-->
 	</div>

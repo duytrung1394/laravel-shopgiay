@@ -50,7 +50,7 @@
 			    			</span></div>
 			    			<hr class="hr--border-cart-popup"></hr>
 			    			<div class='text-center dropdown-cart__bottom'>
-			    				<a href="cart.html" class='btn__link btn__link-dropdow-cart'><span class="glyphicon glyphicon-search"></span> Chi tiết</a>
+			    				<a href="{{ route('giohang')}}" class='btn__link btn__link-dropdow-cart'><span class="glyphicon glyphicon-search"></span> Chi tiết</a>
 			    				<a href="index.html" class='btn__link btn__link-dropdow-cart'>Tiếp tục mua hàng</a>
 			    			</div>
 			    		</div>
@@ -102,7 +102,7 @@
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			    <ul class="navbar-nav mr-auto menu-list">
 			      <li class="nav-item active">
-			        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			        <a class="nav-link" href="{{ route('trang-chu') }}">Home <span class="sr-only">(current)</span></a>
 			      </li>
 			      	@foreach($cateShare as $cate)
 			      		@if($cate['parent_id'] == 0)
@@ -121,7 +121,7 @@
 							    </li>
 							 @else
 							 	<li class="nav-item">
-						         	<a class="nav-link" href="category.html">{{$cate-name}}</a>
+						         	<a class="nav-link" href="danh-muc/{{$cate->id}}/{{$cate->slug_name}}.html}}">{{$cate-name}}</a>
 						      	</li>
 							 @endif
 			      		@endif

@@ -57,6 +57,9 @@
 		max-height: 200px;
 		overflow-y: scroll !important;
 	}
+	#wrapper{
+		min-height: 500px;
+	}
 }
 @media all and (max-width: 767.99px){
 	body {
@@ -93,6 +96,7 @@
 		width: 100%;
 		display: block;
 	}
+	
 	.responsive-table td{
 	    text-align: right;
 	    padding: 15px;
@@ -306,7 +310,7 @@ a:hover{
 /*END_NAV*/
 
 #wrapper{
-	margin-top: 20px;
+	margin: 20px auto;
 }
 .title-heading{
 	padding-bottom: 20px;
@@ -356,7 +360,6 @@ a:hover{
 	padding-right: 4px;
     padding-left: 4px;
     margin: 5px 0px;
-
 }
 
 /** badge status product**/
@@ -690,6 +693,9 @@ p.product-price-detail
 	-webkit-transition:   0.3s;
 	-moz-transition: 0.3s;
 
+}
+.responsive-table tr{
+	border-bottom: 1px solid #ddd;
 }
 /**detail**/
 .btn__link-detail{
@@ -1080,10 +1086,4 @@ a.disabled:hover {
     width: 100%;
     margin: 18px auto;
     text-transform: uppercase;
-}
-
-.fade {
-    opacity: 0;
-    -webkit-transition: opacity 1s linear;
-    transition: opacity 1s linear;
 }

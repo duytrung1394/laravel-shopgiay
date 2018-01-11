@@ -34,25 +34,25 @@ $(document).ready(function (){
 
 	//nav
 	$(".nav__sidebar a").click(function(){
-				//slide tất cả các ul con
-				$(".nav__sidebar ul ul").addClass('active-ul');
-				$(".nav__sidebar ul ul").slideUp();
-				//Hiện gly down ở các ul khác
-				$(".nav__sidebar ul li a span").removeClass('glyphicon-chevron-up');
-				$(".nav__sidebar ul li a span").addClass('glyphicon-chevron-down');
-				//Hiện gly up ở thẻ này
-				$(this).children().addClass('glyphicon-chevron-down');
-				$(this).children().removeClass('glyphicon-chevron-up');
-				// nếu ul con không được hiện thỉ thì thả ul xuống khi click
-				if(!$(this).next().is(":visible"))
-				{
-					$(this).next().slideDown();
-					
-					// ul hiện thì thêm sly up
-					$(this).children().addClass('glyphicon-chevron-up');
-					$(this).children().removeClass('glyphicon-chevron-down');
-				}
-			});
+		//slide tất cả các ul con
+		$(".nav__sidebar ul ul").addClass('active-ul');
+		$(".nav__sidebar ul ul").slideUp();
+		//Hiện gly down ở các ul khác
+		$(".nav__sidebar ul li a span").removeClass('glyphicon-chevron-up');
+		$(".nav__sidebar ul li a span").addClass('glyphicon-chevron-down');
+		//Hiện gly up ở thẻ này
+		$(this).children().addClass('glyphicon-chevron-down');
+		$(this).children().removeClass('glyphicon-chevron-up');
+		// nếu ul con không được hiện thỉ thì thả ul xuống khi click
+		if(!$(this).next().is(":visible"))
+		{
+			$(this).next().slideDown();
+			
+			// ul hiện thì thêm sly up
+			$(this).children().addClass('glyphicon-chevron-up');
+			$(this).children().removeClass('glyphicon-chevron-down');
+		}
+	});
 	// nếu li được active thì hiện thị ul cha của li
 	// $('.active-li').closest('ul').show();
 	// hiện gly up
@@ -68,7 +68,9 @@ $(document).ready(function (){
 	$('#myModal').on('hidden.bs.modal', function () {
   		document.location.reload();
 	});
-
+	
+	// hiện feil_label khi nhấp input
+	
 });
 //initiate the plugin and pass the id of the div containing gallery images
 	$("#img_01").elevateZoom({
@@ -87,5 +89,14 @@ $(document).ready(function (){
 	  var ez =   $('#img_01').data('elevateZoom');	
 		$.fancybox(ez.getGalleryList());
 	  return false;
+	});
+	
+	$('.field__input').on('input', function (){
+			var field = $(this).closest('.field__input-wrapper');
+			if (this.value) {
+			    field.addClass('field__input-active');
+			} else {
+			    field.removeClass('field__input-active');
+			}
 	});
 

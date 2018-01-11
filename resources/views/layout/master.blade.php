@@ -16,7 +16,9 @@
 <body>
 	<div class="container-fluid">
 		@include('layout.header')
+		
 		@yield('content')
+
 		@include('layout.footer')
 	</div>
 	<script type="text/javascript" src='js/jquery.min.js'></script>

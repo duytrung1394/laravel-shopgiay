@@ -306,9 +306,6 @@ a:hover{
 }
 /*END_NAV*/
 
-#wrapper{
-	margin-top: 20px;
-}
 .title-heading{
 	padding-bottom: 20px;
 	position: relative;
@@ -416,6 +413,9 @@ a:hover{
 	display: block;
 }
 
+#wrapper{
+	margin: 20px auto;
+}
 /*Category*/
 .list--nav{
 	padding-left: 0;
