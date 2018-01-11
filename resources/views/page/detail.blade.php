@@ -2,34 +2,24 @@
 @section('content')
 <div id='wrapper'>
 	<div class="row">
-		<div class="col-12 col-sm-12 col-md-2 col-lg-2 nav-left small--text-center">
-			<hr class="hr--border-top small-hidden"></hr>
-			<h4>Giày nam</h4>
-			<ul class='list--nav small--text-center'>
-				<li><a href="" class='site-nav__link'>Thể thao</a></li>
-				<li><a href="" class='site-nav__link'>Scandal</a></li>
-				<li><a href="" class='site-nav__link'>Boots</a></li>
-			</ul>
-		</div>
+		@include('layout.sider_nav')
 	
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 ">
 			<div class='main-content'>
-				<hr class="hr--border-top small-hidden"></hr>
-			<div class=''>
-				<nav class="breadcrumb-nav small--text-center" aria-label="You are here">
-				  <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				    <a href="index.html" itemprop="url" title="Back to the homepage">
-				      <span itemprop="title">Home</span>
-				    </a>
-				    <span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
-				    Nam
-				    <span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
-				    Giay convers
-				  </span>
-				
-				</nav>
-			</div>
-			
+			<hr class="hr--border-top small-hidden"></hr>
+
+			<nav class="breadcrumb-nav small--text-center">
+				<a href="{{ route('trang-chu') }}">Home</a>
+				<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
+				@if(count($cates_parent) > 0)
+				<a href="danh-muc/{{$cates_parent->id}}/{{$cates_parent->slug_name}}.html">{{$cates_parent->name}}</a>
+				<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
+				@endif
+				<a href="danh-muc/{{$cates->id}}/{{$cates->slug_name}}.html">{{$cates->name}}</a>
+			    <span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
+			    <a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html">{{$product->name}}</a>	
+			</nav>
+
 			<div class='block_wrap row product-single'>
 				<div class="col-12 col-sm-12 col-md-7 col-lg-6 product-single__block-left" >
 					<span class="badge badge--sale"><span>Sale</span></span>
@@ -62,36 +52,97 @@
 							<select class="single-option-selector" data-option="option1" id="product__select-size">
 								@if(count($product->product_properties) > 0)
 									@foreach($product->product_properties as $sizes)
-
 										<?php $size = App\Size::find($sizes->size_id);?>
 										<option value="{{$sizes->size_id}}">{{$size->name}}</option>
 									@endforeach
+								@else
+									<option value="0">None</option>
 								@endif
-
 							</select>
 						</div>
 						<div class='selector-wrapper'>
 							<span><label for='product__select-quantity'>Số lượng: </label></span>
 							<select class="single-option-selector" data-option="option1" id="product__select-quantity">
 								@for($i = 1; $i<=10 ; $i++)
-									<option value="$i">{{$i}}</option>
+									<option value="{{$i}}">{{$i}}</option>
 								@endfor
 							</select>
 						</div>
 					</div>
 					
 					<div class="product-submit-cart">
-						<a class='btn__link btn__link-cart' href="mua-hang/{{$product->id}}">Mua hàng</a>
+						<span class='a__submit'>
+							<a href="mua-hang/{{$product->id}}" data-product-id='{{$product->id}}'  @if(count($product->product_properties) == 0)  class='btn__link btn__link-cart btn__add-to-cart disabled'  > Hết hàng @else  class='btn__link btn__link-cart btn__add-to-cart'> Mua hàng <i class="fa fa-shopping-cart" aria-hidden="true"></i> @endif</a>
+						</span>
+						<!-- data-toggle="modal" data-target=".bd-example-modal-lg" -->
 					</div>
 				</div>
-					
+			<div class="modal fade bd-example-modal-lg" id='myModal' tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+				    <div class="modal-content">
+				      	<div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Thêm vào giỏ hàng thành công</h5>
+					        <button type="button" class="close btn__close-icon" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					    </div>
+					    <div class="modal-body">
+				        	<div class="container-fluid">
+				        		<div class="row">
+				        			<div class="col-1-4 hidden-small">
+				        				<img src="images/anh1.jpg" >
+				        			</div>
+				        			<div class="col-1-4 hidden-small">
+				        				<div class="cart__info-product">
+				        					<h5>Adidas Boots</h5>
+				        					<p class="light cart__unit_price">196.000 vnđ</p>
+				        					<p class="light cart_size">Size: 41</p>
+				        					<p class="light cart_qantity">Số lượng: 1</p>
+				        				</div>
+				        			</div>
+				        			<div class="col-1-5">
+				        				<div class="cart__total-info">
+				        					<div class="cart__total-header hidden-small">
+				        						<h5 class="light">sản phẩm</h5>
+					        					<table>
+					        						<tr>
+					        							<td class="text-left">Tổng giá</td>
+					        							<td class="text-right cart__total-price"></td>
+					        						</tr>
+					        						<tr class="shipping-price">
+					        							<td class="text-left">Chi phí ship</td>
+					        							<td class="text-right cart__ship-price"></td>
+					        						</tr>
+					        						<tr>
+					        							<td class="text-left">Tổng cộng</td>
+					        							<td class="text-right cart__total"></td>
+					        						</tr>
+					        					</table>
+				        					</div>
+				        					<div class="cart__total-footer">
+				        						<a href="detail.html" class="btn__link btn__checkout ">Chi tiết <span class="glyphicon glyphicon-chevron-right"></span></a>
+				        						<a href="javascript:void(0)" class="btn__link btn__checkout ">Thanh toán</a>
+				        					</div>
+				        					
+				        				</div>
+				        				<!--end-cart-total-->
+				        			</div>
+				        		</div>
+				        	</div>
+				      </div>
+				      <!--modal-body-->
+				    </div>
+				    <!--modal-content-->
+				  </div>
+				</div>
+				<!--end-bootstrap-modal-->	
 			</div>
 			<!--end-block_wrap-->
 			<div class='product-description'">
 				{!!$product->detail!!}
 			</div>
 			<hr class="hr--border-top small-hidden"></hr>
-			<div class='product--different row'>
+			<div class='product--different block_wrap row'>
 			  	<div class="product-item">
 				    <div class="thumbnail">
 				    	<span class="badge badge--sale"><span>Sale</span></span>
@@ -160,24 +211,48 @@
 <!--end-wrapper-->
 @endsection
 @section('script')
-	<script type="text/javascript">
- 		//initiate the plugin and pass the id of the div containing gallery images
-		$("#img_01").elevateZoom({
-			zoomType: "inner",
-  			cursor: "crosshair",
-			constrainType:"height", 
-			constrainSize: 274,
-			gallery:'gallery_01', 
-			// cursor: 'pointer',
-			// zoomWindowWidth:400,
-			// zoomWindowHeight:500,
-			galleryActiveClass: "active"}); 
-
-		//pass the images to Fancybox
-		$("#img_01").bind("click", function(e) {  
-		  var ez =   $('#img_01').data('elevateZoom');	
-			$.fancybox(ez.getGalleryList());
-		  return false;
+<script type="text/javascript">
+	$(document).ready(function (){
+		$('.btn__add-to-cart').click(function (){
+			var size_id  = $('#product__select-size').val();
+			var qty = $('#product__select-quantity').val();
+			var product_id = $(this).attr('data-product-id');
+			$.ajax({
+				url: "ajax/add-to-cart",
+				type: "post",
+				dataType: 'json',
+				data: "product_id="+product_id+"&size_id="+size_id+"&qty="+qty,
+				async: true,
+				beforeSend: function()
+			    {
+			        $('.btn__add-to-cart').html("Mua hàng <i class='fa fa-circle-o-notch fa-spin'></i>");
+			    },
+			    success: function(data)
+			    {
+			      
+			        if(data.valid.success == false)
+			        {
+			        	
+			        	alert(data.valid.messages);
+			        	$('.btn__add-to-cart').html("Mua hàng <i class='fa fa-shopping-cart' aria-hidden='true'></i>");
+			        }
+			        else{
+			        	$('.btn__add-to-cart').html("Mua hàng <i class='fa fa-shopping-cart' aria-hidden='true'></i>");
+			        	$('.cart__info-product h5').html(data.product_name);
+				        $('p.cart__unit_price').html(data.price+" vnđ");
+				        $('p.cart_size').html('Size: '+data.product_size);
+				        $('p.cart_quantity').html('Số lượng: '+data.qty);
+				        $('.cart__total-info h5').html(data.cart_count+" Sản phẩm");
+				        $('.cart__total-price').html(data.total_price+" vnđ");
+				        $('.cart__ship-price').html(data.ship_price+" vnđ");
+				        $('.cart__total').html(data.total+" vnđ");
+				        $('.cart__count').html("("+data.cart_count+")");
+				        $("#myModal").modal('show');
+			        }
+			    }
+			});
+			return false;
 		});
-	</script>
+	});
+</script>
 @endsection 

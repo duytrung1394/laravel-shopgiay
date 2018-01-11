@@ -6,9 +6,12 @@
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<base href="{{asset('')}}" >
+
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
 	<link href="css/glyphicons.css" rel="stylesheet" />
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="asset/font-awesome/css/fontawesome-all.min.css"> -->
 </head>
 <body>
 	<div class="container-fluid">
@@ -18,8 +21,9 @@
 	</div>
 	<script type="text/javascript" src='js/jquery.min.js'></script>
 	<script type="text/javascript" src='js/bootstrap.min.js'></script>
-	<script type="text/javascript" src='js/myscript.js'></script>
 	<script src='js/elevatezoom/jquery.elevatezoom.js'></script>
+	<script type="text/javascript" src='js/myscript.js'></script>
+	
 		@yield('script')
 	<script type="text/javascript">
 		$.ajaxSetup({

@@ -9,51 +9,54 @@
 		<div class="col-md-6 top-bar-right">
 			<ul class="nav justify-content-end">
 			  	<li class="nav-item cart-link">
-			    	<a class="nav-link cart-select"  href="javascript:void(0)"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a>
+			    	<a class="nav-link cart-select"  href="javascript:void(0)"><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng <span class="cart__count">@if(Cart::count() > 0) ({{Cart::count()}}) @endif</span></a>
 			    	<div class='dropdown-nav popup__cart-body'>
+			    		@if(Cart::count() == 0)
+			    			<p class="text-center" style="margin-top: 20px;">Chưa có sản phẩm nào</p>
+			    		@else
+
 			    		<div class='cart-item cart__list-item'>
+			    			@foreach(Cart::content() as $row)
 			    			<div class="media">
-			    				<a href="#" class='remove-icon cart-popup__remove-icon' ><span class="glyphicon glyphicon-remove"></span></a>
-							  	<img class="" src="images/anh1.jpg" alt="image" width="45px">
+			    				<a href="javascript:void(0)" class='remove-icon cart-popup__remove-icon' ><span class="glyphicon glyphicon-remove"></span></a>
+							  	<img class="" src="uploaded/product/{{$row->options->image}}" alt="image" width="45px">
 							  	<div class="media-body">
-							    	<p class="mt-0 media__product-title"><a href="">Media heading sdasd asdad </a></p>
-							    	<p class='product-price product-price__popup'><span>Size: 34</span> | <span class=''>600.000 vnd</span> * 6</p>
+							    	<p class="mt-0 media__product-title"><a href="san-pham/{{$row->id}}/{{$row->options->slug_name}}.html">{{$row->name}}</a></p>
+							    	<?php 	$size = App\Size::find($row->options->size_id);
+							    			$size_name  = $size->name;
+							    	?>
+							    	<p class='product-price product-price__popup'><span>Size: {{$size_name}}</span> | <span class=''>{{$row->price}}</span> * {{$row->qty}}</p>
 							  	</div>
 							</div>
-							<div class="media">
-			    				<a href="#" class='remove-icon cart-popup__remove-icon' ><span class="glyphicon glyphicon-remove"></span></a>
-							  	<img class="" src="images/anh1.jpg" alt="image" width="45px">
-							  	<div class="media-body">
-							    	<p class="mt-0 media__product-title"><a href="">Media heading sdasd asdad </a></p>
-							    	<p class='product-price product-price__popup'><span>Size: 34</span> | <span class=''>600.000 vnd</span> * 6</p>
-							  	</div>
-							</div>
-							<div class="media">
-			    				<a href="#" class='remove-icon cart-popup__remove-icon' ><span class="glyphicon glyphicon-remove"></span></a>
-							  	<img class="" src="images/anh1.jpg" alt="image" width="45px">
-							  	<div class="media-body">
-							    	<p class="mt-0 media__product-title"><a href="">Media heading sdasd asdad </a></p>
-							    	<p class='product-price product-price__popup'><span>Size: 34</span> | <span class=''>600.000 vnd</span> * 6</p>
-							  	</div>
-							</div>
-							<div class="media">
-			    				<a href="#" class='remove-icon cart-popup__remove-icon' ><span class="glyphicon glyphicon-remove"></span></a>
-							  	<img class="" src="images/anh10.jpg" alt="image" width="45px">
-							  	<div class="media-body">
-							    	<p class="mt-0 media__product-title"><a href="">Media heading sdasd asdad </a></p>
-							    	<p class='product-price product-price__popup'><span>Size: 34</span> | <span class=''>600.000 vnd</span> * 6</p>
-							  	</div>
-							</div>
+							@endforeach
 			    		</div>
 			    		<hr class="hr--border-cart-popup"></hr>
 			    		<div class='dropdown-cart__caption'>
-			    			<div class='cart-total text-right'><span>Tổng tiền:</span><span>200.000 đ</span></div>
+			    			<div class='cart-total text-right'><span>Tổng tiền:</span><span>
+			    				<?php 
+			    			$total_price = Cart::subtotal(0,'','');
+			    			if($total_price > 2000000)
+			    			{
+			    				$ship = 0; 
+			    			}
+			    			else{
+			    				$ship = 50000;
+			    			}
+			    			
+			    			$total = $total_price - $ship;
+			    			echo number_format($total);
+			    			?>
+			    			vnđ
+			    			</span></div>
 			    			<hr class="hr--border-cart-popup"></hr>
 			    			<div class='text-center dropdown-cart__bottom'>
 			    				<a href="cart.html" class='btn__link btn__link-dropdow-cart'><span class="glyphicon glyphicon-search"></span> Chi tiết</a>
 			    				<a href="index.html" class='btn__link btn__link-dropdow-cart'>Tiếp tục mua hàng</a>
 			    			</div>
 			    		</div>
+			    		<?php 	    		
+						?>
+			    		@endif
 			    	</div>
 			    	<!-- end-cart-body-->
 			  	</li>
@@ -102,13 +105,13 @@
 			        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 			      </li>
 			      	@foreach($cateShare as $cate)
-			      		@if($cate->parent_id == 0)
-			      			<?php $cate_child = App\Category::where('parent_id',$cate->id)->get();
+			      		@if($cate['parent_id'] == 0)
+			      			<?php $cate_child = App\Category::where('parent_id',$cate['id'])->get();
 			      			?>
 			      			@if(count($cate_child) > 0)
 					      		<li class="nav-item dropdown">
 							        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							          {{$cate->name}}
+							          {{$cate['name']}}
 							        </a>
 							        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							          	@foreach($cate_child as $cate_c)

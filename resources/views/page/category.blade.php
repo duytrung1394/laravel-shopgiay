@@ -2,44 +2,13 @@
 @section('content')
 <div id='wrapper'>
 	<div class="row">
-		<div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
-			<hr class="hr--border-top small-hidden"></hr>
-			<nav class="nav__sidebar">
-				<ul class=" small--text-center">
-					<li >	
-                    	<a href="javascript:void(0)">Giày thể thao <span class='glyphicon glyphicon-chevron-down'></span></a>
-                        <ul >
-                            <li class="active-li"><a href="#">Sub Menu Item</a>
-                            </li>
-                            <li><a href="#">Sub Menu Item</a>
-                            </li>
-                            <li><a href="#">Sub Menu Item</a>
-                            </li>
-                            <li><a href="#" >Sub Menu Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#" >Item 2</a>
-                    </li>
-                    <li><a href="#" >Item 3</a>
-                    </li>
-                    <li> <a href="javascript:void(0)"  >Duytrung <span class='glyphicon glyphicon-chevron-down' style=""></span></a>
-                        <ul>
-                            <li><a href="#">Sub Menu Item</a>
-                            </li>
-                            <li><a href="#">Sub Menu Item</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-			</nav>
-		</div>
+		@include('layout.sider_nav')
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 block-main-content">
 			<div class='main-content'>
 			<hr class="hr--border-top small-hidden"></hr>
 			<nav class="breadcrumb-nav small--text-center" aria-label="You are here">
 			  	<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-			    	<a href="/" itemprop="url" title="Back to the homepage">
+			    	<a href="{{ route('trang-chu') }}" itemprop="url" title="Back to the homepage">
 			      	<span>Home</span>
 			    </a>
 			    	<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
@@ -49,7 +18,7 @@
 			<div class="grid">
 				<div class='row'>
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center grid__item'>
-						<h5>Giày thể thao</h5>
+						<h5>{{$cate->name}}</h5>
 					</div>
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center collection-sorting grid__item medium-up--two-thirds'>
 						<div class="collection-sorting__dropdown">
@@ -89,7 +58,7 @@
 										<span> {{$product->unit_price}}</span>
 									@endif
 						        	</p>
-						        <p class='product-btn__p' ><a href="detail.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a> <a href="detail.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
+						        <p class='product-btn__p' ><a href="detail.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a> <a href="san-pham/{{$product->id}}/{{$product->slug_name}}.hmtl" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
 						      	</div>
 						    </div>
 					  	</div>

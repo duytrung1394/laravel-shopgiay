@@ -65,4 +65,37 @@
             }
       return $str;
     }
+    
+    function dequyCate($data, $parent, &$newString, $id) {
+        $newString .= "<ul>";
+        foreach($data as $key => $cate)
+        {
+            if($cate['parent_id'] == $parent)
+            {
+                $active = "";
+                if($cate['id'] == $id)
+                {
+                    $active = "active-li";
+                }
+                $countCate = App\Category::where('parent_id',$cate['id'])->get()->toArray();
+
+                $span = "";
+                $url ="javascript:void(0)";
+                if(count($countCate) > 0)
+                {
+                    //Nếu cố cate con thì hiện thị gly down
+                    $span = "<span class='glyphicon glyphicon-chevron-down'></span>";
+                }else{
+                    //hiện link đến danh mục
+                    $url = "danh-muc/$cate[id]/$cate[slug_name].html";
+                }
+                $cate_name = "<li class='".$active."'><a href='". $url ."'>".$cate['name']." ".$span."</a>";
+                $newString .= $cate_name;
+                unset($key);
+                dequyCate($data, $cate['id'], $newString, $id);
+                $newString .= "</li>";
+            }
+        }
+        $newString .= "</ul>";
+    }
 ?>

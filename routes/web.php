@@ -20,7 +20,7 @@ Route::get('san-pham/{id}/{url}',['as'=>'san-pham','uses'=>'PageController@getDe
 Route::get('mua-hang/{id}',['as'=>'muahang','uses'=>'PageController@getAddCart']);
 
 // Route::get("danhsach","PageController@getDanhsach");
-
+Route::post('ajax/add-to-cart','PageController@postAjaxAddtoCart');
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 
