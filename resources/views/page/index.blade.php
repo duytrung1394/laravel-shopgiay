@@ -21,10 +21,10 @@
 						        	<p class='product-title'><a href="">{{$sp->name}}</a></p>
 						        	<p class='product-price'>
 					        		@if($sp->promotion_price > 0 )
-							        	<span class="product__price-on-sale">{{$sp->promotion_price}}</span>
-										<s class="product__price--compare">{{$sp->unit_price}}</s>
+							        	<span class="product__price-on-sale">{{number_format($sp->promotion_price)}} </span>
+										<s class="product__price--compare">{{number_format($sp->unit_price)}}</s> vnđ
 									@else
-										<span> {{$sp->unit_price}}</span>
+										<span> {{number_format($sp->unit_price)}} vnđ</span>
 									@endif
 						        	</p>
 						        <p class='product-btn__p' ><a href="detail.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a> <a href="san-pham/{{$sp->id}}/{{$sp->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
@@ -59,10 +59,10 @@
 						        	<p class='product-title'><a href="">{{$np->name}}</a></p>
 						        	<p class='product-price'>
 					        		@if($np->promotion_price > 0 )
-							        	<span class="product__price-on-sale">{{$np->promotion_price}}</span>
-										<s class="product__price--compare">{{$np->unit_price}}</s>
+							        	<span class="product__price-on-sale">{{number_format($np->promotion_price)}} </span>
+										<s class="product__price--compare">{{number_format($np->unit_price)}}</s> vnđ
 									@else
-										<span> {{$np->unit_price}}</span>
+										<span> {{number_format($np->unit_price)}}</span> vnđ
 									@endif
 						        	</p>
 						        <p class='product-btn__p' ><a href="detail.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-shopping-cart"></span></a> <a href="san-pham/{{$np->id}}/{{$np->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>

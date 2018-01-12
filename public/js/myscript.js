@@ -54,12 +54,12 @@ $(document).ready(function (){
 		}
 	});
 	// nếu li được active thì hiện thị ul cha của li
-	// $('.active-li').closest('ul').show();
+	$('.active-li').closest('ul').show();
 	// hiện gly up
-	// $('.active-li').closest('ul').prev().children().addClass('glyphicon-chevron-up');
+	$('.active-li').closest('ul').prev().children().addClass('glyphicon-chevron-up');
 	$('.active-li').closest('ul').prev().css('color','#339999');
 	$('.active-li').closest('ul').prev().children().css('color','#333');
-	// $('.active-li').closest('ul').prev().children().removeClass('glyphicon-chevron-down');
+	$('.active-li').closest('ul').prev().children().removeClass('glyphicon-chevron-down');
 
 	$('.product-submit-cart .disabled').closest('.a__submit').hover(function (){
 		$(this).css('cursor','not-allowed');
@@ -68,8 +68,6 @@ $(document).ready(function (){
 	$('#myModal').on('hidden.bs.modal', function () {
   		document.location.reload();
 	});
-	
-	// hiện feil_label khi nhấp input
 	
 });
 //initiate the plugin and pass the id of the div containing gallery images

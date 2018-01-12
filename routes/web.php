@@ -23,8 +23,12 @@ Route::get('gio-hang',['as'=>'giohang','uses'=>'PageController@getShowCart']);
 
 Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getShowCheckout']);
 
+Route::post('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@postCheckout']);
+
 // Route::get("danhsach","PageController@getDanhsach");
 Route::post('ajax/add-to-cart','PageController@postAjaxAddtoCart');
+
+Route::post('ajax/add-coupon','PageController@postAjaxAddCounpon');
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 

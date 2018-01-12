@@ -122,8 +122,8 @@
 						        					</table>
 					        					</div>
 					        					<div class="cart__total-footer">
-					        						<a href="gio-hang" class="btn__link btn__checkout ">Chi tiết <span class="glyphicon glyphicon-chevron-right"></span></a>
-					        						<a href="thanh-toan" class="btn__link btn__checkout ">Thanh toán</a>
+					        						<a href="gio-hang" class="btn__link btn__checkout uppercase ">Chi tiết <span class="glyphicon glyphicon-chevron-right"></span></a>
+					        						<a href="thanh-toan" class="btn__link btn__checkout uppercase ">Thanh toán</a>
 					        					</div>
 					        					
 					        				</div>
@@ -202,7 +202,6 @@
 			    },
 			    success: function(data)
 			    {
-			      
 			        if(data.valid.success == false)
 			        {
 			        	

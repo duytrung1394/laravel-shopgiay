@@ -24,15 +24,11 @@
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center collection-sorting grid__item medium-up--two-thirds'>
 						<div class="collection-sorting__dropdown">
 				            <label for="SortBy" class="label--hidden">Sort by</label>
-				            <select name="SortBy" id="SortBy" data-value="best-selling">
-				              <option value="manual">Featured</option>
-				              <option value="best-selling">Best Selling</option>
-				              <option value="title-ascending">Alphabetically, A-Z</option>
-				              <option value="title-descending">Alphabetically, Z-A</option>
-				              <option value="price-ascending">Price, low to high</option>
-				              <option value="price-descending">Price, high to low</option>
-				              <option value="created-descending">Date, new to old</option>
-				              <option value="created-ascending">Date, old to new</option>
+				            <select name="SortBy" id="SortBy" data-value="price-ascending">
+				              <option value="price-ascending">Giá giảm dần</option>
+				              <option value="price-descending">Giá tăng dần</option>
+				              <option value="created-descending">Cữ dần</option>
+				              <option value="created-ascending">Mới dần</option>
 				            </select>
 			          	</div>
 					</div>
@@ -55,10 +51,10 @@
 						        	<p class='product-title'><a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html">{{$product->name}}</a></p>
 						        	<p class='product-price'>
 					        		@if($product->promotion_price > 0 )
-							        	<span class="product__price-on-sale">{{$product->promotion_price}}</span>
-										<s class="product__price--compare">{{$product->unit_price}}</s>
+							        	<span class="product__price-on-sale">{{number_format($product->promotion_price)}}</span>
+										<s class="product__price--compare">{{number_format($product->unit_price)}}</s> vnđ
 									@else
-										<span> {{$product->unit_price}}</span>
+										<span> {{number_format($product->unit_price)}}</span> vnđ
 									@endif
 						        	</p>
 						        <p class='product-btn__p' ><a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>

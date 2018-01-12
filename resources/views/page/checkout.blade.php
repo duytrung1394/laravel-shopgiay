@@ -19,32 +19,40 @@
 				</div>
 				<div class='step__sections'>
 					<div class="section--contact-information">
+				<form  action='thanh-toan' method="post">
 					<p class='section__title'>Thông tin khách hàng</p>
 					<div class="field field__input-wrapper">
 						<label class="field__label" for="input-email">Email</label>
-						<input class="field__input one-column-form__input--text" id="input-email" type="email" placeholder="Email">
+						<input class="field__input one-column-form__input--text" id="input-email" name='txtEmail' type="email" placeholder="Email" value="{{old('txtEmail')}}">
 					</div>
 					<div style="clear: both;"></div>
 					</div>
 					<div class="section--shipping-address">
 						<p class='section__title'>Địa chỉ giao hàng</p>
 						<div class="field field__input-wrapper field--half">
-							<label class="field__label" for="input-email">Họ</label>
-							<input class="field__input" id="input-ho" type="text" placeholder="Họ">
+							<label class="field__label" for="input-ho">Họ</label>
+							<input class="field__input" id="input-ho" type="text" placeholder="Họ" name='txtFirstName' value="{{old('txtFirstName')}}">
 						</div>
 						<div class="field field__input-wrapper field--half">
-							<label class="field__label" for="input-email">Tên</label>
-							<input class="field__input" id="input-ten" type="text" placeholder="Tên">
+							<label class="field__label" for="input-ten">Tên</label>
+							<input class="field__input" id="input-ten" type="text" placeholder="Tên" name="txtLastName" value="{{old('txtLastName')}}">
+						</div>
+						<div class="field field__input-wrapper field--three">
+							<label class="field__label" for="input-gender">Giới tính</label>
+							<select class="field__input field__select" id='input-gender' name='txtGender'>
+								<option value="1">Nam</option>
+								<option value="2">Nữ</option>
+							</select>
+						</div>
+						<div class="field field__input-wrapper field--seven">
+							<label class="field__label" for="input-phone">Số điện thoại</label>
+							<input class="field__input" id="input-phone" type="text" placeholder="Số điện thoại" name='txtPhone' value="{{old('txtPhone')}}">
 						</div>
 						<div class="field field__input-wrapper">
-							<label class="field__label" for="input-email">Số điện thoại</label>
-							<input class="field__input" id="input-ten" type="text" placeholder="Số điện thoại">
+							<label class="field__label" for="input-address">Địa chỉ</label>
+							<input class="field__input" id="input-address" type="text" placeholder="Địa chỉ" name='txtAddress' value="{{old('txtAddress')}}" >
 						</div>
-						<div class="field field__input-wrapper">
-							<label class="field__label" for="input-email">Địa chỉ</label>
-							<input class="field__input" id="input-ten" type="text" placeholder="Địa chỉ">
-						</div>
-						<div class='field field__input-wrapper field__input-active field--half'>
+						<!-- <div class='field field__input-wrapper field__input-active field--half'>
 							<label class="field__label" for="input-province">Tỉnh</label>
 							<select class="field__input field__select" id='input-city'>
 								<option value="1">Nghệ an</option>
@@ -59,16 +67,68 @@
 								<option value="2">Nghệ an</option>
 								<option value="3">Hà nội</option>
 							</select>
+						</div> -->
+						<div class="field field__input-wrapper">
+							<?php
+								$coupon_value = 0;
+								$total_price = 0;
+								$total_down = 0;
+								$counpon_name = "";
+								//nếu đã được add mã giảm giá
+								if(session('coupon')) {
+								$coupon_id  = session('coupon'); 
+								$coupon = App\Coupon::find($coupon_id);
+								$coupon_value = $coupon->value;
+								$coupon_name = $coupon->name;
+								}
+								//nếu có cart
+								if(Cart::count() > 0) { 
+									$total_price = Cart::subtotal(0,'','');
+									$total_down = $total_price * $coupon_value;
+									$total_price -= $total_down; 
+								}
+							?>
+							<input class="field__input" id="input-total-price" type="hidden" placeholder="Tổng giá" name='txtTotalPrice' value='{{$total_price}}'>
 						</div>
+
 						<div style="clear: both;"></div>
 					</div>
 				</div>
 				<!--step__sections-->
 				<div class="step__footer">
 					<div class="text-right ">
-						<a href="javascript:void(0)" class="btn__link btn__checkout btn__no-margin-right">Tiếp tục thanh toán</a>
+						<button  type='submit' name='submit' @if(Cart::count() == 0) disabled="disabled" class="btn__link btn__checkout btn__no-margin-right disabled" @endif class="btn__link btn__checkout btn__no-margin-right">Thanh Toán</button>
 					</div>
 				</div>
+				  {{ csrf_field() }}
+				</form>
+				@if(count($errors) > 0)
+				 	<div class="alert alert-warning alert-dismissible fade show"  role="alert">
+				 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    	<span aria-hidden="true">&times;</span>
+					  	</button>
+						@foreach($errors->all() as $err)
+							{{$err}} <br>
+						@endforeach
+					</div>
+					
+				@endif
+				@if(session('loi'))
+					<div class="alert alert-warning alert-dismissible fade show"  role="alert">
+				 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    	<span aria-hidden="true">&times;</span>
+					  	</button>
+						{{session('loi')}}
+					</div>
+				@endif
+				@if(session('success'))
+					<div class="alert alert-success alert-dismissible fade show"  role="alert">
+				 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    	<span aria-hidden="true">&times;</span>
+					  	</button>
+						{{session('success')}}
+					</div>
+				@endif
 			</div>
 			<!--end-step-->
 		</div>
@@ -111,7 +171,7 @@
 		  								<p class="product__description-size">Size: {{$size_name->name}}</p>
 		  							</td>
 		  							<td class="product__price">
-		  								<p class="product__price-price">{{$row->price}}</p>
+		  								<p class="product__price-price">{{$row->subtotal}}</p>
 		  							</td>
 		  						</tr>
 		  					@endforeach
@@ -124,26 +184,30 @@
 			  		<div class="sidebar__footer">
 			  			<div class="gift-code">
 			  				<div class="field field__input-wrapper seven-col">
-							<label class="field__label" for="input-email">Mã giảm giá</label>
-							<input class="field__input" id="input-ten" type="text" placeholder="Mã giảm giá">
+							<label class="field__label" for="input-coupon">Mã giảm giá</label>
+							<input class="field__input" id="input-coupon" type="text" placeholder="Mã giảm giá" value="@if(session('coupon')) {{$coupon_name}}@endif">
 							</div>
-							<a class="btn__link btn__no-margin-right three-col" href="javascript:void(0)">Áp dụng</a>
+							<a class="btn__link btn__no-margin-right three-col uppercase btn__add-coupon" href="javascript:void(0)">Áp dụng <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
 							<div style="clear:both"></div>
 			  			</div>	
 			  			<div class="total-price">
-			  				<table class="table-total-price">
+			  				<table class="table_total-info">
 			  					<tbody>
 			  						<tr>
 			  							<td>Tổng tiền</td>
 			  							<td class="text-right">{{Cart::subtotal(0,".",",")}} vnđ</td>
 			  						</tr>
-			  						<tr class="shipping-price">
+			  						<tr class="tr__boder-bottom">
 			  							<td>Chi phí vận chuyển</td>
 			  							<td class="text-right">0 vnđ</td>
 			  						</tr>
+			  						<tr class="tr__boder-bottom">
+			  							<td>Giảm giá</td>
+			  							<td class="text-right td__price_down">-{{number_format($total_down)}} vnđ</td>
+			  						</tr>
 			  						<tr>
 			  							<td>Thanh toán</td>
-			  							<td class="text-right">{{Cart::subtotal(0,".",",")}} vnđ</td>
+			  							<td class="text-right td__total-price">{{number_format($total_price)}} vnđ</td>
 			  						</tr>
 			  					</tbody>
 			  				</table>
@@ -160,4 +224,38 @@
 	<!--end-row-->
 </div>
 <!--end-wrapper-->
+@endsection
+@section('script')
+	<script type="text/javascript">
+		$(document).ready(function (){
+			$('.btn__add-coupon').click(function ()
+			{
+				var coupon = $("#input-coupon").val();
+				$.ajax({
+					url: 'ajax/add-coupon',
+					type: 'post',
+					dataType: 'json',
+					data: 'coupon='+coupon,
+					async: true,
+					beforeSend:function (){
+						$('.btn__add-coupon').html('Áp dụng <i class="fa fa-circle-o-notch" aria-hidden="true"></i>');
+					},
+					success: function (data)
+					{
+						$('.btn__add-coupon').html('Áp dụng <i class="fa fa-chevron-right" aria-hidden="true"></i>');
+						if(data.valid.success == false)
+						{
+							alert(data.valid.messages);
+							// $('#input-coupon').val(data.valid.messages);
+						}else{
+							alert(data.valid.messages);
+							$('.td__total-price').html(data.total_price+" vnđ");
+							$('.td__price_down').html("-  "+data.total_down+" vnđ");
+							$('#input-total-price').val(data.total_price_raw);
+						}
+					}
+				});
+			});
+		});
+	</script>
 @endsection

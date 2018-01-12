@@ -37,6 +37,12 @@
 	.field--half{
 	width: 50% !important;
 	}
+	.field--seven{
+		width: 70% !important;
+	}
+	.field--three{
+		width: 30% !important;
+	}
 	.main{
 		padding-right: 2%;
 		border-right: 1px solid #ccc;
@@ -220,6 +226,9 @@ tbody{
 	display: table-row-group;
     vertical-align: middle;
     border-color: inherit;
+}
+button:hover{
+	cursor:  pointer;
 }
 #body-content{
 	width: 100%;
@@ -941,10 +950,10 @@ p.login-title{
 	width: 100%;
 	border-bottom: 1px solid #ccc;
 }
-.table-total-price{
+.table_total-info{
 	width: 100%;
 }
-.shipping-price{
+.tr__boder-bottom{
 	border-bottom: 1px solid #ccc;
 }
 .show-siderbar__main{
@@ -1025,6 +1034,12 @@ a.disabled {
 a.disabled:hover {
 	/*cursor: not-allowed;*/
 }
+.disabled{
+	background-color: #999;
+}
+.disabled:hover{
+	cursor: not-allowed;
+}
 .a__submit{
 	padding: 10px 0px;
 }
@@ -1085,5 +1100,8 @@ a.disabled:hover {
 	display: block;
     width: 100%;
     margin: 18px auto;
-    text-transform: uppercase;
+   
+}
+.uppercase{
+	 text-transform: uppercase;
 }

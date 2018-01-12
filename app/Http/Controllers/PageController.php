@@ -10,6 +10,12 @@ use App\Category;
 use App\ImageProduct;
 use App\Size;
 use \Cart;
+use App\Coupon;
+use Session;
+use App\Customer;
+use App\Bills;
+use App\DetailBill;
+use App\Http\Requests\CheckoutRequests;
 class PageController extends Controller
 {
 	public function __construct()
@@ -157,5 +163,88 @@ class PageController extends Controller
 
     public function getShowCheckout(){
         return view('page.checkout');
+    }
+
+    public function postAjaxAddCounpon(Request $request){
+        $coupon_name = $request->coupon;
+        $valid = array('success' => false, 'messages' => array());
+        $coupon = Coupon::where('name',$coupon_name)->get()->first();
+        
+        if(count($coupon) > 0)
+        {
+            $value             = $coupon->value;
+            $coupon_id         = $coupon->id;
+            $request->session()->put('coupon',$coupon->id);
+            $subtotal          = Cart::subtotal(0,'','');
+            $total_down        =  $value * $subtotal;
+            $total_price       = $subtotal - $total_down;
+            $valid['success']  = true;
+            $valid['messages'] = 'Nhập coupon thành công';
+            
+            $total_down = number_format($total_down);
+            $total_price_raw = $total_price;
+            $total_price = number_format($total_price);
+        }else{
+            $total_price = Cart::subtotal(0,'.',',');
+            $total_price_raw = Cart::subtotal(0,'','');
+            $total_down = 0;
+            $valid['success'] = false;
+            $valid['messages'] = 'Mã giảm giá không tồn tại';
+        }
+        echo json_encode(
+            array(
+                'total_price_raw' => "$total_price_raw",
+                'total_price' => "$total_price",
+                'total_down'  => "$total_down",
+                'valid'       =>  $valid
+            )
+        );
+    }
+
+    public function postCheckout(CheckoutRequests $request){
+        if(Cart::count() > 0)
+        {   
+            $customer = new Customer;
+            $customer->email      = $request->txtEmail;
+            $customer->first_name = $request->txtFirstName;
+            $customer->last_name  = $request->txtLastName;
+            $customer->gender     = $request->txtGender;
+            $customer->address    = $request->txtAddress;
+            $customer->phone      = $request->txtPhone;
+            if($customer->save())
+            {   //lưu thonong tin dơn hàng
+                $customer_id       = Customer::max('id');   
+                $bill = new Bills;
+                $bill->customer_id = $customer_id;
+                if(session('coupon'))
+                {
+                    $bill->coupon_id = session('coupon');
+                }
+                $bill->total_price = $request->txtTotalPrice;
+                if($bill->save())
+                {   //lưu thông tin chi tiết đơn hàng
+                    $bill_id  = Bills::max('id');
+                    foreach(Cart::content() as $cart)
+                    {
+                        $detail_bill = new DetailBill;
+                        $detail_bill->bill_id    = $bill_id;
+                        $detail_bill->product_id = $cart->id;
+                        $detail_bill->size_id    = $cart->options->size_id;
+                        $detail_bill->quantity   = $cart->qty;
+                        $detail_bill->price      = $cart->subtotal;
+                        $detail_bill->save();
+                    }
+                    Cart::destroy();
+                    session()->forget('coupon');
+                    return redirect('thanh-toan')->with('success',"Thanh toán thành công. Nhấp vào <a href='' >đây</a> để về trang chủ");
+                }else{
+                    return redirect('thanh-toan')->with('loi',"Không thể lưu lại thông tin đơn hàng");
+                }
+            }else{
+                 return redirect('thanh-toan')->with('loi',"Không thể lưu lại thông tin khách hàng");
+            }
+        }else{
+            return redirect('thanh-toan')->with('loi',"Giỏ hàng trống");
+        }
     }
 }
