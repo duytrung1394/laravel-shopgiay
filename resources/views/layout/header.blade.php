@@ -35,14 +35,14 @@
 			    			<div class='cart-total text-right'><span>Tổng tiền:</span><span>
 			    				<?php 
 			    			$total_price = Cart::subtotal(0,'','');
-			    			if($total_price > 2000000)
-			    			{
-			    				$ship = 0; 
-			    			}
-			    			else{
-			    				$ship = 50000;
-			    			}
-			    			
+			    			// if($total_price > 2000000)
+			    			// {
+			    			// 	$ship = 0; 
+			    			// }
+			    			// else{
+			    			// 	$ship = 50000;
+			    			// } 
+			    			$ship = 0;
 			    			$total = $total_price - $ship;
 			    			echo number_format($total);
 			    			?>
@@ -51,7 +51,7 @@
 			    			<hr class="hr--border-cart-popup"></hr>
 			    			<div class='text-center dropdown-cart__bottom'>
 			    				<a href="{{ route('giohang')}}" class='btn__link btn__link-dropdow-cart'><span class="glyphicon glyphicon-search"></span> Chi tiết</a>
-			    				<a href="index.html" class='btn__link btn__link-dropdow-cart'>Tiếp tục mua hàng</a>
+			    				<a href="javascript:void(0)" class='btn__link btn__link-dropdow-cart close_popup_cart'>Tiếp tục mua hàng</a>
 			    			</div>
 			    		</div>
 			    		<?php 	    		

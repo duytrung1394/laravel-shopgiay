@@ -26,7 +26,9 @@ $(document).ready(function (){
 	$(".popup__login-body").click(function(e){
 	    e.stopPropagation();
 	});
-	
+	$('.close_popup_cart').click(function (){
+		$(".popup__cart-body").fadeOut();
+	});
 	//show cart detail
 	$('.show-siderbar__main').click(function (){
 		$('.sidebar__main').slideToggle();
@@ -36,7 +38,7 @@ $(document).ready(function (){
 	$(".nav__sidebar a").click(function(){
 		//slide tất cả các ul con
 		$(".nav__sidebar ul ul").addClass('active-ul');
-		$(".nav__sidebar ul ul").slideUp();
+		$(".nav__sidebar ul ul").slideUp('fast');
 		//Hiện gly down ở các ul khác
 		$(".nav__sidebar ul li a span").removeClass('glyphicon-chevron-up');
 		$(".nav__sidebar ul li a span").addClass('glyphicon-chevron-down');
@@ -46,7 +48,7 @@ $(document).ready(function (){
 		// nếu ul con không được hiện thỉ thì thả ul xuống khi click
 		if(!$(this).next().is(":visible"))
 		{
-			$(this).next().slideDown();
+			$(this).next().slideDown('fast');
 			
 			// ul hiện thì thêm sly up
 			$(this).children().addClass('glyphicon-chevron-up');
@@ -54,7 +56,7 @@ $(document).ready(function (){
 		}
 	});
 	// nếu li được active thì hiện thị ul cha của li
-	$('.active-li').closest('ul').show();
+	$('.active-li').closest('ul').slideDown('fast');
 	// hiện gly up
 	$('.active-li').closest('ul').prev().children().addClass('glyphicon-chevron-up');
 	$('.active-li').closest('ul').prev().css('color','#339999');
