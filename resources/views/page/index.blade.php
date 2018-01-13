@@ -16,7 +16,7 @@
 						      	<span class="badge badge--new"><span>New</span></span>
 						      	@endif
 						   		<span class="badge badge--sale"><span>Sale</span></span>
-						      	<img src="uploaded/product/{{$sp->image_product}}" alt="...">
+						      	<a href="san-pham/{{$sp->id}}/{{$sp->slug_name}}.html"><img src="uploaded/product/{{$sp->image_product}}" alt="..."></a>
 						     	<div class="product-caption text-left">
 						        	<p class='product-title'><a href="">{{$sp->name}}</a></p>
 						        	<p class='product-price'>
@@ -54,7 +54,7 @@
 								<span class="badge badge--sale"><span>Sale</span></span>
 								@endif
 						   		<span class="badge badge--new"><span>New</span></span>
-						      	<img src="uploaded/product/{{$np->image_product}}" alt="...">
+						      	<a href="san-pham/{{$np->id}}/{{$np->slug_name}}.html"><img src="uploaded/product/{{$np->image_product}}" alt="..."></a>
 						     	<div class="product-caption text-left">
 						        	<p class='product-title'><a href="">{{$np->name}}</a></p>
 						        	<p class='product-price'>

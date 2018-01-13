@@ -191,10 +191,7 @@ body{
 	font-family: "Segoe UI", 'Open Sans', arial, sans-serif;
 	font-size: 15px;
 	line-height: 1.6;
-
 }
-
-
 a{
 	color: #333;
 }
@@ -364,13 +361,16 @@ a:hover{
 .thumbnail:hover{
 	border: 1px solid #ddd;
 	cursor: pointer;
+	
+}
+.thumbnail:hover img{
+	opacity: 0.8;
 }
 .block_wrap .product-item{
 	padding-right: 4px;
     padding-left: 4px;
     margin: 5px 0px;
 }
-
 /** badge status product**/
 .badge{
 	position: absolute;

@@ -46,7 +46,7 @@
 								@if($product->new == 1 )
 						   		<span class="badge badge--new"><span>New</span></span>
 						   		@endif
-						      	<img src="uploaded/product/{{$product->image_product}}" alt="...">
+						      	<a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html"><img src="uploaded/product/{{$product->image_product}}" alt="..."></a>
 						     	<div class="product-caption text-left">
 						        	<p class='product-title'><a href="san-pham/{{$product->id}}/{{$product->slug_name}}.html">{{$product->name}}</a></p>
 						        	<p class='product-price'>
