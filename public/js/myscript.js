@@ -71,6 +71,20 @@ $(document).ready(function (){
   		document.location.reload();
 	});
 	
+	//remove product item on cart
+
+	$('.remove-product-item').click(function (){
+		var rowId = $(this).attr('data-rowId');
+		$.ajax({
+			url : "ajax/remove/item",
+			type: "post",
+			data: "rowId="+rowId,
+			async: true,
+			success:function (data){
+				window.location.reload();
+			}
+		});
+	});
 });
 //initiate the plugin and pass the id of the div containing gallery images
 	$("#img_01").elevateZoom({

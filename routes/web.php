@@ -25,10 +25,15 @@ Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getShowChecko
 
 Route::post('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@postCheckout']);
 
+
 // Route::get("danhsach","PageController@getDanhsach");
 Route::post('ajax/add-to-cart','PageController@postAjaxAddtoCart');
 
 Route::post('ajax/add-coupon','PageController@postAjaxAddCounpon');
+
+Route::post("ajax/remove/item",'PageController@postAjaxRemoveProduct');
+
+Route::post('ajax/xuly-quantity','PageController@postAjaxXulyQuantity');
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 

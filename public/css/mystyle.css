@@ -89,7 +89,9 @@
   	}
   	.main-content{
   		margin-left: 0px !important;
+  		
   	}
+  
   	.block-main-content{
   		padding: 0px;
   	}
@@ -455,6 +457,23 @@ a:hover{
 	box-sizing:border-box;
 	margin-bottom: 25px;
 	margin-left: 20px;
+}
+.cart__table-cell--quantity{
+	position: relative;
+}
+.loading-icon{
+	display: none;
+	box-sizing: border-box;
+	width: 100%;
+	display: block;
+	background-color: #fff;
+	position: absolute;
+	opacity: 0.8;
+}
+.loading-icon img{
+	display: none;
+	width: 100%;
+	margin: -50px auto;
 }
 hr.hr--border-top{
 	margin-top: 0;

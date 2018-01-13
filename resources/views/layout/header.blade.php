@@ -18,7 +18,7 @@
 			    		<div class='cart-item cart__list-item'>
 			    			@foreach(Cart::content() as $row)
 			    			<div class="media">
-			    				<a href="javascript:void(0)" class='remove-icon cart-popup__remove-icon' ><span class="glyphicon glyphicon-remove"></span></a>
+			    				<a href="javascript:void(0)" class='remove-icon cart-popup__remove-icon remove-product-item' data-rowId="{{$row->rowId}}"><span class="glyphicon glyphicon-remove"></span></a>
 							  	<img class="" src="uploaded/product/{{$row->options->image}}" alt="image" width="45px">
 							  	<div class="media-body">
 							    	<p class="mt-0 media__product-title"><a href="san-pham/{{$row->id}}/{{$row->options->slug_name}}.html">{{$row->name}}</a></p>

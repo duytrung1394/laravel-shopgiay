@@ -36,17 +36,27 @@
 								$size_name = App\Size::find($cart->options->size_id);
 						?>	
 						<tr class='responsive-table__row'>
+							
 							<td class="text-left cart__table-cell-image"><img src="uploaded/product/{{$cart->options->image}}" width='100%'/></td>
 							<td class="cart__table-cell--meta small--text-center"><p>
             					<a href="san-pham/{{$cart->id}}/{{$cart_product->slug_name}}.html"><h6>{{$cart->name}}</h6></a>
               					<small>Size: {{$size_name->name}}</small>
           						</p>
-          						<p><a href="javascript:void(0)" class='btn-del__cart-item' data-product-id='{{$cart->id}}'>Remove</a></p>
+          						<p><a href="javascript:void(0)" class='btn-del__cart-item remove-product-item' data-rowId='{{$cart->rowId}}'>Remove</a></p>
       						</td>
       						<td class="cart__table-cell--price medium-up--text-center" data-label='Đơn giá'>{{number_format($cart->price)}} vnđ</td>
-      						<td class='cart__table-cell--quantity medium-up--text-center' data-label='Số lượng'><input type="number" name="txtQuanty" value="{{$cart->qty}}" class='quantity-selector' size="4" min="1"></td>
-      						<td class='cart__table-cell--quantity text-right' data-label="Tổng">{{number_format($cart->subtotal)}}</td>            
-						</tr>
+      						<td class='cart__table-cell--quantity medium-up--text-center' data-label='Số lượng'>
+      							<div class='loading-icon load-{{$cart->rowId}}'>
+								<img  src="images/loading.gif" alt="gif">
+								</div>
+      							<select class="single-option-selector quantity-selector" data-option="option1" data-rowId='{{$cart->rowId}}'>
+									@for($i = 1; $i<=20 ; $i++)
+										<option value="{{$i}}" @if($cart->qty == $i) selected @endif >{{$i}}</option>
+									@endfor
+								</select>
+      						</td>
+      						<td class='cart__table-cell--quantity text-right quantity-{{$cart->rowId}}' data-label="Tổng">{{number_format($cart->subtotal)}} vnđ</td> 
+      					</tr>
 						@endforeach
 					</tbody>
 				</table>
@@ -57,13 +67,16 @@
 					
 					<p class='small--text-center'>
 						<span>Tổng tiền: </span>
-						<span>{{number_format($total_price)}} vnđ</span>
+						<span class='span__total_price'>{{number_format($total_price)}} vnđ</span>
 					</p>
 					<div class='cart-bottom-footer'>
 						<a href="thanh-toan" class='btn__link btn__link-cart'>Thanh toán</a>
 	    				<a href="" class='btn__link btn__link-cart'>Tiếp tục mua hàng</a>
 					</div>
 				</div>
+				
+				@else
+				<p>Chưa có sản phẩm nào trong Giỏ hàng</p>
 				@endif
 			</div>
 			<!--end-block_wrap-->						
@@ -71,7 +84,52 @@
 		</div>
 		<!--end-main-content-->
 	</div>
+</div>
 	<!--end-row-->
 </div>
 <!--end-wrapper-->
+@endsection
+@section('script')
+	<script type="text/javascript">
+		$(document).ready(function (){
+			$(".quantity-selector").change(function (){
+				var rowId = $(this).attr('data-rowId');
+				var quantity = $(this).val();
+
+				$.ajax({
+					url: "ajax/xuly-quantity",
+					type: "post",
+					data: "rowId="+rowId+"&quantity="+quantity,
+					dataType: "json",
+					async: true,
+					beforeSend:function (){
+						$(".load-"+rowId+" img").css('display','block');
+						$(".load-"+rowId).show();
+					},
+					success:function (data){
+						
+						if(data.valid.success == true){
+						
+							$(".load-"+rowId+" img").css('display','none');
+							$(".load-"+rowId).hide();
+							$(".span__total_price").html(data.total_price+" vnđ");
+							$(".quantity-"+rowId).html(data.row_total+" vnđ");
+							
+							
+						}
+						 else{
+							alert(data.valid.messages);
+							
+							$(".load-"+rowId+" img").css('display','none');
+							$(".load-"+rowId).hide();
+					 }
+					},
+					error:function(){
+						alert('Yêu cầu của bạn không được đáp ứng');
+						window.location.reload();
+					}
+				});
+			});
+		});
+	</script>
 @endsection

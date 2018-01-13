@@ -83,13 +83,10 @@ class PageController extends Controller
         }else{
             $price = $product->unit_price;
         }
-        $product_per = ProductProperties::where('product_id',$product_id)->where('size_id',$size_id)->select('quantity')->get();
+        $product_per = ProductProperties::where('product_id',$product_id)->where('size_id',$size_id)->select('quantity')->get()->first();
+        $quantity = $product_per->quantity;
         $valid = array('success' => false, 'messages' => array());
-
-        foreach($product_per as $pd)
-        {
-            $quantity = $pd->quantity;
-        }
+      
         // nếu số lượng sản phẩm trong cart và selectbox lớn hơn trong database
         $count = Cart::count();
         $quantity_on_cart = 0;
@@ -139,6 +136,7 @@ class PageController extends Controller
             $valid['success'] = true;
             $valid['messages'] = "Thành công";
             $cart_count  = Cart::count();
+            //response
             echo json_encode(
                 array( 
                     "product_id"       => "$product_id",
@@ -246,5 +244,76 @@ class PageController extends Controller
         }else{
             return redirect('thanh-toan')->with('loi',"Giỏ hàng trống");
         }
+    }
+    public function postAjaxRemoveProduct(Request $request){
+        $rowId = $request->rowId;
+        foreach(Cart::content() as $cart)
+        {
+            if($cart->rowId == $rowId)
+            {
+                Cart::remove($rowId);
+                echo "Success";
+            }else{
+                echo "false";
+            }
+        }
+        
+    }
+    public function postAjaxXulyQuantity(Request $request)
+    {
+        $rowId = $request->rowId;
+        $quantity = $request->quantity;
+
+        foreach(Cart::content() as $cart)
+        {
+            if($cart->rowId == $rowId)
+            {
+                $product_id = $cart->id;
+                $size_id = $cart->options->size_id;
+            }
+        }
+
+        // //lấy số lượng sản phẩm có trong giỏ hàng
+        $product_per = ProductProperties::where('product_id',$product_id)->where('size_id',$size_id)->select('quantity')->get()->first();
+        $p_quantity = $product_per->quantity;
+        
+        $valid = array('success' => false, 'messages' => array());
+
+         if($quantity > $p_quantity)
+         {
+            $valid['success'] = false;
+            $valid['messages'] = "Số lượng nhập vào quá lớn đề nghị bạn nhập lại";
+            echo json_encode(
+            array(
+                "rowId" => "$rowId",
+                "quantity" => "$quantity",
+                "valid" => $valid
+                )
+            );
+        }else{
+          
+            Cart::update($rowId, $quantity);
+             foreach(Cart::content() as $row)
+            {
+                if($row->rowId == $rowId)
+                {
+                    $row_total = $row->subtotal(0,".",",");
+                }
+            }
+
+            $valid['success'] = true;
+            $valid['messages'] = "Thành công";
+            $total_price = Cart::subtotal(0,".",",");
+            
+            echo json_encode(
+                array(
+                "rowId" => "$rowId",
+                "row_total" => "$row_total",
+                'total_price' => "$total_price",
+                'valid' => $valid
+                )
+            );
+        }
+        
     }
 }
