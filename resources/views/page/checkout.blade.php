@@ -46,7 +46,7 @@
 						</div>
 						<div class="field field__input-wrapper field--seven">
 							<label class="field__label" for="input-phone">Số điện thoại</label>
-							<input class="field__input" id="input-phone" type="text" placeholder="Số điện thoại" name='txtPhone' value="{{old('txtPhone')}}">
+							<input class="field__input" id="input-phone" type="text" placeholder="Số điện thoại" name='txtPhone' value="{{old('txtPhone')}}" maxlength="13">
 						</div>
 						<div class="field field__input-wrapper">
 							<label class="field__label" for="input-address">Địa chỉ</label>

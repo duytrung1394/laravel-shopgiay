@@ -336,6 +336,9 @@ a:hover{
 	top:35%;
 	left: 0;
 }
+.list_product{
+	width: 100%;
+}
 .title-heading h5{
 	margin: 0px;
 	font-size: 1.8em;
@@ -363,8 +366,8 @@ a:hover{
 .thumbnail:hover{
 	border: 1px solid #ddd;
 	cursor: pointer;
-	
 }
+
 .thumbnail:hover img{
 	opacity: 0.8;
 }
@@ -1059,22 +1062,38 @@ p.login-title{
 	font-size: 0.6em; float: right; line-height: 40px;
 	padding-right: 5px;
 }
-a.disabled {
+.a__submit a.disabled {
     pointer-events: none !important;
     background-color: #aaa;
 }
-a.disabled:hover {
-	/*cursor: not-allowed;*/
-}
-.disabled{
-	background-color: #999;
-}
-.disabled:hover{
+
+.a__submit .disabled:hover{
 	cursor: not-allowed;
 }
 .a__submit{
 	padding: 10px 0px;
+}.pagination {
+    display: inline-block;
 }
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination li.active {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px !important;
+}
+.pagination li.disabled{
+    padding: 8px 16px !important;
+}
+
+.pagination li:hover:not(.active) {background-color: #ddd;}
+.pagination li.disabled:hover {background-color: #fff;}
 
 /****Modal**/
 .modal-content{
@@ -1199,4 +1218,12 @@ a.disabled:hover {
 }
 .options__checkbox h6{
 	margin-bottom: 12px;
+}
+.pagination{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
 }

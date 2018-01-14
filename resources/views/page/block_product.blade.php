@@ -1,5 +1,6 @@
 @if(count($products) > 0 )
-	@foreach($products as $product)   
+		<div class="row"  style="width: 100%;">
+		@foreach($products as $product)   
 	  	<div class="product-item">
 			<div class="thumbnail">
 				@if($product->promotion_price > 0 )
@@ -24,6 +25,12 @@
 		    </div>
 	  	</div>
 	@endforeach
+	</div>
+	<div style="clear:both"></div>
+	<div id="phantrang">
+		{{$products->links()}}
+	</div>
+	
 @else
 <p>Chưa có sản phẩm nào trong chuyên mục này</p>
 @endif

@@ -7,7 +7,7 @@
 			@include('layout.sider_nav')
 			<div class="options__checkbox">
 				<h6>Thương hiệu</h6>
-				<div class="brand__checkbox">
+				<div class="brand__checkbox" id='brand-checkbox' data-cate-id={{$cate_id}}>
 					@if(count($brands) > 0)
 						@foreach($brands as $brand)
 					 	<label class="check_label">{{$brand->name}}
@@ -55,9 +55,10 @@
 
 					<img src="images/loading-icon.gif">
 				</div>
-				<div class="list_product row">
+				<div class="row list_product" style="width: 100%;">
 					@if(count($products) > 0 )
-					@foreach($products as $product)   
+						<div class="row" style="width: 100%;"> 
+						@foreach($products as $product) 
 					  	<div class="product-item">
 							<div class="thumbnail">
 								@if($product->promotion_price > 0 )
@@ -81,12 +82,16 @@
 						      	</div>
 						    </div>
 					  	</div>
+
 			  		@endforeach
-			  	@else
-			  	<p>Chưa có sản phẩm nào trong chuyên mục này</p>
-			  	@endif
-				</div> 
-				
+			  			<div style="clear:both"></div>
+			  		</div>	
+			  			
+			  		{{$products->links()}}
+				  	@else
+				  		<p>Chưa có sản phẩm nào trong chuyên mục này</p>
+				  	@endif
+			  	</div> 
 			</div>
 			<!--block_wrap-->
 		</div>
@@ -101,15 +106,32 @@
 @section('script')
 	<script type="text/javascript">
 		$(document).ready(function (){
+			var data = {
+				cate_id : "",
+				brand_list : [],
+				page : 1
+			}
 			$(".brand-checkbox").click(function (){
-				var cate_id = $(this).attr('data-cate-id');
-				var brand_list = new Array();
-				brand_list = multi_checkbox("brand-checkbox");
-				
+				var cate_id     = $("#brand-checkbox").attr('data-cate-id');
+				var brand_list  = new Array();
+				brand_list      = multi_checkbox("brand-checkbox");
+				data.cate_id    = cate_id;   //get cate_id
+				data.brand_list = brand_list;  //list+brand for ajax send
+				check();
+			});
+			//Khi click vao the a, ngừng load lại trang
+			$(".block_wrap").delegate('#phantrang a','click',function (event){
+				event.preventDefault();
+				var page  = $(this).attr('href').split('page=')[1];
+				data.page = page; //để có thể phân trang bên page phải gửi data.page qua ajax
+				console.log(data);
+				check();
+			});
+			function check(){
 				$.ajax({
 					url: "ajax/checkbox",
 					type: "post",
-					data: "cate_id="+cate_id+"&brand_list="+brand_list,
+					data: data,
 					async: true,
 					beforeSend:function (){
 						$(".block_wrap .loading-icon img").css('display','inline-block');
@@ -120,8 +142,8 @@
 						$(".loading-icon").css('display','none');
 						$('.list_product').html(data);
 					}
-				})
-			});
+				});	
+			}
 			//lấy danh sach checkbox
 			function multi_checkbox(class_check){
 				var val = new Array();
@@ -129,7 +151,7 @@
 					val.push($(this).val());
 				});
 				return val;
-			}
+			 };
 		});
 	</script>
 @endsection

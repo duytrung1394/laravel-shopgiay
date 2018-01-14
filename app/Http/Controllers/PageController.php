@@ -48,10 +48,10 @@ class PageController extends Controller
                 
             }
             $parent =  implode(',',$parent_id);
-            $products = Product::whereIn('cate_id',[$id,$parent])->get();
+            $products = Product::whereIn('cate_id',[$id,$parent])->paginate(3);
             //nếu là cate cha thi wherein id cate con, va cha
         }else{
-            $products = Product::where('cate_id',$id)->get();
+            $products = Product::where('cate_id',$id)->paginate(3);
         }
         $cate = Category::find($id);
         $cate_id = $id;
@@ -322,14 +322,14 @@ class PageController extends Controller
     {
         $cate_id = $request->cate_id;
         $brand_list = $request->brand_list;
-        
+        $page = 3;
         if(!empty($brand_list)){
-            $brand_id = explode(',',$brand_list);
-            $products = Product::where('cate_id',$cate_id)->whereIn('brand_id',$brand_id)->get();
+            $brand_id = implode(',',$brand_list);
+            $products = Product::where('cate_id',$cate_id)->whereIn('brand_id',$brand_list)->paginate(3);
         }else{
-            $products = Product::where('cate_id',$cate_id)->get();
+            $products = Product::where('cate_id',$cate_id)->paginate(3);
         }
         //response for ajax
-        return view('page.block_product',compact('products'));
+        return view('page.block_product',compact('products','brand_id'));
     }
 }
