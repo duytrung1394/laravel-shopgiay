@@ -2,8 +2,23 @@
 @section('content')
 <div id='wrapper'>
 	<div class="row">
-		@include('layout.sider_nav')
-
+		<div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
+		<hr class="hr--border-top small-hidden"></hr>
+			@include('layout.sider_nav')
+			<div class="options__checkbox">
+				<h6>Thương hiệu</h6>
+				<div class="brand__checkbox">
+					@if(count($brands) > 0)
+						@foreach($brands as $brand)
+					 	<label class="check_label">{{$brand->name}}
+						  	<input type="checkbox" value="{{$brand->id}}" class="brand-checkbox" data-cate-id="{{$cate_id}}">
+						  	<span class="checkmark"></span>
+						</label>
+						@endforeach
+					@endif
+				</div>
+			</div>		
+		</div>
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 block-main-content">
 			<div class='main-content'>
 			<hr class="hr--border-top small-hidden"></hr>
@@ -35,8 +50,13 @@
 				</div>
 			</div>
 			<!--end-grid-->
-			<div class='block_wrap row'>  
-				@if(count($products) > 0 )
+			<div class='block_wrap row'>
+				<div class="loading-icon">
+
+					<img src="images/loading-icon.gif">
+				</div>
+				<div class="list_product row">
+					@if(count($products) > 0 )
 					@foreach($products as $product)   
 					  	<div class="product-item">
 							<div class="thumbnail">
@@ -65,6 +85,8 @@
 			  	@else
 			  	<p>Chưa có sản phẩm nào trong chuyên mục này</p>
 			  	@endif
+				</div> 
+				
 			</div>
 			<!--block_wrap-->
 		</div>
@@ -75,4 +97,39 @@
 	<!--end-row-->
 </div>
 <!--end-wrapper-->
+@endsection
+@section('script')
+	<script type="text/javascript">
+		$(document).ready(function (){
+			$(".brand-checkbox").click(function (){
+				var cate_id = $(this).attr('data-cate-id');
+				var brand_list = new Array();
+				brand_list = multi_checkbox("brand-checkbox");
+				
+				$.ajax({
+					url: "ajax/checkbox",
+					type: "post",
+					data: "cate_id="+cate_id+"&brand_list="+brand_list,
+					async: true,
+					beforeSend:function (){
+						$(".block_wrap .loading-icon img").css('display','inline-block');
+						$(".block_wrap .loading-icon").css('display','block');
+					},
+					success:function (data){
+						$(".loading-icon img").css('display','none');
+						$(".loading-icon").css('display','none');
+						$('.list_product').html(data);
+					}
+				})
+			});
+			//lấy danh sach checkbox
+			function multi_checkbox(class_check){
+				var val = new Array();
+				$("."+class_check+":checked").each(function (){
+					val.push($(this).val());
+				});
+				return val;
+			}
+		});
+	</script>
 @endsection

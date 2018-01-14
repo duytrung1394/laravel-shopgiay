@@ -373,6 +373,9 @@ a:hover{
     padding-left: 4px;
     margin: 5px 0px;
 }
+.block_wrap{
+	position: relative;
+}
 /** badge status product**/
 .badge{
 	position: absolute;
@@ -461,20 +464,30 @@ a:hover{
 .cart__table-cell--quantity{
 	position: relative;
 }
+/**********Loadding icon******************/
 .loading-icon{
-	display: none;
-	box-sizing: border-box;
 	width: 100%;
-	display: block;
+	height: 100%;
+	display: none;
 	background-color: #fff;
 	position: absolute;
 	opacity: 0.8;
+	z-index: 99;
+	text-align: center;
 }
 .loading-icon img{
+	width: 100px;
+	vertical-align: middle;
 	display: none;
-	width: 100%;
-	margin: -50px auto;
 }
+
+.loading-icon:before {    
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle; 
+    height: 100%;
+}
+
 hr.hr--border-top{
 	margin-top: 0;
 }
@@ -1123,4 +1136,67 @@ a.disabled:hover {
 }
 .uppercase{
 	 text-transform: uppercase;
+}
+/*******CheckBox**********/
+.check_label{
+	display: block;
+	position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Hide the browser's default checkbox */
+.check_label input{
+	position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark{
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-color: #ddd;
+}
+.check_label input:hover ~ .checkmark{
+	background-color: #bbb;
+}
+.check_label input:checked ~ .checkmark{
+	background-color: #2196F3;
+}
+/*Create the checkmark (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+/* Show the checkmark when checked */
+.check_label input:checked ~ .checkmark:after{
+	display: block;
+}
+
+/* Style the checkmark */
+.check_label .checkmark:after{
+	left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.options__checkbox{
+	padding: 15px 10px;
+}
+.options__checkbox h6{
+	margin-bottom: 12px;
 }

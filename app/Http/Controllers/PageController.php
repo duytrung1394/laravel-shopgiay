@@ -15,6 +15,7 @@ use Session;
 use App\Customer;
 use App\Bills;
 use App\DetailBill;
+use App\Brand;
 use App\Http\Requests\CheckoutRequests;
 class PageController extends Controller
 {
@@ -36,6 +37,7 @@ class PageController extends Controller
     {   
         // 
         $cates = Category::where('parent_id',$id)->get();
+        $brands = Brand::all();
 
         if(count($cates) > 0 )
         {       
@@ -53,7 +55,7 @@ class PageController extends Controller
         }
         $cate = Category::find($id);
         $cate_id = $id;
-        return view('page.category',compact('products','cate','cate_id'));
+        return view('page.category',compact('products','cate','cate_id','brands'));
         
     }
     public function getDetailProduct($id)
@@ -314,6 +316,20 @@ class PageController extends Controller
                 )
             );
         }
+    }
+
+    public function postAjaxXulyCheckBox(Request $request)
+    {
+        $cate_id = $request->cate_id;
+        $brand_list = $request->brand_list;
         
+        if(!empty($brand_list)){
+            $brand_id = explode(',',$brand_list);
+            $products = Product::where('cate_id',$cate_id)->whereIn('brand_id',$brand_id)->get();
+        }else{
+            $products = Product::where('cate_id',$cate_id)->get();
+        }
+        //response for ajax
+        return view('page.block_product',compact('products'));
     }
 }

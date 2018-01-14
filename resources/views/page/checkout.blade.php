@@ -167,8 +167,9 @@
 		  							</td>
 		  							<td class="product__description">
 		  								<p class="product__description-name">{{$row->name}}</p>
-		  								<?php $size_name = App\Size::find($row->qty);?>
-		  								<p class="product__description-size">Size: {{$size_name->name}}</p>
+		  								<?php $size = App\Size::find($row->qty);
+		  								?>
+		  								<p class="product__description-size">Size: {{$size->name}}</p>
 		  							</td>
 		  							<td class="product__price">
 		  								<p class="product__price-price">{{$row->subtotal}}</p>

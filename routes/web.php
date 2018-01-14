@@ -35,6 +35,8 @@ Route::post("ajax/remove/item",'PageController@postAjaxRemoveProduct');
 
 Route::post('ajax/xuly-quantity','PageController@postAjaxXulyQuantity');
 
+Route::post('ajax/checkbox','PageController@postAjaxXulyCheckBox');
+
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 
 	Route::group(['prefix'=>'danh-muc'],function(){

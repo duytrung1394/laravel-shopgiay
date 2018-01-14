@@ -3,7 +3,10 @@
 <!--end-nav-->
 <div id='wrapper'>
 	<div class="row">
-		@include('layout.sider_nav')
+		<div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
+		<hr class="hr--border-top small-hidden"></hr>
+			@include('layout.sider_nav')
+		</div>
 	
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 ">
 			<div class='main-content'>
@@ -46,9 +49,6 @@
       						</td>
       						<td class="cart__table-cell--price medium-up--text-center" data-label='Đơn giá'>{{number_format($cart->price)}} vnđ</td>
       						<td class='cart__table-cell--quantity medium-up--text-center' data-label='Số lượng'>
-      							<div class='loading-icon load-{{$cart->rowId}}'>
-								<img  src="images/loading.gif" alt="gif">
-								</div>
       							<select class="single-option-selector quantity-selector" data-option="option1" data-rowId='{{$cart->rowId}}'>
 									@for($i = 1; $i<=20 ; $i++)
 										<option value="{{$i}}" @if($cart->qty == $i) selected @endif >{{$i}}</option>
@@ -102,26 +102,14 @@
 					data: "rowId="+rowId+"&quantity="+quantity,
 					dataType: "json",
 					async: true,
-					beforeSend:function (){
-						$(".load-"+rowId+" img").css('display','block');
-						$(".load-"+rowId).show();
-					},
 					success:function (data){
-						
 						if(data.valid.success == true){
-						
-							$(".load-"+rowId+" img").css('display','none');
-							$(".load-"+rowId).hide();
+							
 							$(".span__total_price").html(data.total_price+" vnđ");
 							$(".quantity-"+rowId).html(data.row_total+" vnđ");
-							
-							
 						}
 						 else{
 							alert(data.valid.messages);
-							
-							$(".load-"+rowId+" img").css('display','none');
-							$(".load-"+rowId).hide();
 					 }
 					},
 					error:function(){

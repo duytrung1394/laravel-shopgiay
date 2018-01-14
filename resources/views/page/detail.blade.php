@@ -2,7 +2,10 @@
 @section('content')
 <div id='wrapper'>
 	<div class="row">
-		@include('layout.sider_nav')
+		<div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
+		<hr class="hr--border-top small-hidden"></hr>
+			@include('layout.sider_nav')
+		</div>
 	
 		<div class="col-12 col-sm-12 col-md-10 col-lg-10 ">
 			<div class='main-content'>
