@@ -319,17 +319,30 @@ class PageController extends Controller
     }
 
     public function postAjaxXulyCheckBox(Request $request)
-    {
+    { 
         $cate_id = $request->cate_id;
         $brand_list = $request->brand_list;
-        $page = 3;
+
+        // check var sortby
+        switch ($request->sortby) {
+            case 'created-ascending':
+                $sort = "id ASC";
+                break;
+            case 'created-descending':
+                $sort = "id DESC";
+                break;
+            default:
+                $sort = "id ASC";
+                break;
+        }
+        //nếu tòn tại brandlist thì cho về mảng
         if(!empty($brand_list)){
-            $brand_id = implode(',',$brand_list);
-            $products = Product::where('cate_id',$cate_id)->whereIn('brand_id',$brand_list)->paginate(3);
+    
+            $products = Product::where('cate_id',$cate_id)->whereIn('brand_id',$brand_list)->orderByRaw($sort)->paginate(8);
         }else{
-            $products = Product::where('cate_id',$cate_id)->paginate(3);
+            $products = Product::where('cate_id',$cate_id)->orderByRaw($sort)->paginate(8);
         }
         //response for ajax
-        return view('page.block_product',compact('products','brand_id'));
+        return view('page.block_product',compact('products'));
     }
 }

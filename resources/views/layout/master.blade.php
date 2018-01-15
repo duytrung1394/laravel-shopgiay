@@ -14,6 +14,9 @@
 	<!-- <link rel="stylesheet" type="text/css" href="asset/font-awesome/css/fontawesome-all.min.css"> -->
 </head>
 <body>
+	<div class="loading-icon">
+		<!-- <img src="images/loading-icon.gif"> -->
+	</div>
 	<div class="container-fluid">
 		@include('layout.header')
 		

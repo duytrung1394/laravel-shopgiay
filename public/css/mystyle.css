@@ -1,6 +1,6 @@
 @media all and (min-width: 768px) {
-   	body {
-      padding: 0% 4%;
+   	.container-fluid{
+  		padding: 0% 4%;
   	}
   	#register-nav-link{
   		display: none;
@@ -68,8 +68,11 @@
 	}
 }
 @media all and (max-width: 767.99px){
-	body {
-      padding: 0% 1%;
+	.container-fluid{
+  		padding: 0% 2%;
+  	}
+  	.loading-icon{
+  		background-size: 60px 60px !important;
   	}
   	.top-bar-left{
   		display: none;
@@ -234,6 +237,47 @@ button:hover{
 	margin: 0;
 	padding: 0;
 }
+/**********Loadding icon******************/
+.loading-icon{
+  position:fixed;
+  top:0px;
+  right:0px;
+  width:100%;
+  height:100%;
+  background-color:#eee;
+  background-image: url('../images/loading-icon.gif');
+  background-size: 80px 80px;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index:10000000;
+  opacity: 0.75;
+  /*display: none;*/
+  filter: alpha(opacity=75); /* For IE8 and earlier */
+}
+.loading-icon{
+/*	width: 100%;
+	height: 100%;*/
+	/*display: none;*/
+	/*background-color: #fff;
+	position: absolute;
+	opacity: 0.8;
+	z-index: 99;
+	text-align: center;*/
+}
+
+.loading-icon img{
+	/*width: 100px;
+	vertical-align: middle;*/
+	/*display: none;*/
+}
+
+.loading-icon:before {    
+  /*  content: ' ';
+    display: inline-block;
+    vertical-align: middle; 
+    height: 100%;*/
+}
+/***hiden***/
 .visually-hidden{
 	border: 0;
     clip: rect(0, 0, 0, 0);
@@ -283,9 +327,7 @@ button:hover{
 .bg-light{
 	background-color: #fff !important;
 }
-.container-fluid{
-	padding: 0px !important;
-}
+
 .row{
 	margin-right: 0px;
 	margin-left: 0px;
@@ -466,29 +508,6 @@ a:hover{
 }
 .cart__table-cell--quantity{
 	position: relative;
-}
-/**********Loadding icon******************/
-.loading-icon{
-	width: 100%;
-	height: 100%;
-	display: none;
-	background-color: #fff;
-	position: absolute;
-	opacity: 0.8;
-	z-index: 99;
-	text-align: center;
-}
-.loading-icon img{
-	width: 100px;
-	vertical-align: middle;
-	display: none;
-}
-
-.loading-icon:before {    
-    content: ' ';
-    display: inline-block;
-    vertical-align: middle; 
-    height: 100%;
 }
 
 hr.hr--border-top{

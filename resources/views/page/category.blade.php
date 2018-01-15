@@ -38,11 +38,11 @@
 					</div>
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center collection-sorting grid__item medium-up--two-thirds'>
 						<div class="collection-sorting__dropdown">
-				            <label for="SortBy" class="label--hidden">Sort by</label>
-				            <select name="SortBy" id="SortBy" data-value="price-ascending">
-				              <option value="price-ascending">Giá giảm dần</option>
-				              <option value="price-descending">Giá tăng dần</option>
-				              <option value="created-descending">Cữ dần</option>
+				            <label for="SortBy" class="label--hidden" >Sort by</label>
+				            <select name="SortBy" id="SortBy" data-value="price-ascending" data-cate-id='{{$cate_id}}'>
+				             <!--  <option value="price-ascending">Giá giảm dần</option>
+				              <option value="price-descending">Giá tăng dần</option> -->
+				              <option value="created-descending">Cũ dần</option>
 				              <option value="created-ascending">Mới dần</option>
 				            </select>
 			          	</div>
@@ -51,10 +51,7 @@
 			</div>
 			<!--end-grid-->
 			<div class='block_wrap row'>
-				<div class="loading-icon">
-
-					<img src="images/loading-icon.gif">
-				</div>
+				<p class="errors"></p>
 				<div class="row list_product" style="width: 100%;">
 					@if(count($products) > 0 )
 						<div class="row" style="width: 100%;"> 
@@ -105,19 +102,30 @@
 @endsection
 @section('script')
 	<script type="text/javascript">
+		
 		$(document).ready(function (){
 			var data = {
 				cate_id : "",
 				brand_list : [],
+				sortby: "",
 				page : 1
 			}
+			
 			$(".brand-checkbox").click(function (){
 				var cate_id     = $("#brand-checkbox").attr('data-cate-id');
 				var brand_list  = new Array();
 				brand_list      = multi_checkbox("brand-checkbox");
 				data.cate_id    = cate_id;   //get cate_id
 				data.brand_list = brand_list;  //list+brand for ajax send
-				check();
+				ajax();
+			});
+			//lấy giá trị sort by
+			$("#SortBy").change(function (){
+				var cate_id = $(this).attr('data-cate-id');
+				var val = $(this).val();
+				data.cate_id = cate_id;
+				data.sortby = val;
+				ajax();
 			});
 			//Khi click vao the a, ngừng load lại trang
 			$(".block_wrap").delegate('#phantrang a','click',function (event){
@@ -125,22 +133,23 @@
 				var page  = $(this).attr('href').split('page=')[1];
 				data.page = page; //để có thể phân trang bên page phải gửi data.page qua ajax
 				console.log(data);
-				check();
+				ajax();
 			});
-			function check(){
+			function ajax(){
 				$.ajax({
 					url: "ajax/checkbox",
 					type: "post",
 					data: data,
 					async: true,
 					beforeSend:function (){
-						$(".block_wrap .loading-icon img").css('display','inline-block');
-						$(".block_wrap .loading-icon").css('display','block');
+						$(".loading-icon").fadeIn('fast');
 					},
 					success:function (data){
-						$(".loading-icon img").css('display','none');
-						$(".loading-icon").css('display','none');
+						$(".loading-icon").fadeOut('fast');
 						$('.list_product').html(data);
+					},
+					errors:function (){
+						alert('fasle');
 					}
 				});	
 			}
