@@ -232,3 +232,6 @@
 	});
 </script>
 @endsection 
+@section('title')
+	{{$product->name}}
+@endsection

@@ -5,16 +5,25 @@
 		<div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
 		<hr class="hr--border-top small-hidden"></hr>
 			@include('layout.sider_nav')
-			<div class="options__checkbox">
-				<h6>Thương hiệu</h6>
-				<div class="brand__checkbox" id='brand-checkbox' data-cate-id={{$cate_id}}>
+			<div class="options__checkbox" data-cate-id={{$cate_id}}>
+				<div class="brand__checkbox check__group clearfix" id='brand-checkbox'>
+					<h6>Thương hiệu</h6>
 					@if(count($brands) > 0)
 						@foreach($brands as $brand)
 					 	<label class="check_label">{{$brand->name}}
-						  	<input type="checkbox" value="{{$brand->id}}" class="brand-checkbox" data-cate-id="{{$cate_id}}">
+						  	<input type="checkbox" value="{{$brand->id}}" class="item-filter brand filter-brand-{{$brand->id}}">
 						  	<span class="checkmark"></span>
 						</label>
 						@endforeach
+					@endif
+				</div>
+				<div class="size__checkbox check__group clearfix" id='size-checkbox'>
+					<h6>Kích Cỡ</h6>
+					@if(count($sizes) > 0)
+						@foreach($sizes as $size)
+	            			<input type="checkbox"  value="{{$size->id}}" id='size-{{$size->id}}' class="item-filter size filter-size-{{$size->id}}">
+		            		<label for="size-{{$size->id}}">{{$size->name}}</label>
+						@endforeach     
 					@endif
 				</div>
 			</div>		
@@ -34,7 +43,7 @@
 			<div class="grid">
 				<div class='row'>
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center grid__item'>
-						<h5>{{$cate->name}}</h5>
+							<h5>{{$cate->name}}</h5>
 					</div>
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center collection-sorting grid__item medium-up--two-thirds'>
 						<div class="collection-sorting__dropdown">
@@ -42,8 +51,9 @@
 				            <select name="SortBy" id="SortBy" data-value="price-ascending" data-cate-id='{{$cate_id}}'>
 				             <!--  <option value="price-ascending">Giá giảm dần</option>
 				              <option value="price-descending">Giá tăng dần</option> -->
-				              <option value="created-descending">Cũ dần</option>
-				              <option value="created-ascending">Mới dần</option>
+				              <option value="created-ascending">Cũ nhất</option>
+				              <option value="created-descending">Mới nhất</option>
+				              
 				            </select>
 			          	</div>
 					</div>
@@ -51,10 +61,13 @@
 			</div>
 			<!--end-grid-->
 			<div class='block_wrap row'>
-				<p class="errors"></p>
-				<div class="row list_product" style="width: 100%;">
+				<div class="row">
+					<div class="filter-tag">
+						
+					</div>
+				</div>
 					@if(count($products) > 0 )
-						<div class="row" style="width: 100%;"> 
+					<div class="row clearfix" style="width: 100%;" id="list_product"> 
 						@foreach($products as $product) 
 					  	<div class="product-item">
 							<div class="thumbnail">
@@ -80,15 +93,16 @@
 						    </div>
 					  	</div>
 
-			  		@endforeach
-			  			<div style="clear:both"></div>
+			  			@endforeach
 			  		</div>	
-			  			
-			  		{{$products->links()}}
+			  			<div class="block_center">
+			  				{{$products->links()}}
+			  			</div>
+			  	
 				  	@else
 				  		<p>Chưa có sản phẩm nào trong chuyên mục này</p>
 				  	@endif
-			  	</div> 
+			  
 			</div>
 			<!--block_wrap-->
 		</div>
@@ -100,6 +114,9 @@
 </div>
 <!--end-wrapper-->
 @endsection
+@section('title')
+	{{$cate->name}}
+@endsection
 @section('script')
 	<script type="text/javascript">
 		
@@ -107,18 +124,41 @@
 			var data = {
 				cate_id : "",
 				brand_list : [],
+				size_list : [],
 				sortby: "",
 				page : 1
 			}
-			
-			$(".brand-checkbox").click(function (){
-				var cate_id     = $("#brand-checkbox").attr('data-cate-id');
+			//filter check
+			$(".item-filter").change(function (){
+				var cate_id     = $(".options__checkbox").attr('data-cate-id');
 				var brand_list  = new Array();
-				brand_list      = multi_checkbox("brand-checkbox");
-				data.cate_id    = cate_id;   //get cate_id
-				data.brand_list = brand_list;  //list+brand for ajax send
+				var size_list   = new Array();
+				brand_list      = multi_checkbox("brand"); //call multi_checkbox, get list id
+				size_list       = multi_checkbox('size');
+				data.page       = 1; 			//khi check thi luon gửi page 1, tránh lỗi khi số page bé hơn page đang gửi hiện tại
+				data.cate_id    = cate_id;   	//get cate_id
+				data.brand_list = brand_list;  	//list_brand for ajax send
+				data.size_list  = size_list;	//get size_list
 				ajax();
 			});
+			//khi click remove tag
+			$(".block_wrap").delegate(".remove-tag","click",function (e){
+				e.preventDefault();
+				var  tag_id = $(this).attr('data-tag'); //lay id cua filter-item
+				$("."+tag_id).prop('checked', false); 	//Chuyển checkbox có data-tag thành false
+
+				var cate_id     = $(".options__checkbox").attr('data-cate-id');
+				var brand_list  = new Array();
+				var size_list   = new Array();
+				brand_list      = multi_checkbox("brand"); 
+				size_list       = multi_checkbox('size');
+				data.page       = 1; 			
+				data.cate_id    = cate_id;   	
+				data.brand_list = brand_list;  
+				data.size_list  = size_list;	
+				ajax();
+			});
+
 			//lấy giá trị sort by
 			$("#SortBy").change(function (){
 				var cate_id = $(this).attr('data-cate-id');
@@ -127,7 +167,7 @@
 				data.sortby = val;
 				ajax();
 			});
-			//Khi click vao the a, ngừng load lại trang
+			//Khi click vao the a, ngừng load lại trang, truyen ajax
 			$(".block_wrap").delegate('#phantrang a','click',function (event){
 				event.preventDefault();
 				var page  = $(this).attr('href').split('page=')[1];
@@ -135,6 +175,7 @@
 				console.log(data);
 				ajax();
 			});
+
 			function ajax(){
 				$.ajax({
 					url: "ajax/checkbox",
@@ -146,7 +187,7 @@
 					},
 					success:function (data){
 						$(".loading-icon").fadeOut('fast');
-						$('.list_product').html(data);
+						$('.block_wrap').html(data);
 					},
 					errors:function (){
 						alert('fasle');
@@ -160,7 +201,9 @@
 					val.push($(this).val());
 				});
 				return val;
-			 };
+			};
+
+			
 		});
 	</script>
 @endsection

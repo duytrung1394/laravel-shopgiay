@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 use App\Product;
 use App\ProductProperties;
 use App\Category;
@@ -38,7 +38,7 @@ class PageController extends Controller
         // 
         $cates = Category::where('parent_id',$id)->get();
         $brands = Brand::all();
-
+        $sizes = Size::all();
         if(count($cates) > 0 )
         {       
             $parent_id = null;
@@ -48,14 +48,14 @@ class PageController extends Controller
                 
             }
             $parent =  implode(',',$parent_id);
-            $products = Product::whereIn('cate_id',[$id,$parent])->paginate(3);
+            $products = Product::whereIn('cate_id',[$id,$parent])->paginate(4);
             //nếu là cate cha thi wherein id cate con, va cha
         }else{
-            $products = Product::where('cate_id',$id)->paginate(3);
+            $products = Product::where('cate_id',$id)->paginate(4);
         }
         $cate = Category::find($id);
         $cate_id = $id;
-        return view('page.category',compact('products','cate','cate_id','brands'));
+        return view('page.category',compact('products','cate','cate_id','brands','sizes'));
         
     }
     public function getDetailProduct($id)
@@ -322,7 +322,9 @@ class PageController extends Controller
     { 
         $cate_id = $request->cate_id;
         $brand_list = $request->brand_list;
-
+        $size_list = $request->size_list;
+        $brands = null;
+        $sizes = null;
         // check var sortby
         switch ($request->sortby) {
             case 'created-ascending':
@@ -331,18 +333,40 @@ class PageController extends Controller
             case 'created-descending':
                 $sort = "id DESC";
                 break;
+            //more
             default:
                 $sort = "id ASC";
                 break;
         }
-        //nếu tòn tại brandlist thì cho về mảng
+
+        //find sản phẩm theo filter
+        //Khi không có filter nào được check
+        $filter = "";
+
+        // if brand has been checked
         if(!empty($brand_list)){
-    
-            $products = Product::where('cate_id',$cate_id)->whereIn('brand_id',$brand_list)->orderByRaw($sort)->paginate(8);
-        }else{
-            $products = Product::where('cate_id',$cate_id)->orderByRaw($sort)->paginate(8);
+            //convert to string
+            $brand_id = implode(",",$brand_list);
+            //nối bộ lọc vào filter
+            $filter .= " and brand_id in ($brand_id) ";
+
+            // $products = Product::where('cate_id',$cate_id)->whereIn("brand_id",$brand_list)->orderByRaw($sort)->paginate(4); //old
+            $brands = Brand::whereIn('id',$brand_list)->get();
         }
-        //response for ajax
-        return view('page.block_product',compact('products'));
+        // if brand has been checked
+        if(!empty($size_list)){
+            $size_id = implode(',',$size_list);
+
+            $filter .= " and id in (select product_id from product_properties where size_id in ($size_id)) ";
+
+            //get size for tag
+            $sizes = Size::whereIn('id',$size_list)->get();
+        }
+    
+        // $products =Product::where('cate_id',$cate_id)->whereRaw("brand_id in (1) and id in (select product_id from product_properties where size_id = 1)")->orderByRaw($sort)->paginate(4); //test loc theo size và brand
+
+        $products = Product::whereRaw("cate_id = $cate_id".$filter)->orderByRaw($sort)->paginate(4);
+        //response ajax
+        return view('page.block_product',compact('products','brands','sizes'));
     }
 }

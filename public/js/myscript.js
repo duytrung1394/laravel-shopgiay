@@ -114,6 +114,3 @@ $(document).ready(function (){
 			    field.removeClass('field__input-active');
 			}
 	});
-$(window).ready(function(){ 
-	$('.loading-icon').fadeOut();
-});

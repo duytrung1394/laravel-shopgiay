@@ -121,3 +121,6 @@
 		});
 	</script>
 @endsection
+@section('title')
+	Giỏ hàng
+@endsection

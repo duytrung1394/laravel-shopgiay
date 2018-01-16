@@ -97,7 +97,7 @@
 				<!--step__sections-->
 				<div class="step__footer">
 					<div class="text-right ">
-						<button  type='submit' name='submit' @if(Cart::count() == 0) disabled="disabled" class="btn__link btn__checkout btn__no-margin-right disabled" @endif class="btn__link btn__checkout btn__no-margin-right">Thanh Toán</button>
+						<button  type='submit' name='submit' class="btn__link btn__checkout btn__no-margin-right">Thanh Toán</button>
 					</div>
 				</div>
 				  {{ csrf_field() }}
@@ -259,4 +259,7 @@
 			});
 		});
 	</script>
+@endsection
+@section('title')
+	Thanh toán
 @endsection

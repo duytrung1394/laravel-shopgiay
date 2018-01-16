@@ -1,6 +1,21 @@
+<div class="row">
+	<div class="filter-tag">
+		<!-- Tag-filter -->
+		@if(count($brands) > 0)
+			@foreach($brands as $brand)
+				<a class="remove-tag" data-tag='filter-brand-{{$brand->id}}'>{{$brand->name}} <i class="fa fa-times" aria-hidden="true"></i></a>
+			@endforeach
+		@endif
+		@if(count($sizes) > 0)
+			@foreach($sizes as $size)
+				<a class="remove-tag" data-tag='filter-size-{{$size->id}}'>{{$size->name}} <i class="fa fa-times" aria-hidden="true"></i></a>
+			@endforeach
+		@endif
+	</div>
+</div>
 @if(count($products) > 0 )
-		<div class="row"  style="width: 100%;">
-		@foreach($products as $product)   
+	<div class="row clearfix"  style="width: 100%;" id="list_product">
+	@foreach($products as $product)   
 	  	<div class="product-item">
 			<div class="thumbnail">
 				@if($product->promotion_price > 0 )
@@ -26,8 +41,8 @@
 	  	</div>
 	@endforeach
 	</div>
-	<div style="clear:both"></div>
-	<div id="phantrang">
+	
+	<div id="phantrang" class="block_center">
 		{{$products->links()}}
 	</div>
 	
