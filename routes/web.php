@@ -25,17 +25,19 @@ Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getShowChecko
 
 Route::post('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@postCheckout']);
 
-
 // Route::get("danhsach","PageController@getDanhsach");
-Route::post('ajax/add-to-cart','PageController@postAjaxAddtoCart');
+Route::post('ajax/add-to-cart','AjaxController@postAjaxAddtoCart');
 
-Route::post('ajax/add-coupon','PageController@postAjaxAddCounpon');
+Route::post('ajax/add-coupon','AjaxController@postAjaxAddCounpon');
 
-Route::post("ajax/remove/item",'PageController@postAjaxRemoveProduct');
+Route::post("ajax/remove/item",'AjaxController@postAjaxRemoveProduct');
 
-Route::post('ajax/xuly-quantity','PageController@postAjaxXulyQuantity');
+Route::post('ajax/xuly-quantity','AjaxController@postAjaxXulyQuantity');
 
-Route::post('ajax/checkbox','PageController@postAjaxXulyCheckBox');
+Route::post('ajax/checkbox','AjaxController@postAjaxXulyCheckBox');
+
+Route::post('ajax/search','AjaxController@postAjaxSearch');
+
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 

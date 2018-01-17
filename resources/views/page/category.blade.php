@@ -51,9 +51,8 @@
 				            <select name="SortBy" id="SortBy" data-value="price-ascending" data-cate-id='{{$cate_id}}'>
 				             <!--  <option value="price-ascending">Giá giảm dần</option>
 				              <option value="price-descending">Giá tăng dần</option> -->
-				              <option value="created-ascending">Cũ nhất</option>
-				              <option value="created-descending">Mới nhất</option>
-				              
+				              	<option value="created-descending">Mới nhất</option>
+				              	<option value="created-ascending">Cũ nhất</option>
 				            </select>
 			          	</div>
 					</div>
@@ -61,11 +60,9 @@
 			</div>
 			<!--end-grid-->
 			<div class='block_wrap row'>
-				<div class="row">
-					<div class="filter-tag">
-						
+				
+					<div class="row filter-tag">
 					</div>
-				</div>
 					@if(count($products) > 0 )
 					<div class="row clearfix" style="width: 100%;" id="list_product"> 
 						@foreach($products as $product) 
@@ -100,7 +97,7 @@
 			  			</div>
 			  	
 				  	@else
-				  		<p>Chưa có sản phẩm nào trong chuyên mục này</p>
+				  		<p class="text-center messages">Không có sản phẩm phù hợp!</p>
 				  	@endif
 			  
 			</div>

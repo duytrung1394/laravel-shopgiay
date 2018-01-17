@@ -98,4 +98,9 @@
         }
         $newString .= "</ul>";
     }
+
+    function changeColorkeySearch($key, $subject)
+    {
+        return preg_replace("/($key)/i", "<span class='highlight'>$key</span>" , $subject);
+    }
 ?>

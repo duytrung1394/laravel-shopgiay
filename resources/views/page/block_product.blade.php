@@ -1,5 +1,5 @@
-<div class="row">
-	<div class="filter-tag">
+
+	<div class="row filter-tag">
 		<!-- Tag-filter -->
 		@if(count($brands) > 0)
 			@foreach($brands as $brand)
@@ -12,7 +12,7 @@
 			@endforeach
 		@endif
 	</div>
-</div>
+
 @if(count($products) > 0 )
 	<div class="row clearfix"  style="width: 100%;" id="list_product">
 	@foreach($products as $product)   
@@ -47,5 +47,5 @@
 	</div>
 	
 @else
-<p>Chưa có sản phẩm nào trong chuyên mục này</p>
+<p class="text-center messages">Không có sản phẩm phù hợp!</p>
 @endif

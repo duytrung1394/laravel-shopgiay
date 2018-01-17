@@ -237,6 +237,9 @@ button:hover{
 	margin: 0;
 	padding: 0;
 }
+.highlight{
+	color: #0099FF;
+}
 /**********Loadding icon******************/
 .loading-icon{
   position:fixed;
@@ -244,15 +247,15 @@ button:hover{
   right:0px;
   width:100%;
   height:100%;
-  background-color:#eee;
+  background-color:#aaa;
   background-image: url('../images/loading-icon.gif');
   background-size: 80px 80px;
   background-repeat: no-repeat;
   background-position: center;
   z-index:10000000;
-  opacity: 0.75;
+  opacity: 0.8;
   display: none;
-  filter: alpha(opacity=75); /* For IE8 and earlier */
+  filter: alpha(opacity=80); /* For IE8 and earlier */
 }
 .loading-icon{
 /*	width: 100%;
@@ -433,7 +436,7 @@ a:hover{
 .badge{
 	position: absolute;
 	line-height: 1.1;
-	z-index: 50;
+	z-index: 8;
 }
 .badge span{
 	height: 45px;
@@ -740,7 +743,7 @@ p.product-price-detail
 }
 .dropdown-nav{
 	position: absolute;
-	z-index: 55;
+	z-index: 11;
 	display: none;
 	width: 300px;
 	left: -205px;
@@ -752,7 +755,7 @@ p.product-price-detail
 .dropdown-nav ul {
 	padding-left: 0px;
 }
-.cart-item .media{
+.view-item .media{
 	position: relative;
 	padding: 3px;
 }
@@ -784,8 +787,46 @@ p.product-price-detail
 	transition:  0.3s;
 	-webkit-transition:   0.3s;
 	-moz-transition: 0.3s;
-
 }
+/**search**/
+.header-right{
+	padding: 30px 0px;
+}
+.search-box{
+	position: relative;
+	width: 280px;
+	margin: 0 auto;
+}
+.search-input{
+	width: 100%;
+}
+.search-result{
+	width: 270px;
+	display: none;
+	margin-top: 3px;
+	border: 1px solid #ddd;
+	position: absolute;
+	z-index: 10;
+	background-color: #fff;
+}
+.form-input-search{
+	position: relative;
+	width: 270px;
+}
+.form-input-search i{
+	font-size: 1.4em;
+}
+.icon-search{
+	display: block;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	pointer-events: none;
+}
+.text-example{
+	font-size: 0.85em;
+}
+
 .responsive-table tr{
 	border-bottom: 1px solid #ddd;
 }
@@ -1305,4 +1346,9 @@ p.login-title{
 #size-checkbox input:checked + label{
     background-color: #333;
     color: #fff;
+}
+.messages{
+	display: block;
+	width: 100%;
+	text-align: center;
 }

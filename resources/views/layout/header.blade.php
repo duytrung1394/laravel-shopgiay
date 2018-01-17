@@ -15,7 +15,7 @@
 			    			<p class="text-center" style="margin-top: 20px;">Chưa có sản phẩm nào</p>
 			    		@else
 
-			    		<div class='cart-item cart__list-item'>
+			    		<div class='view-item cart__list-item'>
 			    			@foreach(Cart::content() as $row)
 			    			<div class="media">
 			    				<a href="javascript:void(0)" class='remove-icon cart-popup__remove-icon remove-product-item' data-rowId="{{$row->rowId}}"><span class="glyphicon glyphicon-remove"></span></a>
@@ -85,11 +85,23 @@
 		</div>
 	</div>
 	<!-- top-bar -->
-	<div class="row" id="header-logo">
-		<div class='col-md-6' id='header-logo-left'>
+	<div class="row clearfix" id="header-logo">
+		<div class='col-12 col-sm-12 col-md-6 col-lg-6 ' id='header-logo-left'>
 			<p class='p-logo'><a href="">ShopGiay</a></p>
 		</div>
-		<div class='col-md-6 header-logo-right'>
+
+		<div class='col-12 col-sm-12 col-md-6 col-lg-6 header-right'>
+			<div class="search-box">
+				<div class="form-input-search">
+					<input type="text" name="txtKeyword" placeholder="Nhập từ khóa cần tìm kiếm" class="search-input">
+					<span class='icon-search'><i class="fa fa-search" aria-hidden="true"></i></span>
+				</div>
+				<div class="search-result">
+				</div>
+				<div class="text-example">
+					<span>ví dụ: giày thể thao, converse</span>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- Header-Logo -->

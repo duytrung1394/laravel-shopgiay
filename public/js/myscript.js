@@ -15,9 +15,13 @@ $(document).ready(function (){
 	$(".popup__cart-body").click(function(e){
 	    e.stopPropagation();
 	});
+	$(".search-box").click(function (e){
+		e.stopPropagation();
+	});
 	$(document).click(function(){
 	    $(".popup__cart-body").fadeOut();
 	    $('.popup__login-body').fadeOut();
+	    $('.search-result').fadeOut();
 	});
 	$('.login-select').click(function(e){
 		$('.popup__login-body').fadeToggle();
@@ -86,6 +90,27 @@ $(document).ready(function (){
 			}
 		});
 	});
+
+	//quicksearch
+	$('.search-input').keyup(function (){
+		key = $(this).val();
+		if(key == ""){
+			$(".search-result").fadeOut();
+		}else{
+			$.ajax({
+				url : "ajax/search",
+				type: "post",
+				data: "key="+key,
+				async: true,
+				success:function (data){
+					$(".search-result").html(data);
+				}
+			});
+			$(".search-result").fadeIn();
+		}
+	});
+
+
 });
 //initiate the plugin and pass the id of the div containing gallery images
 	$("#img_01").elevateZoom({
