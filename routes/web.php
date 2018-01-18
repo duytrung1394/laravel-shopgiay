@@ -25,6 +25,10 @@ Route::get('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@getShowChecko
 
 Route::post('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@postCheckout']);
 
+Route::get('dang-ky',['as'=>'dangky','uses'=>'PageController@getDangKy']);
+
+Route::post('dang-ky',['as'=>'dangky','uses'=>'PageController@postDangKy']);
+
 // Route::get("danhsach","PageController@getDanhsach");
 Route::post('ajax/add-to-cart','AjaxController@postAjaxAddtoCart');
 
@@ -34,10 +38,13 @@ Route::post("ajax/remove/item",'AjaxController@postAjaxRemoveProduct');
 
 Route::post('ajax/xuly-quantity','AjaxController@postAjaxXulyQuantity');
 
-Route::post('ajax/checkbox','AjaxController@postAjaxXulyCheckBox');
+Route::post('ajax/filter','AjaxController@postAjaxFilterPaginate');
 
 Route::post('ajax/search','AjaxController@postAjaxSearch');
 
+Route::post('dang-nhap','AjaxController@postAjaxDangnhap');
+
+Route::get('dang-xuat','PageController@getDangXuat');
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 

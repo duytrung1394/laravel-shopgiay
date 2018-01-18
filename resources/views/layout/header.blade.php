@@ -60,27 +60,42 @@
 			    	</div>
 			    	<!-- end-cart-body-->
 			  	</li>
-			  	<li class="nav-item login-link">
+			  	@if(Auth::check())
+			  	<li class="nav-item">
+			    	<a class="nav-link small-hidden" href="javascript:void(0)">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
+			 	</li>
+			 	<li class="nav-item">
+			    	<a class="nav-link small-hidden" href="dang-xuat">Đăng xuất</a>
+			 	</li>
+			 	@else
+			 	<li class="nav-item login-link">
 			    	<a class="nav-link small-hidden login-select" href="javascript:void(0)">Đăng nhập</a>
-			    	<div class="dropdown-nav popup__login-body small-hidden">
-			    		<p class="login-title text-center">Đăng nhập</p>
-			    		<div class="field__input-wrapper">
-			    			<input type="text" name="txtEmail" placeholder="Email">
-			    		</div>
-			    		<div class="field__input-wrapper">
-			    			<input type="password" name="txtPassword" placeholder="Mật khẩu">
-			    		</div>
-			    		<div class="field__input-wrapper forgot-password">
-			    			<p><a href="#">Quên mật khẩu?</a></p>
-			    		</div>
-			    		<div class="field__input-wrapper">
-			    			<input type="submit" name="login" value="Đăng nhập" class="btn__submit">
-			    		</div>
+			    	<div class="dropdown-nav popup__login-body small-hidden ">
+			    		<form action="dang-nhap" method="post" id='form-login'>
+				    		<p class="login-title text-center">Đăng nhập</p>
+				    		<div class="field__input-wrapper">
+				    			<input type="text" name="txtEmail" placeholder="Email" class='input-email'>
+				    			<p class="errors alert">* Bạn chưa nhập email</p>
+				    		</div>
+				    		<div class="field__input-wrapper">
+				    			<input type="password" name="txtPassword" placeholder="Mật khẩu" class="input-password">
+				    			<p class="errors alert">* Bạn chưa nhập mật khẩu</p>
+				    		</div>
+				    		<div class="field__input-wrapper forgot-password">
+				    			<p><a href="#">Quên mật khẩu?</a></p>
+				    		</div>
+				    		<div class="field__input-wrapper">
+				    			<p class="login-messages alert">Ban chua nhap</p>
+				    			<input type="submit" name="login" value="Đăng nhập" class="btn__submit">
+				    		</div>
+				    		{{ csrf_field() }}
+			    		</form>
 			    	</div>
 			  	</li>
 			  	<li class="nav-item">
-			    	<a class="nav-link small-hidden" href="register.html">Đăng kí</a>
+			    	<a class="nav-link small-hidden" href="dang-ky">Đăng kí</a>
 			 	</li>
+			 	@endif
 			</ul>
 		</div>
 	</div>

@@ -9,14 +9,17 @@ use App\ProductProperties;
 use App\Category;
 use App\ImageProduct;
 use App\Size;
-use \Cart;
 use App\Coupon;
+use \Cart;
 use Session;
 use App\Customer;
 use App\Bills;
 use App\DetailBill;
 use App\Brand;
+use App\User;
 use App\Http\Requests\CheckoutRequests;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
 	public function __construct()
@@ -30,15 +33,17 @@ class PageController extends Controller
     	$new_product = Product::where('new',1)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->get();
     	
     	$sale_product = Product::where('promotion_price','>',0)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->get();
-    	
+    
     	return view('page.index',compact('new_product','sale_product'));
     }
-    public function getCategory($id)
+    public function getCategory($id, Request $request)
     {   
         // 
         $cates = Category::where('parent_id',$id)->get();
         $brands = Brand::all();
         $sizes = Size::all();
+        $cate = Category::find($id);
+        $cate_id = $id;
         if(count($cates) > 0 )
         {       
             $parent_id = null;
@@ -53,8 +58,10 @@ class PageController extends Controller
         }else{
             $products = Product::where('cate_id',$id)->orderBy('id','DESC')->paginate(8);
         }
-        $cate = Category::find($id);
-        $cate_id = $id;
+        if($request->ajax())
+        {
+            return view('page.paginate_view',compact('products'));
+        }
         return view('page.category',compact('products','cate','cate_id','brands','sizes'));
         
     }
@@ -81,11 +88,40 @@ class PageController extends Controller
         return view('page.checkout');
     }
 
-   
-
     public function postCheckout(CheckoutRequests $request){
-        if(Cart::count() > 0)
-        {   
+        
+        //Kiêm tra xem số lượng mỗi sản phẩm có còn trong kho hàng nữa không
+        $flag = true;
+        $list_soil_out = "";
+        foreach(Cart::content() as $row)
+        {
+            $rowId = $row->rowId;
+            $product_per = ProductProperties::where('product_id',$row->id)->where('size_id',$row->options->size_id)->select('quantity')->get()->first();
+            $quantity_repository = $product_per->quantity;
+            //Nếu số lượng trong kho bằng 0 thì xóa sản phẩm đó ra khỏi cart
+            if($quantity_repository == 0){
+                $size = Size::find($row->options->size_id);
+                $size_name = $size->name;
+                $list_soil_out .= " ".$row->name." size: ".$size_name." đã hết hàng<br/>";
+                $flag = false;
+                Cart::remove($rowId);
+            }      
+            //nếu số lượng trong cart lớn hơn kho     
+            else if($row->qty > $quantity_repository)
+            {
+                $size = Size::find($row->options->size_id);
+                $size_name = $size->name;
+                $list_soil_out .= " ".$row->name." size: ".$size_name." còn ".$quantity_repository." sản phẩm<br/>";
+                $flag = false;
+                //update lại số lượng sản phẩm trong cart bằng số lượng trong kho.
+                Cart::update($rowId,['qty'=>$quantity_repository]);
+            }
+        }
+        //nếu có những sản phẩm đã hết, hoặc số lượng ít hơn lựa chọn thì thông báo cho người dùng
+        if($flag == false){
+            return redirect('thanh-toan')->with('loi',"Bạn vui lòng kiểm tra lại giỏ hàng: <br/>".$list_soil_out);
+        }
+        else{
             $customer = new Customer;
             $customer->email      = $request->txtEmail;
             $customer->first_name = $request->txtFirstName;
@@ -98,11 +134,18 @@ class PageController extends Controller
                 $customer_id       = Customer::max('id');   
                 $bill = new Bills;
                 $bill->customer_id = $customer_id;
+
+                $total_price = Cart::subtotal(0,'','');
                 if(session('coupon'))
                 {
+                    //Kiểm tra xem có nhập mã giảm giá không
                     $bill->coupon_id = session('coupon');
+                    $coupon = Coupon::find(session('coupon'));
+                    $coupon_value = $coupon->value;
+                    $total_price -= $total_price * $coupon_value;
                 }
-                $bill->total_price = $request->txtTotalPrice;
+
+                $bill->total_price = $total_price;
                 if($bill->save())
                 {   //lưu thông tin chi tiết đơn hàng
                     $bill_id  = Bills::max('id');
@@ -113,8 +156,16 @@ class PageController extends Controller
                         $detail_bill->product_id = $cart->id;
                         $detail_bill->size_id    = $cart->options->size_id;
                         $detail_bill->quantity   = $cart->qty;
-                        $detail_bill->price      = $cart->subtotal;
+                        $detail_bill->price      = $cart->subtotal(0,'','');
                         $detail_bill->save();
+
+                        $product_p = ProductProperties::where('product_id',$cart->id)->where('size_id',$cart->options->size_id)->select('quantity')->get()->first();
+                        $quantity = $product_p->quantity;
+                        $quantity_remain = $quantity - $cart->qty;
+
+                        //cập nhật lại số lượng hàng trong kho
+                        $quantity = DB::table('product_properties')->where('product_id',$cart->id)->where('size_id',$cart->options->size_id)->update(['quantity'=>$quantity_remain]);
+
                     }
                     Cart::destroy();
                     session()->forget('coupon');
@@ -125,9 +176,36 @@ class PageController extends Controller
             }else{
                  return redirect('thanh-toan')->with('loi',"Không thể lưu lại thông tin khách hàng");
             }
-        }else{
-            return redirect('thanh-toan')->with('loi',"Giỏ hàng trống");
-        }
+        }   
     }
-    
+   
+    public function getDangKy()
+    {
+        return view('page.register');
+    }
+    public function postDangKy(UserRequest $request)
+    {
+        $this->validate($request,[
+            'txtEmail' => 'unique:users,email'
+        ],[
+            "txtEmail.unique" => "Email của bạn đã tồn tại"
+        ]);
+         if($request->txtPass != $request->txtConfirmPass){
+            return redirect('dang-ky')->with('loi','Mật khẩu không trùng khớp');
+        }else{
+            $user = new User;
+            $user->first_name = $request->txtFirstName;
+            $user->last_name  = $request->txtLastName;
+            $user->email      = $request->txtEmail;
+            $user->password   = bcrypt($request->txtPass);
+            $user->save();
+
+            return redirect('dang-ky')->with('thongbao',"Đăng kí thành công. Nhấp vào<a href=''> đây </a>để trở về trang chủ");
+        }
+       
+    }
+    public function getDangXuat(){
+        Auth::logout();
+        return redirect('/');
+    }
 }

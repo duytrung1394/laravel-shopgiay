@@ -17,7 +17,7 @@ use App\Bills;
 use App\DetailBill;
 use App\Brand;
 use App\Http\Requests\CheckoutRequests;
-
+use Illuminate\Support\Facades\Auth;
 class AjaxController extends Controller
 {
 	public function postAjaxAddtoCart(Request $request)
@@ -141,6 +141,7 @@ class AjaxController extends Controller
             )
         );
     }
+    
     public function postAjaxRemoveProduct(Request $request){
         $rowId = $request->rowId;
         foreach(Cart::content() as $cart)
@@ -212,7 +213,7 @@ class AjaxController extends Controller
         }
     }
 
-    public function postAjaxXulyCheckBox(Request $request)
+    public function postAjaxFilterPaginate(Request $request)
     {   
         $cate_id = $request->cate_id;
         $brand_list = $request->brand_list;
@@ -269,5 +270,25 @@ class AjaxController extends Controller
         $product = Product::search($key_search)->take(5)->get();
 
         return view('page.result_search',compact('product','key_search'));
+    }
+    public function postAjaxDangnhap(Request $request)
+    {
+        $email = $request->txtEmail;
+        $password = $request->txtPassword;
+        $valid = array('success' => false, 'messages' =>array());
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $valid['success'] = true; 
+            $valid['messages'] = 'Đăng nhập thành công';
+        }else{
+            $valid['success'] = false;
+            $valid['messages'] = 'Sai email hoặc mật khẩu';
+        }
+
+        echo json_encode(
+            array(
+                'valid' => $valid
+            )
+        );
     }
 }

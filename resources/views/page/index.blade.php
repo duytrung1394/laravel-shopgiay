@@ -27,7 +27,7 @@
 										<span> {{number_format($sp->unit_price)}} vnđ</span>
 									@endif
 						        	</p>
-						        <a href="san-pham/{{$sp->id}}/{{$sp->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
+						        <p><a href="san-pham/{{$sp->id}}/{{$sp->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
 						      	</div>
 						    </div>
 					  	</div>
@@ -65,7 +65,7 @@
 										<span> {{number_format($np->unit_price)}}</span> vnđ
 									@endif
 						        	</p>
-						        <a href="san-pham/{{$np->id}}/{{$np->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
+						        <p><a href="san-pham/{{$np->id}}/{{$np->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>
 						      	</div>
 						    </div>
 					  	</div>

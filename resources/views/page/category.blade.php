@@ -59,7 +59,7 @@
 				</div>
 			</div>
 			<!--end-grid-->
-			<div class='block_wrap row'>
+			<div class='block_wrap row' id="pd">
 				
 					<div class="row filter-tag">
 					</div>
@@ -92,7 +92,7 @@
 
 			  			@endforeach
 			  		</div>	
-			  			<div class="block_center">
+			  			<div class="block_center block_paginate">
 			  				{{$products->links()}}
 			  			</div>
 			  	
@@ -118,8 +118,9 @@
 	<script type="text/javascript">
 		
 		$(document).ready(function (){
+			var cate_id  = $(".options__checkbox").attr('data-cate-id');
 			var data = {
-				cate_id : "",
+				cate_id : cate_id,
 				brand_list : [],
 				size_list : [],
 				sortby: "",
@@ -127,24 +128,21 @@
 			}
 			//filter check
 			$(".item-filter").change(function (){
-				var cate_id     = $(".options__checkbox").attr('data-cate-id');
 				var brand_list  = new Array();
 				var size_list   = new Array();
 				brand_list      = multi_checkbox("brand"); //call multi_checkbox, get list id
 				size_list       = multi_checkbox('size');
 				data.page       = 1; 			//khi check thi luon gửi page 1, tránh lỗi khi số page bé hơn page đang gửi hiện tại
-				data.cate_id    = cate_id;   	//get cate_id
 				data.brand_list = brand_list;  	//list_brand for ajax send
 				data.size_list  = size_list;	//get size_list
 				ajax();
 			});
 			//khi click remove tag
+
 			$(".block_wrap").delegate(".remove-tag","click",function (e){
 				e.preventDefault();
 				var  tag_id = $(this).attr('data-tag'); //lay id cua filter-item
 				$("."+tag_id).prop('checked', false); 	//Chuyển checkbox có data-tag thành false
-
-				var cate_id     = $(".options__checkbox").attr('data-cate-id');
 				var brand_list  = new Array();
 				var size_list   = new Array();
 				brand_list      = multi_checkbox("brand"); 
@@ -158,24 +156,22 @@
 
 			//lấy giá trị sort by
 			$("#SortBy").change(function (){
-				var cate_id = $(this).attr('data-cate-id');
 				var val = $(this).val();
 				data.cate_id = cate_id;
 				data.sortby = val;
 				ajax();
 			});
-			//Khi click vao the a, ngừng load lại trang, truyen ajax
-			$(".block_wrap").delegate('#phantrang a','click',function (event){
+		
+			$(".block_wrap").on('click','#pagination a', function (event) {
 				event.preventDefault();
 				var page  = $(this).attr('href').split('page=')[1];
 				data.page = page; //để có thể phân trang bên page phải gửi data.page qua ajax
-				console.log(data);
 				ajax();
 			});
 
 			function ajax(){
 				$.ajax({
-					url: "ajax/checkbox",
+					url: "ajax/filter",
 					type: "post",
 					data: data,
 					async: true,
@@ -199,8 +195,6 @@
 				});
 				return val;
 			};
-
-			
 		});
 	</script>
 @endsection

@@ -177,7 +177,7 @@
 					@endif
 				  
 				</div>
-				<!--product--different-->
+				<!--productdifferent-->
 			</div>
 		<!--end-main-content-->
 		</div>

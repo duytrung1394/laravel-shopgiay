@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
 	<link href="css/glyphicons.css" rel="stylesheet" />
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<!-- <link rel="stylesheet" type="text/css" href="asset/font-awesome/css/fontawesome-all.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="asset/font-awesome/css/fontawesome-all.min.css"> --> <!--not full icon-->
 </head>
 <body>
 	<div class="loading-icon">

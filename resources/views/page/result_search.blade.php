@@ -18,5 +18,5 @@
         </div>
         @endforeach
     @else
-    <p class='text-center' style='margin-top: 20px;'>Không có sản phẩm phù hợp</p>
+    <p class='text-center' style='margin: 10px;'>Không có sản phẩm phù hợp </p>
     @endif

@@ -12,7 +12,7 @@
 			@endforeach
 		@endif
 	</div>
-
+	
 @if(count($products) > 0 )
 	<div class="row clearfix"  style="width: 100%;" id="list_product">
 	@foreach($products as $product)   
@@ -42,10 +42,9 @@
 	@endforeach
 	</div>
 	
-	<div id="phantrang" class="block_center">
+	<div class="block_center" id="pagination">
 		{{$products->links()}}
 	</div>
-	
 @else
 <p class="text-center messages">Không có sản phẩm phù hợp!</p>
 @endif

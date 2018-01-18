@@ -1,17 +1,18 @@
 $(document).ready(function (){
 
 	$(".cart-select").click(function(e){
-    $('.popup__cart-body').fadeToggle();
-     $('.popup__login-body').fadeOut();
-  	if($(".cart__list-item").height() < 200)
-	{
-		$(".cart__list-item").css('overflow-y',"hidden");
-	}else{
-		$(".cart__list-item").css('overflow-y',"scroll");
-	}
-    e.stopPropagation();
+	    $('.popup__cart-body').fadeToggle();
+	     $('.popup__login-body').fadeOut();
+	  	if($(".cart__list-item").height() < 200)
+		{
+			$(".cart__list-item").css('overflow-y',"hidden");
+		}else{
+			$(".cart__list-item").css('overflow-y',"scroll");
+		}
+	    e.stopPropagation(); //ngừng
 	});
 
+	//Khi click vao cart-body, ngừng đóng popup
 	$(".popup__cart-body").click(function(e){
 	    e.stopPropagation();
 	});
@@ -22,11 +23,15 @@ $(document).ready(function (){
 	    $(".popup__cart-body").fadeOut();
 	    $('.popup__login-body').fadeOut();
 	    $('.search-result').fadeOut();
+	    //ẩn các alert khi dong popup
+	    $('.popup__login-body .alert').fadeOut();
 	});
 	$('.login-select').click(function(e){
 		$('.popup__login-body').fadeToggle();
 		$(".popup__cart-body").fadeOut();
-		 e.stopPropagation();
+		e.stopPropagation();
+		//ẩn các alert khi mở popup
+	    $('.popup__login-body .alert').hide();
 	});
 	$(".popup__login-body").click(function(e){
 	    e.stopPropagation();
@@ -42,7 +47,6 @@ $(document).ready(function (){
 	//nav
 	$(".nav__sidebar a").click(function(){
 		//slide tất cả các ul con
-		$(".nav__sidebar ul ul").addClass('active-ul');
 		$(".nav__sidebar ul ul").slideUp('fast');
 		//Hiện gly down ở các ul khác
 		$(".nav__sidebar ul li a span").removeClass('glyphicon-chevron-up');
@@ -104,15 +108,74 @@ $(document).ready(function (){
 				async: true,
 				success:function (data){
 					$(".search-result").html(data);
+					$(".search-result").fadeIn();
 				}
 			});
-			$(".search-result").fadeIn();
+			
 		}
 	});
 
+	//DANG NHAP
+	$('#form-login').submit(function (e){
+		e.preventDefault();
+		var email = $('.popup__login-body .input-email').val();
+		var password = $('.popup__login-body .input-password').val();
+		var error = false;
+		if(email == "")
+		{
+			$('.popup__login-body .input-email').next('.errors').fadeIn();
+			error = true;
+		}
+		if(password == "")
+		{
+			$('.popup__login-body .input-password').next('.errors').fadeIn();
+			error = true;
+		}
+		if(error == false)
+		{	
+			var form = $(this);
+			var formdata = new FormData($(this)[0]);
+			$.ajax({
+				url : form.attr('action'),
+				type :form.attr('method'),
+				data: formdata,
+				dataType: 'json',
+				cache: false,				// To unable request pages to be cached
+				contentType: false,			// The content type used when sending data to the server.
+				processData: false,			// To send DOMDocument or non processed data file it is set to false
+				async: true,
+				success: function (result)
+				{
+					if(result.valid.success == true)
+					{	
+						$('.login-messages').html('Đăng nhập thành công');
+						$('.login-messages').css('color','#33CC66');
+						$('.login-messages').fadeIn();
+						setTimeout(function(){
+							window.location.reload();
+						},1000);
+					}else{
+						$('.login-messages').html('Sai email hoặc mật khẩu');
+						$('.login-messages').css('color','#dd0000');
+						$('.login-messages').fadeIn();
+					}
+				}
+			});
+		}
+	});
+	//hide errors after press key on input
+	$('.popup__login-body .input-email').keyup(function ()
+	{
+		$(this).next('.errors').fadeOut();
+		$('.login-messages').fadeOut();
+	});
+	$('.popup__login-body .input-password').keyup(function ()
+	{
+		$(this).next('.errors').fadeOut();
+		$('.login-messages').fadeOut();
+	});
 
 });
-//initiate the plugin and pass the id of the div containing gallery images
 	$("#img_01").elevateZoom({
 		zoomType: "inner",
 			cursor: "crosshair",

@@ -281,6 +281,9 @@ button:hover{
     height: 100%;*/
 }
 /***hiden***/
+.alert{
+	padding: 5px 15px;
+}
 .visually-hidden{
 	border: 0;
     clip: rect(0, 0, 0, 0);
@@ -471,9 +474,10 @@ a:hover{
 	margin: 40px auto;
 }
 #footer{
-	height: 150px;
-	background-color: #777;
+	height: 100px;
+	background-color: #fff;
 	width: 100%;
+	border-top: 1px solid #ccc;
 }
 .menu-list ul{
 	display: none;
@@ -773,6 +777,18 @@ p.product-price-detail
 	background-color: #fff;
 	border: 1px solid #ddd;
 }
+.popup__login-body .field__input-wrapper{
+	padding: 5px 5px;
+}
+.field__input-wrapper .alert{
+	text-align: center;
+	font-size: 0.9em;
+	/*display: none;*/
+	padding: 0;
+}
+.field__input-wrapper .errors{
+	color: #dd0000;
+}
 .btn__submit{
 	width: 100%;
 	background-color: #0099CC;
@@ -950,7 +966,9 @@ p.login-title{
 }
 .section--shipping-address{
 	padding-top: 40px;
-
+}
+.section--contact-information .close{
+	padding: 5px;
 }
 .field__input-wrapper{
 	position: relative;
@@ -1120,6 +1138,7 @@ p.login-title{
 /**SIDER BAR */
 .nav__sidebar ul{
 	padding: 0px;
+	background-color: #fff;
 }
 .nav__sidebar ul ul{
 	display: none;
@@ -1141,9 +1160,7 @@ p.login-title{
 .active-a{
 	color: #ccc;
 }
-.active-ul{
-	background-color: #fff;
-}
+
 .active-li a{
 	color: #339999;
 }
@@ -1200,6 +1217,7 @@ p.login-title{
 .modal-body{
 	padding: 15px;
 }
+
 .btn__close-icon{
 	font-size: 2.5em !important;
 	margin-top: -20px !important;

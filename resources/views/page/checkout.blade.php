@@ -7,13 +7,11 @@
 				<div class="step__header">
 					<nav class="breadcrumb-nav small--text-center" aria-label="You are here">
 					  <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-					    <a href="index.html" itemprop="url" title="Back to the homepage">
+					    <a href="" itemprop="url" title="Back to the homepage">
 					      <span itemprop="title">Giỏ hàng</span>
 					    </a>
 					    <span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
 					    Thông tin khách hàng
-					    <span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
-					    Shipping
 					  </span>
 					</nav>
 				</div>
@@ -26,6 +24,33 @@
 						<input class="field__input one-column-form__input--text" id="input-email" name='txtEmail' type="email" placeholder="Email" value="{{old('txtEmail')}}">
 					</div>
 					<div style="clear: both;"></div>
+					@if(count($errors) > 0)
+					 	<div class="alert alert-warning alert-dismissible fade show"  role="alert">
+					 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						    	<span aria-hidden="true">&times;</span>
+						  	</button>
+							@foreach($errors->all() as $err)
+								{!!$err!!} <br>
+							@endforeach
+						</div>
+						
+					@endif
+					@if(session('loi'))
+						<div class="alert alert-warning alert-dismissible fade show"  role="alert">
+					 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						    	<span aria-hidden="true">&times;</span>
+						  	</button>
+							{!!session('loi')!!}
+						</div>
+					@endif
+					@if(session('success'))
+						<div class="alert alert-success alert-dismissible fade show"  role="alert">
+					 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						    	<span aria-hidden="true">&times;</span>
+						  	</button>
+							{!!session('success')!!}
+						</div>
+					@endif
 					</div>
 					<div class="section--shipping-address">
 						<p class='section__title'>Địa chỉ giao hàng</p>
@@ -52,83 +77,18 @@
 							<label class="field__label" for="input-address">Địa chỉ</label>
 							<input class="field__input" id="input-address" type="text" placeholder="Địa chỉ" name='txtAddress' value="{{old('txtAddress')}}" >
 						</div>
-						<!-- <div class='field field__input-wrapper field__input-active field--half'>
-							<label class="field__label" for="input-province">Tỉnh</label>
-							<select class="field__input field__select" id='input-city'>
-								<option value="1">Nghệ an</option>
-								<option value="2">Thành phố hồ chí minh</option>
-								<option value="3">Hà nội</option>
-							</select>
-						</div>
-						<div class='field field__input-wrapper field__input-active field--half '>
-							<label class="field__label" for="input-city">Huyện/Thành phố</label>
-							<select class="field__input field__select" id='input-city'>
-								<option value="1">Vinh</option>
-								<option value="2">Nghệ an</option>
-								<option value="3">Hà nội</option>
-							</select>
-						</div> -->
-						<div class="field field__input-wrapper">
-							<?php
-								$coupon_value = 0;
-								$total_price = 0;
-								$total_down = 0;
-								$counpon_name = "";
-								//nếu đã được add mã giảm giá
-								if(session('coupon')) {
-								$coupon_id  = session('coupon'); 
-								$coupon = App\Coupon::find($coupon_id);
-								$coupon_value = $coupon->value;
-								$coupon_name = $coupon->name;
-								}
-								//nếu có cart
-								if(Cart::count() > 0) { 
-									$total_price = Cart::subtotal(0,'','');
-									$total_down = $total_price * $coupon_value;
-									$total_price -= $total_down; 
-								}
-							?>
-							<input class="field__input" id="input-total-price" type="hidden" placeholder="Tổng giá" name='txtTotalPrice' value='{{$total_price}}'>
-						</div>
-
 						<div style="clear: both;"></div>
 					</div>
 				</div>
 				<!--step__sections-->
 				<div class="step__footer">
 					<div class="text-right ">
-						<button  type='submit' name='submit' class="btn__link btn__checkout btn__no-margin-right">Thanh Toán</button>
+						<button  type='submit' name='submit' class="btn__link btn__checkout btn__no-margin-right" @if(Cart::count()==0) id='submit-false' @endif >Thanh Toán</button>
 					</div>
 				</div>
 				  {{ csrf_field() }}
 				</form>
-				@if(count($errors) > 0)
-				 	<div class="alert alert-warning alert-dismissible fade show"  role="alert">
-				 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    	<span aria-hidden="true">&times;</span>
-					  	</button>
-						@foreach($errors->all() as $err)
-							{{$err}} <br>
-						@endforeach
-					</div>
-					
-				@endif
-				@if(session('loi'))
-					<div class="alert alert-warning alert-dismissible fade show"  role="alert">
-				 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    	<span aria-hidden="true">&times;</span>
-					  	</button>
-						{{session('loi')}}
-					</div>
-				@endif
-				@if(session('success'))
-					<div class="alert alert-success alert-dismissible fade show"  role="alert">
-				 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					    	<span aria-hidden="true">&times;</span>
-					  	</button>
-						{!!session('success')!!}
-					</div>
-				@endif
+				
 			</div>
 			<!--end-step-->
 		</div>
@@ -167,7 +127,7 @@
 		  							</td>
 		  							<td class="product__description">
 		  								<p class="product__description-name">{{$row->name}}</p>
-		  								<?php $size = App\Size::find($row->qty);
+		  								<?php $size = App\Size::find($row->options->size_id);
 		  								?>
 		  								<p class="product__description-size">Size: {{$size->name}}</p>
 		  							</td>
@@ -184,6 +144,25 @@
 			  		<!--order-summary__sections-->
 			  		<div class="sidebar__footer">
 			  			<div class="gift-code">
+			  				<?php
+								$coupon_value = 0;
+								$total_price = 0;
+								$total_down = 0;
+								$counpon_name = "";
+								//nếu đã được add mã giảm giá
+								if(session('coupon')) {
+								$coupon_id  = session('coupon'); 
+								$coupon = App\Coupon::find($coupon_id);
+								$coupon_value = $coupon->value;
+								$coupon_name = $coupon->name;
+								}
+								//nếu có cart
+								if(Cart::count() > 0) { 
+									$total_price = Cart::subtotal(0,'','');
+									$total_down = $total_price * $coupon_value;
+									$total_price -= $total_down; 
+								}
+							?>
 			  				<div class="field field__input-wrapper seven-col">
 							<label class="field__label" for="input-coupon">Mã giảm giá</label>
 							<input class="field__input" id="input-coupon" type="text" placeholder="Mã giảm giá" value="@if(session('coupon')) {{$coupon_name}}@endif">
@@ -257,7 +236,12 @@
 					}
 				});
 			});
+			$("#submit-false").click(function (){
+				alert('Giỏ hàng trống');
+				return false;
+			});
 		});
+		
 	</script>
 @endsection
 @section('title')

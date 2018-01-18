@@ -24,7 +24,8 @@ class UserController extends Controller
     	]);
 
 		$user           = new User;
-		$user->name     = $request->txtName;
+        $user->first_name     = $request->txtFirstName;
+		$user->last_name     = $request->txtLastName;
 		$user->email    = $request->txtEmail;
 		$user->password = bcrypt($request->txtPass);
 		$user->level    = $request->rdoQuyen;
@@ -47,20 +48,24 @@ class UserController extends Controller
     public function postEditUser(Request $request, $id)
     {
         $this->validate($request,[
-            'txtName'        => "required|min:4",
-            'txtEmail'       => "required|email|unique:users,email,".$id,
+            'txtFirstName' => "required|min:2",
+            'txtLastName'  => "required|min:2",
+            'txtEmail'     => "required|email|unique:users,email,".$id,
         ],[
-            'txtName.required'   => "Bạn chưa nhập tên người dùng",
-            'txtName.required'   => "Tên người dùng phải có ít nhất 3 kí tự",
-            'txtEmail.required'  => "Bạn chưa nhập Email",
-            'txtEmail.email'     => "Bạn chưa nhập đúng định dạng Email",
-            "txtEmail.unique"    => "Email đã tồn tại",
+            'txtFirstName.required' => "Bạn chưa nhập họ",
+            'txtFirstName.min'      => "Họ phải có ít nhất 2 kí tự",
+            'txtLastName.required'  => "Bạn chưa nhập tên",
+            'txtLastName.min'       => "Tên phải có ít nhất 2 kí tự",
+            'txtEmail.required'     => "Bạn chưa nhập Email",
+            'txtEmail.email'        => "Bạn chưa nhập đúng định dạng Email",
+            "txtEmail.unique"       => "Email đã tồn tại",
         ]);
 
-        $user        = User::find($id);
-        $user->name  = $request->txtName;
-        $user->email = $request->txtEmail;
-        $user->level = $request->rdoQuyen;    
+        $user             = User::find($id);
+        $user->first_name = $request->txtFirstName;
+        $user->last_name  = $request->txtLastName;
+        $user->email      = $request->txtEmail;
+        $user->level      = $request->rdoQuyen;    
         $user->save();
 
         return redirect('admin/user/sua/'.$id)->with('message','Sửa thành công');

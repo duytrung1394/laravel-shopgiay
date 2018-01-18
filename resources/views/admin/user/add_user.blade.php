@@ -21,7 +21,7 @@
                             </div>
                         @endif
                         <!-- In Thông báo -->
-                        @if(session('message'))
+                        @if(session('thongbao'))
                             <div class="alert alert-success">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <strong>Success</strong>
@@ -38,7 +38,11 @@
                         <form action="" method="POST">
                             <div class="form-group">
                                 <label>Tên</label>
-                                <input class="form-control" name="txtName" placeholder="Điền vào tên User" value="{!! old('txtName') !!}"/>
+                                <input class="form-control" name="txtFirstName" placeholder="Điền vào họ User" value="{!! old('txtFirstName') !!}"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Họ</label>
+                                <input class="form-control" name="txtLastName" placeholder="Điền vào tên User" value="{!! old('txtLastName') !!}"/>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

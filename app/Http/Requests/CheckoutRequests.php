@@ -29,8 +29,7 @@ class CheckoutRequests extends FormRequest
             'txtLastName'   => "required",
             'txtGender'     => "required",
             'txtPhone'      => "numeric",
-            'txtAddress'    => "required",
-            'txtTotalPrice' => "numeric",
+            'txtAddress'    => "required",    
         ];
     }
     public function messages()
@@ -42,7 +41,6 @@ class CheckoutRequests extends FormRequest
             "txtLastName.required"  => "Bạn chưa nhập Tên",
             "txtGender.required"    => "Bạn chưa chọn giới tính",
             "txtAddress.numeric"    => "Bạn chưa nhập địa chỉ",
-            "txtTotalPrice.numeric" => "Tổng giá phải là sô",  
             "txtPhone.numeric"      => "Số điện thoại phải là sô",  
         ];
 

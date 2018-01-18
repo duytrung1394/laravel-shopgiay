@@ -110,6 +110,7 @@
 						}
 						 else{
 							alert(data.valid.messages);
+							window.location.reload();
 					 }
 					},
 					error:function(){

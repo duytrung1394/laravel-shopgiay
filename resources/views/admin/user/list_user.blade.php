@@ -14,7 +14,7 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>Họ Tên</th>
                                 <th>Email</th>
                                 <th>Quyền</th>
                                 <th>Xóa</th>
@@ -25,7 +25,7 @@
                             @foreach($users as $user)
                             <tr class="odd gradeX" align="center">
                                 <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
+                                <td>{{$user->first_name}} {{$user->last_name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
                                     @if($user->level == 2)
