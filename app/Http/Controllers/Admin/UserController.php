@@ -72,7 +72,13 @@ class UserController extends Controller
     }
     public function getAdminLogin()
     {
-        return view('admin.login');
+        if(Auth::check())
+        {
+            return redirect('admin');
+        }else{
+            return view('admin.login');
+        }
+        
     }
     public function postAdminLogin(Request $request)
     {   
@@ -86,14 +92,17 @@ class UserController extends Controller
         $email = $request->txtEmail;
         $password = $request->txtPass;
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            return redirect('admin/danh-muc/danh-sach');
+            return redirect('admin');
         }else{
             return redirect('admin/dang-nhap')->with('loi','Sai Email hoặc mật khẩu');
         }
     }
-    public function  getAdmiLogout()
+    public function getAdminLogout()
     {
-        Auth::logout();
-        return redirect('admin/dang-nhap');
+        if(Auth::check())
+        {
+            Auth::logout();
+            return redirect('admin/dang-nhap');
+        }
     }
 }

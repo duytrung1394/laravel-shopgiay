@@ -20,8 +20,8 @@
 
                         <li><a href="javascript:void(0)"><i class="fa fa-user fa-fw"></i> 
                             @if(Auth::check())
-                            {{Auth::user()->name}}
-                           
+                            {{Auth::user()->first_name}}
+                            {{Auth::user()->last_name}}
                         </a>
                         </li>
                         <li class="divider"></li>
@@ -50,7 +50,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="javascript:void(0)"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{{ route('admin-index')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)"><i class="fa fa-bar-chart-o fa-fw"></i> Danh mục<span class="fa arrow"></span></a>
@@ -65,7 +65,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="javascript:void(0)"><i class="fa fa-cube fa-fw"></i> Product<span class="fa arrow"></span></a>
+                            <a href="javascript:void(0)"><i class="fa fa-cube fa-fw"></i> Sản phẩm<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="admin/san-pham/danh-sach">Danh sách</a>
@@ -73,6 +73,16 @@
                                 <li>
                                     <a href="admin/san-pham/them">Thêm</a>
                                 </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                         <li>
+                            <a href="javascript:void(0)"><i class="fa fa-bar-chart-o fa-fw"></i> Đơn hàng<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/don-hang/danh-sach">Danh sách</a>
+                                </li>
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -99,7 +109,32 @@
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
+                        </li> 
+                        <li>
+                            <a href="javascript:void(0)"><i class="fa fa-cube fa-fw"></i> Kích thước<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/size/danh-sach">Danh sách</a>
+                                </li>
+                                <li>
+                                    <a href="admin/size/them">Thêm</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li> 
+                        <li>
+                            <a href="javascript:void(0)"><i class="fa fa-cube fa-fw"></i> Coupon<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/coupon/danh-sach">Danh sách</a>
+                                </li>
+                                <li>
+                                    <a href="admin/coupon/them">Thêm</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
                         </li>
+                       
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

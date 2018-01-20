@@ -59,7 +59,7 @@
 											<option value="{{$sizes->size_id}}">{{$size->name}}</option>
 										@endforeach
 									@else
-										<option value="0">None</option>
+										<option value="0">Hết</option>
 									@endif
 								</select>
 							</div>
@@ -158,15 +158,17 @@
 							@if($diff_product->new == 1 )
 						   		<span class="badge badge--new"><span>New</span></span>
 							@endif
-					      	<img src="uploaded/product/{{$diff_product->image_product}}" alt="...">
+					      	<a href="san-pham/{{$diff_product->id}}/{{$diff_product->slug_name}}.html">
+					      		<img src="uploaded/product/{{$diff_product->image_product}}" alt="...">
+					      	</a>
 					     	<div class="product-caption text-left">
 					        	<p class='product-title'><a href="san-pham/{{$diff_product->id}}/{{$diff_product->slug_name}}.html">{{$diff_product->name}}</a></p>
 					        	<p class='product-price'>
 					        		@if($diff_product->promotion_price > 0 )
-							        	<span class="product__price-on-sale">{{$diff_product->promotion_price}}</span>
-										<s class="product__price--compare">{{$diff_product->unit_price}}</s>
+							        	<span class="product__price-on-sale">{{number_format($diff_product->promotion_price)}}</span>
+										<s class="product__price--compare">{{number_format($diff_product->unit_price)}}</s> vnđ
 									@else
-										<span> {{$diff_product->unit_price}}</span>
+										<span> {{number_format($diff_product->unit_price)}} vnđ</span>
 									@endif
 					        	</p>
 								<a href="san-pham/{{$diff_product->id}}/{{$diff_product->slug_name}}.html" class="product-btn__a" role="button"><span class="glyphicon glyphicon-search"></span> Chi tiết</a></p>

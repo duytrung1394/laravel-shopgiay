@@ -110,13 +110,6 @@
                                 </div>
                                 <div class="col-md-6 col-lg-6">
                                     <p><a href="admin/san-pham/hinh/sua/{{$p_image->id}}">Sửa hình ảnh</a>
-                                   <!-- <form class='form-upload'>
-                                        <button type="button" class="btn btn-edit-image" data-imgid="{{$p_image->id}}">Sửa
-                                        </button> 
-                                        <input type="file" name="hinh" width='150px' class='form-control file-{{$p_image->id}}'>
-                                        <button type="submit" class="btn btn-submit btn-edit-{{$p_image->id}} btn-primary btn-submit-image" data-imgid="{{$p_image->id}}" data-product_id='{{$product->id}}'>Lưu
-                                        </button>
-                                    </form>    --> 
                                 </div>
                             </div>
                             @endforeach 
@@ -161,6 +154,7 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function (){
+            // them input file
             $("#btn-add-file").click(function ()
             {   
                 if($('#divUpload input').length < 9)
@@ -170,7 +164,7 @@
                     $("#preview").append("<img class='box-preview-img img-"+i+"'/>");
                 }
             });
-
+            //hien hinh anh preview khi chọn hinh
             $("#divUpload").delegate(".file-upload","change",function (event){
                 var id = $(this).attr('data-inputid');
                 $('#preview .img-'+id).css("visibility","visible")
@@ -191,13 +185,6 @@
 
                 $(".file-upload").val("");
 
-            });
-            //hiện nút tải lên hình
-            $('.btn-edit-image').click(function () {
-                var img_id = $(this).attr('data-imgid');
-
-                $('.btn-edit-'+img_id).fadeToggle();
-                $('.file-'+img_id).fadeToggle();
             });
 
             //xóa hình ảnh

@@ -40,7 +40,7 @@ class CheckoutRequests extends FormRequest
             "txtFirstName.required" => "Bạn chưa nhập Họ",
             "txtLastName.required"  => "Bạn chưa nhập Tên",
             "txtGender.required"    => "Bạn chưa chọn giới tính",
-            "txtAddress.numeric"    => "Bạn chưa nhập địa chỉ",
+            "txtAddress.required"    => "Bạn chưa nhập địa chỉ",
             "txtPhone.numeric"      => "Số điện thoại phải là sô",  
         ];
 

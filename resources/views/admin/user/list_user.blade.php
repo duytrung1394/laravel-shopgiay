@@ -34,7 +34,7 @@
                                        Người dùng
                                     @endif
                                 </td>
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a class='btn-xoa' href="admin/user/xoa/{{$user->id}}"> Xóa</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a class='btn-del' href="admin/user/xoa/{{$user->id}}"> Xóa</a></td>
                                 <td class="" ass="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/user/sua/{{$user->id}}">Sửa</a></td>
                             </tr>
                             @endforeach

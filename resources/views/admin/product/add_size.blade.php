@@ -52,8 +52,8 @@
                                     @if(count($product->product_properties)>0)
                                     @foreach($product->product_properties as $p_product)
                                     <tr>
-                                        <td><?php $size_name = App\Size::find($p_product->size_id);
-                                        ?> {{$size_name->name}}</td>
+                                        <td>
+                                         {{$p_product->size->name}}</td>
                                         <td>{{$p_product->quantity}}</td>
                                     </tr>
                                     @endforeach

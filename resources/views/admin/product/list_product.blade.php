@@ -5,8 +5,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Product
-                            <small>List</small>
+                        <h1 class="page-header">Sản phẩm
+                            <small>Danh sách</small>
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -72,7 +72,6 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Sửa</button>
                       </div>
                     </div>
                   </div>

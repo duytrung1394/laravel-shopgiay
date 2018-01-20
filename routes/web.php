@@ -47,6 +47,7 @@ Route::post('dang-nhap','AjaxController@postAjaxDangnhap');
 Route::get('dang-xuat','PageController@getDangXuat');
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
+	Route::get('/',['as'=>'admin-index','uses'=>'CategoryController@getIndexAdmin']);
 
 	Route::group(['prefix'=>'danh-muc'],function(){
 
@@ -96,6 +97,9 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 		Route::get('sua/{id}','BrandController@geteditBrand');
 
 		Route::post('sua/{id}','BrandController@postEditBrand');
+
+		Route::get('xoa/{id}','BrandController@getDelBrand');
+
 	});
 
 	Route::group(['prefix'=>'user'],function (){
@@ -109,6 +113,50 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 
 		Route::post('sua/{id}','UserController@postEditUser');
 
+		Route::get('xoa/{id}','UserController@getDelUser');
+
+
+	});
+
+	Route::group(['prefix'=>'size'],function (){
+		Route::get('them','SizeController@getAddSizes');
+
+		Route::post('them','SizeController@postAddSizes');
+
+		Route::get('danh-sach','SizeController@getListSizes');
+
+		Route::get('sua/{id}','SizeController@getEditSizes');
+
+		Route::post('sua/{id}','SizeController@postEditSizes');
+
+		Route::get('xoa/{id}','SizeController@getDelSizes');
+
+	});
+	Route::group(['prefix'=>'coupon'],function (){
+
+		Route::get('them','CouponController@getAddCoupon');
+
+		Route::post('them','CouponController@postAddCoupon');
+
+		Route::get('danh-sach','CouponController@getListCoupon');
+
+		Route::get('sua/{id}','CouponController@getEditCoupon');
+
+		Route::post('sua/{id}','CouponController@postEditCoupon');
+
+		Route::get('xoa/{id}','CouponController@getDelCoupon');
+	});
+
+
+	Route::group(['prefix'=>'don-hang'],function (){
+
+		Route::get('danh-sach','BillController@getListBill');
+
+		Route::get('xoa/{id}','BillController@getDelBill');
+
+		Route::get('chi-tiet/{id}','BillController@getDetailBill');
+
+		Route::get('chi-tiet/xoa/{id}','BillController@getDelDetailBill');
 	});
 
 	Route::post('ajax/view-size',"ProductController@postAjaxViewSize");
@@ -123,6 +171,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 
 	Route::post('admin/dang-nhap','Admin\UserController@postAdminLogin');
 
-	Route::get('admin/logout','Admin\UserController@getAdmiLogout');
+	Route::get('admin/logout','Admin\UserController@getAdminLogout');
 
 

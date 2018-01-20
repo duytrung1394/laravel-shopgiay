@@ -38,7 +38,7 @@
                                     @endif
                                 </td>
                                
-                                <td class="center"><i class="fa fa-trash-o fa-fw "></i><a href="admin/danh-muc/xoa/{{$cate->id}}" class='btn-del-cate'> Delete</a></td>
+                                <td class="center"><i class="fa fa-trash-o fa-fw "></i><a href="admin/danh-muc/xoa/{{$cate->id}}" class='btn-del'> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/danh-muc/sua/{{$cate->id}}">Edit</a></td>
                             </tr>
                             <?php $stt++;?>
@@ -50,19 +50,4 @@
             </div>
             <!-- /.container-fluid -->
         </div>
-@endsection
-@section('script')
-    <script type="text/javascript">
-        $(document).ready(function (){
-            $('.btn-del-cate').click(function ()
-            {   
-              
-                var cf = confirm('Bạn có muốn xóa không?');
-                if(cf == false)
-                {
-                    return false;
-                }
-            });
-        });
-    </script>
 @endsection

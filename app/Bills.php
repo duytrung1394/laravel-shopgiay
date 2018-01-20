@@ -16,4 +16,8 @@ class Bills extends Model
     {
     	return $this->hasMany("App\DetailBill","bill_id","id");
     }
+    public function coupon()
+    {
+    	return $this->belongsTo('App\Coupon','coupon_id','id');
+    }
 }

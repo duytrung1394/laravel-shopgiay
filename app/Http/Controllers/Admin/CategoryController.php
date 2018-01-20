@@ -9,6 +9,9 @@ use App\Category;
 use DateTime;
 class CategoryController extends Controller
 {
+    public function getIndexAdmin(){
+        return view('admin.index');
+    }
     public function getAddCate()
     {
 

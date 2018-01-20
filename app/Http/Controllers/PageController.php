@@ -30,9 +30,9 @@ class PageController extends Controller
 	}
     public function getIndexPage()
     {
-    	$new_product = Product::where('new',1)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->get();
+    	$new_product = Product::where('new',1)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->orderBy('id','desc')->get();
     	
-    	$sale_product = Product::where('promotion_price','>',0)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->get();
+    	$sale_product = Product::where('promotion_price','>',0)->select('id','name','slug_name','image_product','unit_price','promotion_price','new')->limit(5)->orderBy('id','desc')->get();
     
     	return view('page.index',compact('new_product','sale_product'));
     }
@@ -136,14 +136,17 @@ class PageController extends Controller
                 $bill->customer_id = $customer_id;
 
                 $total_price = Cart::subtotal(0,'','');
+
+                $coupon_value = 0; //set coupon defult
                 if(session('coupon'))
                 {
                     //Kiểm tra xem có nhập mã giảm giá không
                     $bill->coupon_id = session('coupon');
                     $coupon = Coupon::find(session('coupon'));
                     $coupon_value = $coupon->value;
-                    $total_price -= $total_price * $coupon_value;
                 }
+
+                $total_price -= $total_price * $coupon_value;
 
                 $bill->total_price = $total_price;
                 if($bill->save())
@@ -151,12 +154,14 @@ class PageController extends Controller
                     $bill_id  = Bills::max('id');
                     foreach(Cart::content() as $cart)
                     {
-                        $detail_bill = new DetailBill;
+                        $detail_bill             = new DetailBill;
                         $detail_bill->bill_id    = $bill_id;
                         $detail_bill->product_id = $cart->id;
                         $detail_bill->size_id    = $cart->options->size_id;
                         $detail_bill->quantity   = $cart->qty;
-                        $detail_bill->price      = $cart->subtotal(0,'','');
+                        $price      = $cart->subtotal(0,'','');
+                        $price     -= $price * $coupon_value; 
+                        $detail_bill->price      =  $price;
                         $detail_bill->save();
 
                         $product_p = ProductProperties::where('product_id',$cart->id)->where('size_id',$cart->options->size_id)->select('quantity')->get()->first();

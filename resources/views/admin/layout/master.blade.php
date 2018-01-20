@@ -28,6 +28,8 @@
     <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/adminstyle.css">
+
+    <link rel="stylesheet" type="text/css" href="admin_asset/css/mycss.css">
 </head>
 
 <body>
@@ -51,10 +53,12 @@
     <!-- Custom Theme JavaScript -->
     <script src="admin_asset/dist/js/sb-admin-2.js"></script>
 
+
     <!-- DataTables JavaScript -->
     <script src="admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
     <script src="admin_asset/ckeditor/ckeditor.js"></script>
+    <script src="admin_asset/js/myscript.js"></script>
     <script type="text/javascript">
        $.ajaxSetup({
             headers: {

@@ -60,4 +60,10 @@ class BrandController extends Controller
     	$brand->save();
     	return redirect("admin/thuong-hieu/sua/".$id)->with('message','Sửa thành công');
     }
+    public function getDelBrand($id)
+   {
+        $cate = Brand::find($id);
+        $cate->delete();
+        return redirect('admin/thuong-hieu/danh-sach')->with('message','Xóa thành công');
+   }
 }

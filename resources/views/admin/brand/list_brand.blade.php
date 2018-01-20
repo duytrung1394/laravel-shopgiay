@@ -30,7 +30,7 @@
                                     {!!$brand->description!!}
                                 </td>
             
-                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/thuong-hieu/xoa/{{$brand->id}}"> Delete</a></td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/thuong-hieu/xoa/{{$brand->id}}" class='btn-del'> Delete</a></td>
                                 <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/thuong-hieu/sua/{{$brand->id}}">Edit</a></td>
                             </tr>
                             <?php $stt++;?>
