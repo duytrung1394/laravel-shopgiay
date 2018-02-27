@@ -74,7 +74,7 @@
 							</div>
 						</div>
 
-						<p class='amount-remain'>Còn lại <span id='amount'></span> sản phẩm</p>
+						<p class='amount-remain'>Còn lại <span id='amount'></span> sản phẩm trong kho</p>
 
 						<div class="product-submit-cart">
 							<span class='a__submit'>
@@ -200,6 +200,7 @@
 
 		$('#product__select-size').change(function (){
 			size_id = $(this).val();
+			$('#product__select-quantity').val(1);
 			showQuantity(size_id);
 		})
 		
