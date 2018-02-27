@@ -207,9 +207,7 @@ a:hover{
 ul{
 	list-style-type: none;
 }
-h4, h5{
-	/*font-family: TimesNewRoman;*/
-}
+
 input{
 	max-width: 100%;
     background-color: #f4f4f4;
@@ -257,29 +255,7 @@ button:hover{
   display: none;
   filter: alpha(opacity=80); /* For IE8 and earlier */
 }
-.loading-icon{
-/*	width: 100%;
-	height: 100%;*/
-	/*display: none;*/
-	/*background-color: #fff;
-	position: absolute;
-	opacity: 0.8;
-	z-index: 99;
-	text-align: center;*/
-}
 
-.loading-icon img{
-	/*width: 100px;
-	vertical-align: middle;*/
-	/*display: none;*/
-}
-
-.loading-icon:before {    
-  /*  content: ' ';
-    display: inline-block;
-    vertical-align: middle; 
-    height: 100%;*/
-}
 /***hiden***/
 .alert{
 	padding: 5px 15px;
@@ -585,7 +561,6 @@ hr.hr--border-cart-popup{
 select{
 	-webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
    	background-image: url('../images/arrow.png');
     background-repeat: no-repeat;
     background-position: right 7px center;
@@ -1369,4 +1344,7 @@ p.login-title{
 	display: block;
 	width: 100%;
 	text-align: center;
+}
+.amount-remain{
+ 	margin: 12px 0px 27px;
 }
