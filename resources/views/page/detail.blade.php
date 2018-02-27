@@ -52,11 +52,12 @@
 						<div class="slelect-size-box">
 							<div class='selector-wrapper'>
 								<span><label for='product__select-size'>Size: </label></span>
-								<select class="single-option-selector" data-option="option1" id="product__select-size">
+								<select class="single-option-selector" id="product__select-size" 
+								>
 									@if(count($product->product_properties) > 0)
 										@foreach($product->product_properties as $sizes)
-											<?php $size = App\Size::find($sizes->size_id);?>
-											<option value="{{$sizes->size_id}}">{{$size->name}}</option>
+											<option value="{{$sizes->size_id}}" data-quantity={{$sizes->quantity}}>{{$sizes->size->name}}	
+											</option>
 										@endforeach
 									@else
 										<option value="0">Hết</option>
@@ -65,14 +66,16 @@
 							</div>
 							<div class='selector-wrapper'>
 								<span><label for='product__select-quantity'>Số lượng: </label></span>
-								<select class="single-option-selector" data-option="option1" id="product__select-quantity">
+								<select class="single-option-selector" id="product__select-quantity">
 									@for($i = 1; $i<=10 ; $i++)
 										<option value="{{$i}}">{{$i}}</option>
 									@endfor
 								</select>
 							</div>
 						</div>
-						
+
+						<p class='amount-remain'>Còn lại <span id='amount'></span> sản phẩm</p>
+
 						<div class="product-submit-cart">
 							<span class='a__submit'>
 								<a href="mua-hang/{{$product->id}}" data-product-id='{{$product->id}}'  @if(count($product->product_properties) == 0)  class='btn__link btn__link-cart btn__add-to-cart disabled'  > Hết hàng @else  class='btn__link btn__link-cart btn__add-to-cart'> Mua hàng <i class="fa fa-shopping-cart" aria-hidden="true"></i> @endif</a>
@@ -99,10 +102,10 @@
 					        			</div>
 					        			<div class="col-1-4 hidden-small">
 					        				<div class="cart__info-product">
-					        					<h5>Adidas Boots</h5>
-					        					<p class="light cart__unit_price">196.000 vnđ</p>
-					        					<p class="light cart__size">Size: 41</p>
-					        					<p class="light cart__qantity">Số lượng: 1</p>
+					        					<h5></h5>
+					        					<p class="light cart__unit_price"></p>
+					        					<p class="light cart__size"></p>
+					        					<p class="light cart__qantity"></p>
 					        				</div>
 					        			</div>
 					        			<div class="col-1-5">
@@ -142,7 +145,7 @@
 					</div>
 					<!--end-bootstrap-modal-->	
 				
-				<div class='product-description'">
+				<div class='product-description'>
 					{!!$product->detail!!}
 				</div>
 				<hr class="hr--border-top small-hidden"></hr>
@@ -191,6 +194,44 @@
 @section('script')
 <script type="text/javascript">
 	$(document).ready(function (){
+		// default
+		var size_id =  $('#product__select-size').val();
+		showQuantity(size_id);
+
+		$('#product__select-size').change(function (){
+			size_id = $(this).val();
+			$('#product__select-quantity').val(1);
+			showQuantity(size_id);
+		})
+		
+		// show Quantity func
+		function showQuantity(size_id){
+			// lặp qua mỗi option, nếu option value bằng với size_id được chọn thì lấy data-quantity của option đó để hiện thị số lượng sản phẩm trong table
+			$("#product__select-size option").each(function (){
+			var option_size = $(this).attr('value');
+			if(size_id === option_size){
+				size_qty = $(this).attr('data-quantity');
+					$('#amount').html(size_qty);
+					$('#amount').attr('data-qty',size_qty);
+				}
+			});
+		}
+		// check quantity choose
+		$('#product__select-quantity').change(function (){
+			quantity = parseInt($(this).val());
+			size_qty = parseInt($('#amount').attr('data-qty'));
+
+			if(size_qty > 0){
+				if(size_qty < quantity){
+					alert('Sản phẩm còn lại là '+size_qty);
+					$(this).val(size_qty);
+				}
+			}else{
+				alert('Size này đã hết hàng');
+				window.location.reload();
+			}
+		});
+
 		$('.btn__add-to-cart').click(function (){
 			var size_id  = $('#product__select-size').val();
 			var qty = $('#product__select-quantity').val();
