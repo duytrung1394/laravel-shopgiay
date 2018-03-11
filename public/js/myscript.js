@@ -148,14 +148,14 @@ $(document).ready(function (){
 				{
 					if(result.valid.success == true)
 					{	
-						$('.login-messages').html('Đăng nhập thành công');
+						$('.login-messages').html(result.valid.messages);
 						$('.login-messages').css('color','#33CC66');
 						$('.login-messages').fadeIn();
 						setTimeout(function(){
 							window.location.reload();
 						},1000);
 					}else{
-						$('.login-messages').html('Sai email hoặc mật khẩu');
+						$('.login-messages').html(result.valid.messages);
 						$('.login-messages').css('color','#dd0000');
 						$('.login-messages').fadeIn();
 					}

@@ -17,16 +17,22 @@ use App\Bills;
 use App\DetailBill;
 use App\Brand;
 use App\User;
+use Mail;
+use App\UserActivation;
+use App\Jobs\SendActivationMail;
 use App\Http\Requests\CheckoutRequests;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
-	public function __construct()
+   protected $userActivation;
+
+	public function __construct(UserActivation $userActivation)
 	{	
         //truyyền viewshare . loai san pham tới kahcs mọi trang trong page
 		$cateShare = Category::get()->toArray();
-		view()->share(['cateShare'=>$cateShare]);
+        view()->share(['cateShare'=>$cateShare]);
+        $this->userActivation = $userActivation;
 	}
     public function getIndexPage()
     {
@@ -186,6 +192,9 @@ class PageController extends Controller
    
     public function getDangKy()
     {
+        if(Auth::check()){
+            return redirect('/');
+        }
         return view('page.register');
     }
     public function postDangKy(UserRequest $request)
@@ -204,13 +213,30 @@ class PageController extends Controller
             $user->email      = $request->txtEmail;
             $user->password   = bcrypt($request->txtPass);
             $user->save();
-
-            return redirect('dang-ky')->with('thongbao',"Đăng kí thành công. Nhấp vào<a href=''> đây </a>để trở về trang chủ");
+            $token = $this->userActivation->createActivation($user);
+            $activation_link = route('activation', $token);
+            // dispatch jobs
+            dispatch(new SendActivationMail($user, $activation_link));
+            return redirect('dang-ky')->with('thongbao',"Đăng kí thành công. Bạn vui lòng kiểm tra email để kích hoạt tài khoản");
         }
-       
+    }
+
+    public function getActivationUser($token){
+        // kiểm tra token có tồn tại không
+        $activation = $this->userActivation->getActivationByToken($token);
+        if($activation){
+            $user = User::find($activation->user_id);
+            $user->active = 1;
+            $user->save();
+            auth()->login($user); // login
+            $this->userActivation->deleteActivation($token);
+        }
+        return redirect( route('trang-chu'));
     }
     public function getDangXuat(){
-        Auth::logout();
+        if(Auth::check()){
+            Auth::logout();    
+        }
         return redirect('/');
     }
 }
