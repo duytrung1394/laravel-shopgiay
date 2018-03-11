@@ -91,7 +91,7 @@ class UserController extends Controller
         ]);
         $email = $request->txtEmail;
         $password = $request->txtPass;
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password,'active'=> 1])) {
             return redirect('admin');
         }else{
             return redirect('admin/dang-nhap')->with('loi','Sai Email hoặc mật khẩu');

@@ -20,7 +20,7 @@ class AdminLoginMiddleware
             if(Auth::user()->level == 2){
                 return $next($request);
             }else{
-                return redirect('admin/dang-nhap');
+                return redirect(route('trang-chu'));
             }
         }else{
             return redirect('admin/dang-nhap');

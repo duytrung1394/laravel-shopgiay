@@ -276,13 +276,12 @@ class AjaxController extends Controller
         $email = $request->txtEmail;
         $password = $request->txtPassword;
         $valid = array('success' => false, 'messages' =>array());
-
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
             $valid['success'] = true; 
             $valid['messages'] = 'Đăng nhập thành công';
         }else{
             $valid['success'] = false;
-            $valid['messages'] = 'Sai email hoặc mật khẩu';
+            $valid['messages'] = 'Sai email hoặc mật khẩu hoặc là tài khoản của bạn chưa được kích hoạt';
         }
 
         echo json_encode(
