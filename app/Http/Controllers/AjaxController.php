@@ -220,6 +220,7 @@ class AjaxController extends Controller
         $size_list = $request->size_list;
         $brands = null;
         $sizes = null;
+        $itemsOnPage = $request->itemsOnPage;
         // check var sortby
         switch ($request->sortby) {
             case 'created-ascending' :
@@ -267,7 +268,7 @@ class AjaxController extends Controller
         // $products =Product::where('cate_id',$cate_id)->whereRaw("brand_id in (1) and id in (select product_id from product_properties where size_id = 1)")->orderByRaw($sort)->paginate(4); //test loc theo size và brand
         $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
 
-        $products = Product::whereRaw("cate_id = $cate_id".$filter)->select(DB::raw($selectRaw))->orderByRaw($sort)->paginate(8);
+        $products = Product::whereRaw("cate_id = $cate_id".$filter)->select(DB::raw($selectRaw))->orderByRaw($sort)->paginate($itemsOnPage);
         //response ajax
         return view('page.block_product',compact('products','brands','sizes'));
     }

@@ -582,7 +582,7 @@ select{
 }
 
 #SortBy{
-	width: 160px;
+	width: 140px;
 	float: right;
 }
 #product__select-size{
@@ -1347,4 +1347,8 @@ p.login-title{
 }
 .amount-remain{
  	margin: 12px 0px 27px;
+}
+#itemsOnPage{
+	width: 120px;
+	margin-right: 6px;
 }

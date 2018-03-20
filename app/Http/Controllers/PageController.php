@@ -44,33 +44,35 @@ class PageController extends Controller
     }
     public function getCategory($id, Request $request)
     {   
-        // 
-        $cates = Category::where('parent_id',$id)->get();
-        $brands = Brand::all();
-        $sizes = Size::all();
         $cate = Category::find($id);
-        $cate_id = $id;
-        $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
-        if(count($cates) > 0 )
-        {       
-            $parent_id = null;
-            foreach($cates as $cate)
-            {
-                $parent_id[] = $cate->id;
-                
+        if(!empty($cate)){
+            $cates = Category::where('parent_id',$id)->get();
+            $brands = Brand::all();
+            $sizes = Size::all();
+            $cate_id = $id;
+            $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
+            if(count($cates) > 0 )
+            {       
+                $parent_id = null;
+                foreach($cates as $cate)
+                {
+                    $parent_id[] = $cate->id;
+                    
+                }
+                $parent =  implode(',',$parent_id);
+                $products = Product::whereIn('cate_id',[$id,$parent])->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
+                //nếu là cate cha thi wherein id cate con, va cha
+            }else{
+                $products = Product::where('cate_id',$id)->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
             }
-            $parent =  implode(',',$parent_id);
-            $products = Product::whereIn('cate_id',[$id,$parent])->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
-            //nếu là cate cha thi wherein id cate con, va cha
-        }else{
-            $products = Product::where('cate_id',$id)->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
+            if($request->ajax())
+            {
+                return view('page.paginate_view',compact('products'));
+            }
+            return view('page.category',compact('products','cate','cate_id','brands','sizes'));
+        } else {
+            return redirect(route('trang-chu'));
         }
-        if($request->ajax())
-        {
-            return view('page.paginate_view',compact('products'));
-        }
-        return view('page.category',compact('products','cate','cate_id','brands','sizes'));
-        
     }
     public function getDetailProduct($id)
     {

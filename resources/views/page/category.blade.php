@@ -55,6 +55,15 @@
 				              	<option value="created-ascending">Cũ nhất</option>
 				            </select>
 			          	</div>
+						<div class="collection-sorting__dropdown">
+				            <label for="itemsOnPage" class="label--hidden" >Hiển thị</label>
+				            <select name="itemsOnPage" id="itemsOnPage">
+				              	<option value="8">8 sản phẩm</option>
+				              	<option value="12">12 sản phẩm</option>
+				              	<option value="16">16 sản phẩm</option>
+				              	<option value="25">25 sản phẩm</option>
+				            </select>
+			          	</div>
 					</div>
 				</div>
 			</div>
@@ -124,6 +133,7 @@
 				brand_list : [],
 				size_list : [],
 				sortby: "",
+				itemsOnPage : 8,
 				page : 1
 			}
 			//filter check
@@ -147,8 +157,7 @@
 				var size_list   = new Array();
 				brand_list      = multi_checkbox("brand"); 
 				size_list       = multi_checkbox('size');
-				data.page       = 1; 			
-				data.cate_id    = cate_id;   	
+				data.page       = 1; 				
 				data.brand_list = brand_list;  
 				data.size_list  = size_list;	
 				ajax();
@@ -157,11 +166,16 @@
 			//lấy giá trị sort by
 			$("#SortBy").change(function (){
 				var val = $(this).val();
-				data.cate_id = cate_id;
 				data.sortby = val;
 				ajax();
 			});
-		
+			// lấy số item on page
+			$("#itemsOnPage").change(function (){
+				var val = $(this).val();
+				data.itemsOnPage = val;
+				ajax();
+			});
+
 			$(".block_wrap").on('click','#pagination a', function (event) {
 				event.preventDefault();
 				var page  = $(this).attr('href').split('page=')[1];
