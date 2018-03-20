@@ -222,15 +222,21 @@ class AjaxController extends Controller
         $sizes = null;
         // check var sortby
         switch ($request->sortby) {
-            case 'created-ascending':
+            case 'created-ascending' :
                 $sort = "id ASC";
                 break;
-            case 'created-descending':
+            case 'created-descending' :
                 $sort = "id DESC";
+                break;
+            case 'price-ascending' :
+                $sort = "price ASC";
+                break;
+            case 'price-descending' :
+                $sort = 'price DESC';
                 break;
             //more
             default:
-                $sort = "id DESC";
+                $sort = "price ASC";
                 break;
         }
 
@@ -259,8 +265,9 @@ class AjaxController extends Controller
         }
     
         // $products =Product::where('cate_id',$cate_id)->whereRaw("brand_id in (1) and id in (select product_id from product_properties where size_id = 1)")->orderByRaw($sort)->paginate(4); //test loc theo size và brand
+        $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
 
-        $products = Product::whereRaw("cate_id = $cate_id".$filter)->orderByRaw($sort)->paginate(8);
+        $products = Product::whereRaw("cate_id = $cate_id".$filter)->select(DB::raw($selectRaw))->orderByRaw($sort)->paginate(8);
         //response ajax
         return view('page.block_product',compact('products','brands','sizes'));
     }

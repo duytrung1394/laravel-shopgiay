@@ -48,9 +48,9 @@
 					<div class='col-12 col-sm-12 col-md-6 col-lg-6  small--text-center collection-sorting grid__item medium-up--two-thirds'>
 						<div class="collection-sorting__dropdown">
 				            <label for="SortBy" class="label--hidden" >Sort by</label>
-				            <select name="SortBy" id="SortBy" data-value="price-ascending" data-cate-id='{{$cate_id}}'>
-				             <!--  <option value="price-ascending">Giá giảm dần</option>
-				              <option value="price-descending">Giá tăng dần</option> -->
+				            <select name="SortBy" id="SortBy" data-cate-id='{{$cate_id}}'>
+				              	<option value="price-ascending">Giá tăng dần</option>
+				              	<option value="price-descending">Giá giảm dần</option>
 				              	<option value="created-descending">Mới nhất</option>
 				              	<option value="created-ascending">Cũ nhất</option>
 				            </select>

@@ -50,6 +50,7 @@ class PageController extends Controller
         $sizes = Size::all();
         $cate = Category::find($id);
         $cate_id = $id;
+        $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
         if(count($cates) > 0 )
         {       
             $parent_id = null;
@@ -59,10 +60,10 @@ class PageController extends Controller
                 
             }
             $parent =  implode(',',$parent_id);
-            $products = Product::whereIn('cate_id',[$id,$parent])->orderBy('id','DESC')->paginate(8);
+            $products = Product::whereIn('cate_id',[$id,$parent])->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
             //nếu là cate cha thi wherein id cate con, va cha
         }else{
-            $products = Product::where('cate_id',$id)->orderBy('id','DESC')->paginate(8);
+            $products = Product::where('cate_id',$id)->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
         }
         if($request->ajax())
         {
