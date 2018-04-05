@@ -1352,3 +1352,6 @@ p.login-title{
 	width: 120px;
 	margin-right: 6px;
 }
+#price-checkbox{
+	font-size: 0.85em;
+}

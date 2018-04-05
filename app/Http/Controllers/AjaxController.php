@@ -218,6 +218,8 @@ class AjaxController extends Controller
         $cate_id = $request->cate_id;
         $brand_list = $request->brand_list;
         $size_list = $request->size_list;
+        $price_list = $request->price_list;
+        // echo "kh";
         $brands = null;
         $sizes = null;
         $itemsOnPage = $request->itemsOnPage;
@@ -264,11 +266,24 @@ class AjaxController extends Controller
             //get size for tag
             $sizes = Size::whereIn('id',$size_list)->get();
         }
-    
+
+        if(!empty($price_list)){
+            // dd($price_list);
+            $filter .= " and (";
+            foreach($price_list as $key => $price_node){
+                // từ phần tử thứ 2, thì thêm ||
+                if($key > 0){
+                    $filter .= " || ( unit_price BETWEEN $price_node[price_min] and $price_node[price_max] ) ";
+                }else{
+                    $filter .= " ( unit_price BETWEEN $price_node[price_min] and $price_node[price_max] ) ";
+                }
+            }
+            $filter .= " ) ";
+        }
         // $products =Product::where('cate_id',$cate_id)->whereRaw("brand_id in (1) and id in (select product_id from product_properties where size_id = 1)")->orderByRaw($sort)->paginate(4); //test loc theo size và brand
         $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
 
-        $products = Product::whereRaw("cate_id = $cate_id".$filter)->select(DB::raw($selectRaw))->orderByRaw($sort)->paginate($itemsOnPage);
+        $products = Product::selectRaw($selectRaw)->whereRaw("cate_id = $cate_id".$filter)->orderByRaw($sort)->paginate($itemsOnPage);
         //response ajax
         return view('page.block_product',compact('products','brands','sizes'));
     }

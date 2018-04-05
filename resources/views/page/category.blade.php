@@ -6,6 +6,25 @@
 		<hr class="hr--border-top small-hidden"></hr>
 			@include('layout.sider_nav')
 			<div class="options__checkbox" data-cate-id={{$cate_id}}>
+				<div class="brand__checkbox check__group clearfix" id='price-checkbox'>
+					<h6>Giá</h6>
+						<label class="check_label">Dưới 500.000 vnđ
+							<input type="checkbox" data-price-min='0' data-price-max='499999' class="item-filter price ">
+							<span class="checkmark"></span>
+						</label>
+						<label class="check_label">Từ 500.000  đên 1.000.000 vnđ
+							<input type="checkbox" data-price-min='500000' data-price-max='999999' class="item-filter price">
+							<span class="checkmark"></span>
+						</label>
+						<label class="check_label">Từ 1.000.000 đến 5.000.000 vnđ
+							<input type="checkbox" data-price-min='1000000' data-price-max='5000000' class="item-filter price">
+							<span class="checkmark"></span>
+						</label>
+						<label class="check_label">Trên 5.000.000 vnđ
+							<input type="checkbox" data-price-min='5000000' data-price-max='100000000' class="item-filter price">
+							<span class="checkmark"></span>
+						</label>
+				</div>
 				<div class="brand__checkbox check__group clearfix" id='brand-checkbox'>
 					<h6>Thương hiệu</h6>
 					@if(count($brands) > 0)
@@ -142,9 +161,12 @@
 				var size_list   = new Array();
 				brand_list      = multi_checkbox("brand"); //call multi_checkbox, get list id
 				size_list       = multi_checkbox('size');
+				price_list = multi_checkbox('price');
 				data.page       = 1; 			//khi check thi luon gửi page 1, tránh lỗi khi số page bé hơn page đang gửi hiện tại
 				data.brand_list = brand_list;  	//list_brand for ajax send
 				data.size_list  = size_list;	//get size_list
+				data.price_list = price_list;
+				// console.log(price_list);
 				ajax();
 			});
 			//khi click remove tag
@@ -204,9 +226,19 @@
 			//lấy danh sach checkbox
 			function multi_checkbox(class_check){
 				var val = new Array();
-				$("."+class_check+":checked").each(function (){
+				if(class_check === 'price'){
+					$(".price:checked").each(function (){
+						var price_check = {
+							price_min : $(this).attr('data-price-min'),
+							price_max : $(this).attr('data-price-max')
+						}
+						val.push(price_check);
+					});
+				}else{
+					$("."+class_check+":checked").each(function (){
 					val.push($(this).val());
-				});
+					});
+				}
 				return val;
 			};
 		});
