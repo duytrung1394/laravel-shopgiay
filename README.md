@@ -14,7 +14,6 @@ Xây dựng site bán giày với laravel Shoppingcart
 * type `git clone https://github.com/duytrung1394/laravel-shopgiay.git projectname` to clone the repository 
 * type `cd projectname`
 * type `composer install`
-* type `composer update`
 * copy *.env.example* to *.env*
 * type `php artisan key:generate`to generate secure key in *.env* file
 * if you use MySQL in *.env* file :

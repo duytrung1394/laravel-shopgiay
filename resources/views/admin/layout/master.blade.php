@@ -22,10 +22,7 @@
     <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- DataTables CSS -->
-    <link href="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
-    <!-- DataTables Responsive CSS -->
-    <link href="admin_asset/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/adminstyle.css">
 
@@ -55,8 +52,8 @@
 
 
     <!-- DataTables JavaScript -->
-    <script src="admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
-    <script src="admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    
     <script src="admin_asset/ckeditor/ckeditor.js"></script>
     <script src="admin_asset/js/myscript.js"></script>
     <script type="text/javascript">
@@ -70,9 +67,7 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
+        $('#dataTables-example').DataTable();
     });
     
     </script>
