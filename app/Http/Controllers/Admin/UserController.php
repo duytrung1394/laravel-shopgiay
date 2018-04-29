@@ -72,7 +72,7 @@ class UserController extends Controller
     }
     public function getAdminLogin()
     {
-        if(Auth::check())
+        if(Auth::guard('admins')->check())
         {
             return redirect('admin');
         }else{
@@ -91,7 +91,7 @@ class UserController extends Controller
         ]);
         $email = $request->txtEmail;
         $password = $request->txtPass;
-        if (Auth::attempt(['email' => $email, 'password' => $password,'active'=> 1])) {
+        if (Auth::guard('admins')->attempt(['email' => $email, 'password' => $password,'active'=> 1])) {
             return redirect('admin');
         }else{
             return redirect('admin/dang-nhap')->with('loi','Sai Email hoặc mật khẩu');
@@ -99,9 +99,9 @@ class UserController extends Controller
     }
     public function getAdminLogout()
     {
-        if(Auth::check())
+        if(Auth::guard('admins')->check())
         {
-            Auth::logout();
+            Auth::guard('admins')->logout();
             return redirect('admin/dang-nhap');
         }
     }

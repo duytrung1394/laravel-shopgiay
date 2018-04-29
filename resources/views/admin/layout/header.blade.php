@@ -19,9 +19,9 @@
                     <ul class="dropdown-menu dropdown-user">
 
                         <li><a href="javascript:void(0)"><i class="fa fa-user fa-fw"></i> 
-                            @if(Auth::check())
-                            {{Auth::user()->first_name}}
-                            {{Auth::user()->last_name}}
+                            @if(Auth::guard('admins')->check())
+                            {{Auth::guard('admins')->user()->first_name}}
+                            {{Auth::guard('admins')->user()->last_name}}
                         </a>
                         </li>
                         <li class="divider"></li>

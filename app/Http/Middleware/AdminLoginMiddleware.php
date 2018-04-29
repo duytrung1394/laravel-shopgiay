@@ -15,9 +15,9 @@ class AdminLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check())
+        if(Auth::guard('admins')->check())
         {
-            if(Auth::user()->level == 2){
+            if(Auth::guard('admins')->user()->level == 2){
                 return $next($request);
             }else{
                 return redirect(route('trang-chu'));
