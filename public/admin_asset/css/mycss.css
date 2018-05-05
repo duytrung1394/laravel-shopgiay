@@ -25,3 +25,17 @@
 .product-title p{
 	padding-left: 7px;
 }
+.type-report{
+	margin: 10px 0;
+}
+.type-report label{
+	margin-left: 15px;
+}
+#title-filter{
+	text-align: center;
+	margin: 20px 0;
+	color: brown;
+}
+.type-report span{
+	margin-left: 15px;
+}

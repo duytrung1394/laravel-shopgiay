@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(CategorySeeder::class);
+        // $this->call(NumberSeeder::class);
        
     }
 }
@@ -57,6 +57,16 @@ class CategorySeeder extends Seeder
             ['name'=>"Giày Nữ","slug_name"=>"giay-nam","parent_id"=>0],
             ['name'=>"Thể thao","slug_name"=>"the-thao","parent_id"=>1],
             ['name'=>"Boot","slug_name"=>"boot","parent_id"=>1]
+        ]);
+    }
+}
+class NumberSeeder extends Seeder
+{
+    public function run()
+    {
+        DB::table('number')->insert([
+            ['so'=>0], ['so'=>1], ['so'=>2], ['so' =>3], ['so'=>4], ['so'=>5], ['so'=>6], ['so'=>7],
+            ['so'=>8], ['so'=>9] 
         ]);
     }
 }

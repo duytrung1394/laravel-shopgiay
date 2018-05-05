@@ -148,7 +148,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 		Route::get('xoa/{id}','CouponController@getDelCoupon');
 	});
 
-
 	Route::group(['prefix'=>'don-hang'],function (){
 
 		Route::get('danh-sach','BillController@getListBill');
@@ -160,6 +159,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 		Route::get('chi-tiet/xoa/{id}','BillController@getDelDetailBill');
 	});
 
+	Route::group(['prefix'=>'thong-ke'], function (){
+
+		Route::get('doanh-thu','StatisticsController@getRevenue');
+		
+	});
+
+	Route::post('ajax/report-date',['as'=>'admin.ajax.report_date','uses'=>'StatisticsController@postReportDate']);
+	
 	Route::post('ajax/view-size',"ProductController@postAjaxViewSize");
 
 	Route::post('ajax/del-image',"ProductController@postAjaxDelImage");

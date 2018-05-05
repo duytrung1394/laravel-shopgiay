@@ -216,7 +216,9 @@
                     async: true,
                     success:function(data)
                     {
-                        console.log(data);
+                        if(data === "true"){
+                            alert("Sửa số lượng sản phẩm thành công");
+                        }
                     }
                 });
             });
