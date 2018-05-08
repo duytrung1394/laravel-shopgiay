@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2018 at 11:04 PM
--- Server version: 5.7.21-0ubuntu0.16.04.1
--- PHP Version: 7.1.15-1+ubuntu16.04.1+deb.sury.org+2
+-- Generation Time: May 08, 2018 at 07:19 PM
+-- Server version: 5.7.22-0ubuntu0.16.04.1
+-- PHP Version: 7.1.16-1+ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,15 @@ SET time_zone = "+00:00";
 --
 -- Database: `shoppingcart`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `bangso`
+--
+CREATE TABLE `bangso` (
+`so` bigint(20)
+);
 
 -- --------------------------------------------------------
 
@@ -61,7 +70,25 @@ INSERT INTO `bills` (`id`, `customer_id`, `coupon_id`, `total_price`, `created_a
 (23, 26, 4, '5850666.40', '2018-01-20 12:33:48', '2018-01-20 12:33:48'),
 (24, 27, NULL, '1300000.00', '2018-02-27 13:53:40', '2018-02-27 13:53:40'),
 (25, 28, NULL, '5200000.00', '2018-02-27 13:54:30', '2018-02-27 13:54:30'),
-(26, 29, 2, '2465555.40', '2018-02-27 14:41:05', '2018-02-27 14:41:05');
+(26, 29, 2, '2465555.40', '2018-02-27 14:41:05', '2018-02-27 14:41:05'),
+(27, 30, 4, '3200000.00', '2018-05-04 08:27:42', '2018-05-04 08:27:42'),
+(28, 31, NULL, '2600000.00', '2018-05-04 08:28:33', '2018-05-04 08:28:33'),
+(29, 32, NULL, '180000.00', '2018-05-08 03:57:12', '2018-05-08 03:57:12'),
+(30, 33, NULL, '224444.00', '2018-05-08 03:58:43', '2018-05-08 03:58:43'),
+(31, 34, NULL, '1300000.00', '2018-05-08 08:43:21', '2018-05-08 08:43:21'),
+(32, 35, NULL, '1300000.00', '2018-05-08 08:45:10', '2018-05-08 08:45:10'),
+(33, 36, NULL, '180000.00', '2018-05-08 09:28:31', '2018-05-08 09:28:31'),
+(34, 37, NULL, '200000.00', '2018-05-08 09:33:53', '2018-05-08 09:33:53'),
+(35, 38, NULL, '200000.00', '2018-05-08 09:38:15', '2018-05-08 09:38:15'),
+(36, 39, NULL, '180000.00', '2018-05-08 09:53:24', '2018-05-08 09:53:24'),
+(37, 40, NULL, '200000.00', '2018-05-08 10:00:37', '2018-05-08 10:00:37'),
+(38, 41, NULL, '200000.00', '2018-05-08 10:06:51', '2018-05-08 10:06:51'),
+(39, 42, NULL, '200000.00', '2018-05-08 10:08:57', '2018-05-08 10:08:57'),
+(40, 43, NULL, '1500000.00', '2018-05-08 10:11:07', '2018-05-08 10:11:07'),
+(41, 44, NULL, '200000.00', '2018-05-08 11:38:52', '2018-05-08 11:38:52'),
+(42, 45, NULL, '2222222.00', '2018-05-08 12:02:35', '2018-05-08 12:02:35'),
+(43, 46, 2, '1428000.00', '2018-05-08 12:05:25', '2018-05-08 12:05:25'),
+(44, 47, 4, '3264000.00', '2018-05-08 12:07:00', '2018-05-08 12:07:00');
 
 -- --------------------------------------------------------
 
@@ -199,7 +226,34 @@ INSERT INTO `customer` (`id`, `first_name`, `last_name`, `gender`, `email`, `add
 (26, 'Lê Duy', 'Trung', 1, 'trung@gmail.com', 'Vinh  Nghệ An', '0155499349', NULL, NULL, '2018-01-20 12:33:48', '2018-01-20 12:33:48'),
 (27, 'Lê', 'Duy Trung', 1, 'trungduy@gmail.com', 'vinh', '014343434434', NULL, NULL, '2018-02-27 13:53:40', '2018-02-27 13:53:40'),
 (28, 'Haha', 'Hi', 1, 'hihi@gmail.com', 'Hà Tĩnh', '345535453534', NULL, NULL, '2018-02-27 13:54:30', '2018-02-27 13:54:30'),
-(29, 'hihi', 'trung', 1, 'duytrung@gmail.com', 'test', '123123123', NULL, NULL, '2018-02-27 14:41:05', '2018-02-27 14:41:05');
+(29, 'hihi', 'trung', 1, 'duytrung@gmail.com', 'test', '123123123', NULL, NULL, '2018-02-27 14:41:05', '2018-02-27 14:41:05'),
+(30, 'Lê', 'Trung', 1, 'ldtrung.steam@gmail.com', 'Vinh Nghệ an', '0159693453', NULL, NULL, '2018-05-04 08:27:42', '2018-05-04 08:27:42'),
+(31, 'Lê Duy', 'Trung', 1, 'ldtrung.steam@gmail.com', 'Vinh Nghệ An', '0145453453', NULL, NULL, '2018-05-04 08:28:33', '2018-05-04 08:28:33'),
+(32, 'Le', 'Trung', 1, 'ldtrung.steam@gmail.com', 'ha noi', '01312312312', NULL, NULL, '2018-05-08 03:57:12', '2018-05-08 03:57:12'),
+(33, 'Ho', 'Ha', 1, 'ldtrung.steam@gmail.com', 'Ha Noi', '01321331233', NULL, NULL, '2018-05-08 03:58:43', '2018-05-08 03:58:43'),
+(34, 'Le duy', 'Trung', 1, 'ldtrung.steam@gmail.com', 'vinh nghe an', '0165591323', NULL, NULL, '2018-05-08 08:43:21', '2018-05-08 08:43:21'),
+(35, 'Le', 'Trung', 1, 'ldtrung.steam@gmail.com', 'Vinh', '0165591323', NULL, NULL, '2018-05-08 08:45:10', '2018-05-08 08:45:10'),
+(36, 'Le', 'Trung', 1, 'ldtrung.steam@gmail.com', 'vinh nghe an', '01234454412', NULL, NULL, '2018-05-08 09:28:31', '2018-05-08 09:28:31'),
+(37, 'le', 'trung', 1, 'ldtrung.steam@gmail.com', 'vinh nghe an', '01651239123', NULL, NULL, '2018-05-08 09:33:53', '2018-05-08 09:33:53'),
+(38, 'le', 'trung', 1, 'ldtrung.steam@gmail.com', 'vinh-nghean', '016559132', NULL, NULL, '2018-05-08 09:38:15', '2018-05-08 09:38:15'),
+(39, 'Le', 'Trung', 1, 'ldtrung.steam@gmail.com', 'Vinh', '0134543342', NULL, NULL, '2018-05-08 09:53:24', '2018-05-08 09:53:24'),
+(40, 'le', 'trung', 1, 'ldtrung.steam@gmail.com', 'Vinh Nghe an', '0165591232', NULL, NULL, '2018-05-08 10:00:37', '2018-05-08 10:00:37'),
+(41, 'le', 'trung', 1, 'ldtrung.steam@gmail.com', 'Vinh Nghệ an', '01652342342', NULL, NULL, '2018-05-08 10:06:51', '2018-05-08 10:06:51'),
+(42, 'le', 'trung', 1, 'ldtrung.steam@gmail.com', 'Vinh Nghe An', '01655912312', NULL, NULL, '2018-05-08 10:08:57', '2018-05-08 10:08:57'),
+(43, 'le', 'trung', 1, 'ldtrung.steam@gmail.com', 'vinh', '0153443344', NULL, NULL, '2018-05-08 10:11:07', '2018-05-08 10:11:07'),
+(44, 'le', 'trung', 1, 'trung3859@gmail.com', 'vin nghe an', '015345454454', NULL, NULL, '2018-05-08 11:38:52', '2018-05-08 11:38:52'),
+(45, 'test', 'mail', 1, 'ldtrung.steam@gmail.com', 'vinh nghệ an', '01465564454', NULL, NULL, '2018-05-08 12:02:35', '2018-05-08 12:02:35'),
+(46, 'test', 'mail', 1, 'ldtrung.steam@gmail.com', 'vinh ha noi', '05435342323', NULL, NULL, '2018-05-08 12:05:25', '2018-05-08 12:05:25'),
+(47, 'test', 'sendmail', 1, 'ldtrung.steam@gmail.com', 'vinh', '03124234234', NULL, NULL, '2018-05-08 12:07:00', '2018-05-08 12:07:00');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `dates`
+--
+CREATE TABLE `dates` (
+`date` varchar(29)
+);
 
 -- --------------------------------------------------------
 
@@ -248,7 +302,28 @@ INSERT INTO `detail_bill` (`id`, `bill_id`, `product_id`, `size_id`, `quantity`,
 (33, 24, 21, 1, 1, '1300000.00', '2018-02-27 13:53:40', '2018-02-27 13:53:40'),
 (34, 25, 21, 3, 4, '5200000.00', '2018-02-27 13:54:30', '2018-02-27 13:54:30'),
 (35, 26, 21, 1, 1, '910000.00', '2018-02-27 14:41:05', '2018-02-27 14:41:05'),
-(36, 26, 16, 6, 2, '1555555.40', '2018-02-27 14:41:05', '2018-02-27 14:41:05');
+(36, 26, 16, 6, 2, '1555555.40', '2018-02-27 14:41:05', '2018-02-27 14:41:05'),
+(37, 27, 24, 7, 2, '3200000.00', '2018-05-04 08:27:42', '2018-05-04 08:27:42'),
+(38, 28, 21, 2, 2, '2600000.00', '2018-05-04 08:28:33', '2018-05-04 08:28:33'),
+(39, 29, 22, 1, 1, '180000.00', '2018-05-08 03:57:12', '2018-05-08 03:57:12'),
+(40, 30, 22, 1, 1, '180000.00', '2018-05-08 03:58:43', '2018-05-08 03:58:43'),
+(41, 30, 15, 6, 4, '44444.00', '2018-05-08 03:58:43', '2018-05-08 03:58:43'),
+(42, 31, 21, 1, 1, '1300000.00', '2018-05-08 08:43:21', '2018-05-08 08:43:21'),
+(43, 32, 21, 1, 1, '1300000.00', '2018-05-08 08:45:10', '2018-05-08 08:45:10'),
+(44, 33, 22, 1, 1, '180000.00', '2018-05-08 09:28:31', '2018-05-08 09:28:31'),
+(45, 34, 1, 1, 1, '200000.00', '2018-05-08 09:33:53', '2018-05-08 09:33:53'),
+(46, 35, 1, 1, 1, '200000.00', '2018-05-08 09:38:15', '2018-05-08 09:38:15'),
+(47, 36, 22, 1, 1, '180000.00', '2018-05-08 09:53:24', '2018-05-08 09:53:24'),
+(48, 37, 2, 3, 1, '200000.00', '2018-05-08 10:00:37', '2018-05-08 10:00:37'),
+(49, 38, 2, 3, 1, '200000.00', '2018-05-08 10:06:51', '2018-05-08 10:06:51'),
+(50, 39, 1, 1, 1, '200000.00', '2018-05-08 10:08:57', '2018-05-08 10:08:57'),
+(51, 40, 26, 7, 1, '1500000.00', '2018-05-08 10:11:07', '2018-05-08 10:11:07'),
+(52, 41, 23, 1, 1, '200000.00', '2018-05-08 11:38:52', '2018-05-08 11:38:52'),
+(53, 42, 16, 7, 2, '2222222.00', '2018-05-08 12:02:35', '2018-05-08 12:02:35'),
+(54, 43, 17, 5, 1, '476000.00', '2018-05-08 12:05:25', '2018-05-08 12:05:25'),
+(55, 43, 17, 6, 2, '952000.00', '2018-05-08 12:05:25', '2018-05-08 12:05:25'),
+(56, 44, 17, 5, 3, '1632000.00', '2018-05-08 12:07:00', '2018-05-08 12:07:00'),
+(57, 44, 17, 6, 3, '1632000.00', '2018-05-08 12:07:00', '2018-05-08 12:07:00');
 
 -- --------------------------------------------------------
 
@@ -264,6 +339,18 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+INSERT INTO `failed_jobs` (`id`, `connection`, `queue`, `payload`, `exception`, `failed_at`) VALUES
+(1, 'database', 'default', '{"displayName":"App\\\\Jobs\\\\SendActivationMail","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":5,"timeout":null,"timeoutAt":null,"data":{"commandName":"App\\\\Jobs\\\\SendActivationMail","command":"O:27:\\"App\\\\Jobs\\\\SendActivationMail\\":10:{s:7:\\"\\u0000*\\u0000user\\";O:45:\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\":3:{s:5:\\"class\\";s:8:\\"App\\\\User\\";s:2:\\"id\\";i:16;s:10:\\"connection\\";s:5:\\"mysql\\";}s:18:\\"\\u0000*\\u0000activation_link\\";s:102:\\"http:\\/\\/localhost:8000\\/kich-hoat\\/token\\/95d801761f0098705d5ac50591d2fec0b5f37580c3a40491fc1442aa095ce332\\";s:5:\\"tries\\";i:5;s:6:\\"\\u0000*\\u0000job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";N;s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:5:\\"delay\\";N;s:7:\\"chained\\";a:0:{}}"}}', 'Illuminate\\Database\\Eloquent\\ModelNotFoundException: No query results for model [App\\User]. in /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:412\nStack trace:\n#0 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesAndRestoresModelIdentifiers.php(54): Illuminate\\Database\\Eloquent\\Builder->firstOrFail()\n#1 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php(41): App\\Jobs\\SendActivationMail->getRestoredPropertyValue(Object(Illuminate\\Contracts\\Database\\ModelIdentifier))\n#2 [internal function]: App\\Jobs\\SendActivationMail->__wakeup()\n#3 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): unserialize(\'O:27:"App\\\\Jobs\\\\...\')\n#4 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(76): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#5 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(320): Illuminate\\Queue\\Jobs\\Job->fire()\n#6 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(270): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#7 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(114): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#8 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'default\', Object(Illuminate\\Queue\\WorkerOptions))\n#9 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'default\')\n#10 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->handle()\n#11 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#12 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#13 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#14 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#15 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)\n#16 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#17 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#18 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#19 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#20 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#21 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#22 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#23 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#24 {main}', '2018-05-08 09:23:04'),
+(2, 'database', 'default', '{"displayName":"App\\\\Jobs\\\\SendActivationMail","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":5,"timeout":null,"timeoutAt":null,"data":{"commandName":"App\\\\Jobs\\\\SendActivationMail","command":"O:27:\\"App\\\\Jobs\\\\SendActivationMail\\":10:{s:7:\\"\\u0000*\\u0000user\\";O:45:\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\":3:{s:5:\\"class\\";s:8:\\"App\\\\User\\";s:2:\\"id\\";i:17;s:10:\\"connection\\";s:5:\\"mysql\\";}s:18:\\"\\u0000*\\u0000activation_link\\";s:102:\\"http:\\/\\/localhost:8000\\/kich-hoat\\/token\\/90933b72ea2f39c5cecf5a2b578f4b6c57b432657675a0af34f2608597a0f9a0\\";s:5:\\"tries\\";i:5;s:6:\\"\\u0000*\\u0000job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";N;s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:5:\\"delay\\";N;s:7:\\"chained\\";a:0:{}}"}}', 'Illuminate\\Database\\Eloquent\\ModelNotFoundException: No query results for model [App\\User]. in /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:412\nStack trace:\n#0 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesAndRestoresModelIdentifiers.php(54): Illuminate\\Database\\Eloquent\\Builder->firstOrFail()\n#1 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php(41): App\\Jobs\\SendActivationMail->getRestoredPropertyValue(Object(Illuminate\\Contracts\\Database\\ModelIdentifier))\n#2 [internal function]: App\\Jobs\\SendActivationMail->__wakeup()\n#3 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): unserialize(\'O:27:"App\\\\Jobs\\\\...\')\n#4 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(76): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#5 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(320): Illuminate\\Queue\\Jobs\\Job->fire()\n#6 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(270): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#7 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(114): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#8 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'default\', Object(Illuminate\\Queue\\WorkerOptions))\n#9 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'default\')\n#10 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->handle()\n#11 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#12 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#13 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#14 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#15 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)\n#16 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#17 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#18 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#19 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#20 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#21 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#22 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#23 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#24 {main}', '2018-05-08 09:23:04'),
+(3, 'database', 'default', '{"displayName":"App\\\\Jobs\\\\SendActivationMail","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":5,"timeout":null,"timeoutAt":null,"data":{"commandName":"App\\\\Jobs\\\\SendActivationMail","command":"O:27:\\"App\\\\Jobs\\\\SendActivationMail\\":10:{s:7:\\"\\u0000*\\u0000user\\";O:45:\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\":3:{s:5:\\"class\\";s:8:\\"App\\\\User\\";s:2:\\"id\\";i:18;s:10:\\"connection\\";s:5:\\"mysql\\";}s:18:\\"\\u0000*\\u0000activation_link\\";s:102:\\"http:\\/\\/localhost:8000\\/kich-hoat\\/token\\/067eb36d355f380b1f00d7b9d612e89c9046689f0c016c3ff710888662a62a02\\";s:5:\\"tries\\";i:5;s:6:\\"\\u0000*\\u0000job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";N;s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:5:\\"delay\\";N;s:7:\\"chained\\";a:0:{}}"}}', 'Illuminate\\Database\\Eloquent\\ModelNotFoundException: No query results for model [App\\User]. in /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:412\nStack trace:\n#0 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesAndRestoresModelIdentifiers.php(54): Illuminate\\Database\\Eloquent\\Builder->firstOrFail()\n#1 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php(41): App\\Jobs\\SendActivationMail->getRestoredPropertyValue(Object(Illuminate\\Contracts\\Database\\ModelIdentifier))\n#2 [internal function]: App\\Jobs\\SendActivationMail->__wakeup()\n#3 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): unserialize(\'O:27:"App\\\\Jobs\\\\...\')\n#4 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(76): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#5 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(320): Illuminate\\Queue\\Jobs\\Job->fire()\n#6 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(270): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#7 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(114): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#8 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'default\', Object(Illuminate\\Queue\\WorkerOptions))\n#9 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'default\')\n#10 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->handle()\n#11 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#12 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#13 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#14 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#15 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)\n#16 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#17 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#18 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#19 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#20 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#21 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#22 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#23 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#24 {main}', '2018-05-08 09:23:04'),
+(4, 'database', 'default', '{"displayName":"App\\\\Jobs\\\\SendActivationMail","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":5,"timeout":null,"timeoutAt":null,"data":{"commandName":"App\\\\Jobs\\\\SendActivationMail","command":"O:27:\\"App\\\\Jobs\\\\SendActivationMail\\":10:{s:7:\\"\\u0000*\\u0000user\\";O:45:\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\":3:{s:5:\\"class\\";s:8:\\"App\\\\User\\";s:2:\\"id\\";i:19;s:10:\\"connection\\";s:5:\\"mysql\\";}s:18:\\"\\u0000*\\u0000activation_link\\";s:102:\\"http:\\/\\/localhost:8000\\/kich-hoat\\/token\\/007fa87ea3d79c4809e766ad65009ec4aae3ee8917a2f01676e5477530e66950\\";s:5:\\"tries\\";i:5;s:6:\\"\\u0000*\\u0000job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";N;s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:5:\\"delay\\";N;s:7:\\"chained\\";a:0:{}}"}}', 'Illuminate\\Database\\Eloquent\\ModelNotFoundException: No query results for model [App\\User]. in /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:412\nStack trace:\n#0 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesAndRestoresModelIdentifiers.php(54): Illuminate\\Database\\Eloquent\\Builder->firstOrFail()\n#1 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php(41): App\\Jobs\\SendActivationMail->getRestoredPropertyValue(Object(Illuminate\\Contracts\\Database\\ModelIdentifier))\n#2 [internal function]: App\\Jobs\\SendActivationMail->__wakeup()\n#3 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): unserialize(\'O:27:"App\\\\Jobs\\\\...\')\n#4 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(76): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#5 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(320): Illuminate\\Queue\\Jobs\\Job->fire()\n#6 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(270): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#7 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(114): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#8 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'default\', Object(Illuminate\\Queue\\WorkerOptions))\n#9 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'default\')\n#10 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->handle()\n#11 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#12 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#13 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#14 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#15 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)\n#16 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#17 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#18 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#19 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#20 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#21 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#22 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#23 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#24 {main}', '2018-05-08 09:23:04'),
+(5, 'database', 'default', '{"displayName":"App\\\\Jobs\\\\SendActivationMail","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":5,"timeout":null,"timeoutAt":null,"data":{"commandName":"App\\\\Jobs\\\\SendActivationMail","command":"O:27:\\"App\\\\Jobs\\\\SendActivationMail\\":10:{s:7:\\"\\u0000*\\u0000user\\";O:45:\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\":3:{s:5:\\"class\\";s:8:\\"App\\\\User\\";s:2:\\"id\\";i:21;s:10:\\"connection\\";s:5:\\"mysql\\";}s:18:\\"\\u0000*\\u0000activation_link\\";s:102:\\"http:\\/\\/localhost:8000\\/kich-hoat\\/token\\/a9fa48bc6ee8752ea292943dd4f8e187ea267d03faa294176181d82751cd7304\\";s:5:\\"tries\\";i:5;s:6:\\"\\u0000*\\u0000job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";N;s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:5:\\"delay\\";N;s:7:\\"chained\\";a:0:{}}"}}', 'Illuminate\\Database\\Eloquent\\ModelNotFoundException: No query results for model [App\\User]. in /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:412\nStack trace:\n#0 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesAndRestoresModelIdentifiers.php(54): Illuminate\\Database\\Eloquent\\Builder->firstOrFail()\n#1 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/SerializesModels.php(41): App\\Jobs\\SendActivationMail->getRestoredPropertyValue(Object(Illuminate\\Contracts\\Database\\ModelIdentifier))\n#2 [internal function]: App\\Jobs\\SendActivationMail->__wakeup()\n#3 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(42): unserialize(\'O:27:"App\\\\Jobs\\\\...\')\n#4 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(76): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#5 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(320): Illuminate\\Queue\\Jobs\\Job->fire()\n#6 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(270): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#7 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(114): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#8 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'default\', Object(Illuminate\\Queue\\WorkerOptions))\n#9 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'default\')\n#10 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->handle()\n#11 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#12 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#13 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#14 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#15 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)\n#16 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#17 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#18 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#19 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#20 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#21 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#22 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#23 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#24 {main}', '2018-05-08 09:23:04'),
+(6, 'database', 'default', '{"displayName":"App\\\\Jobs\\\\SendBillInfoEmail","job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call","maxTries":3,"timeout":null,"timeoutAt":null,"data":{"commandName":"App\\\\Jobs\\\\SendBillInfoEmail","command":"O:26:\\"App\\\\Jobs\\\\SendBillInfoEmail\\":12:{s:5:\\"tries\\";i:3;s:11:\\"\\u0000*\\u0000customer\\";O:45:\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\":3:{s:5:\\"class\\";s:12:\\"App\\\\Customer\\";s:2:\\"id\\";i:39;s:10:\\"connection\\";s:5:\\"mysql\\";}s:7:\\"\\u0000*\\u0000cart\\";N;s:14:\\"\\u0000*\\u0000total_price\\";N;s:9:\\"\\u0000*\\u0000coupon\\";N;s:6:\\"\\u0000*\\u0000job\\";N;s:10:\\"connection\\";N;s:5:\\"queue\\";N;s:15:\\"chainConnection\\";N;s:10:\\"chainQueue\\";N;s:5:\\"delay\\";N;s:7:\\"chained\\";a:0:{}}"}}', 'Symfony\\Component\\Debug\\Exception\\FatalThrowableError: Class \'App\\Jobs\\BillInfoEmail\' not found in /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/app/Jobs/SendBillInfoEmail.php:40\nStack trace:\n#0 [internal function]: App\\Jobs\\SendBillInfoEmail->handle()\n#1 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#2 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#3 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#4 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#5 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(94): Illuminate\\Container\\Container->call(Array)\n#6 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(114): Illuminate\\Bus\\Dispatcher->Illuminate\\Bus\\{closure}(Object(App\\Jobs\\SendBillInfoEmail))\n#7 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(102): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(App\\Jobs\\SendBillInfoEmail))\n#8 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php(98): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))\n#9 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/CallQueuedHandler.php(49): Illuminate\\Bus\\Dispatcher->dispatchNow(Object(App\\Jobs\\SendBillInfoEmail), false)\n#10 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Jobs/Job.php(76): Illuminate\\Queue\\CallQueuedHandler->call(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Array)\n#11 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(320): Illuminate\\Queue\\Jobs\\Job->fire()\n#12 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(270): Illuminate\\Queue\\Worker->process(\'database\', Object(Illuminate\\Queue\\Jobs\\DatabaseJob), Object(Illuminate\\Queue\\WorkerOptions))\n#13 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Worker.php(114): Illuminate\\Queue\\Worker->runJob(Object(Illuminate\\Queue\\Jobs\\DatabaseJob), \'database\', Object(Illuminate\\Queue\\WorkerOptions))\n#14 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(101): Illuminate\\Queue\\Worker->daemon(\'database\', \'default\', Object(Illuminate\\Queue\\WorkerOptions))\n#15 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Queue/Console/WorkCommand.php(85): Illuminate\\Queue\\Console\\WorkCommand->runWorker(\'database\', \'default\')\n#16 [internal function]: Illuminate\\Queue\\Console\\WorkCommand->handle()\n#17 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(29): call_user_func_array(Array, Array)\n#18 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()\n#19 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))\n#20 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Container/Container.php(549): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)\n#21 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(183): Illuminate\\Container\\Container->call(Array)\n#22 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Command/Command.php(252): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#23 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))\n#24 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(938): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#25 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(240): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Queue\\Console\\WorkCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#26 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/symfony/console/Application.php(148): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#27 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Console/Application.php(88): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#28 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(121): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#29 /home/duytrung/work/code/laravel/shoppingcart/laravel-shopgiay/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))\n#30 {main}', '2018-05-08 09:53:27');
 
 -- --------------------------------------------------------
 
@@ -467,7 +554,38 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (55, '2018_03_11_215802_add_active_column_in_users_table', 39),
 (56, '2018_03_11_220137_add_user_activations_table', 40),
 (57, '2018_03_11_225127_create_jobs_table', 41),
-(58, '2018_03_11_225143_create_failed_jobs_table', 41);
+(58, '2018_03_11_225143_create_failed_jobs_table', 41),
+(59, '2018_05_04_142033_create-number-table', 42),
+(60, '2018_05_04_142954_create-number-view', 43),
+(61, '2018_05_04_143940_drop_number_view', 44),
+(62, '2018_05_04_144040_create-number-view-2', 45),
+(63, '2018_05_04_144250_create-dates-view', 46);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `number`
+--
+
+CREATE TABLE `number` (
+  `so` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `number`
+--
+
+INSERT INTO `number` (`so`) VALUES
+(0),
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9);
 
 -- --------------------------------------------------------
 
@@ -554,14 +672,14 @@ CREATE TABLE `product_properties` (
 --
 
 INSERT INTO `product_properties` (`product_id`, `size_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, NULL, NULL),
+(1, 1, 3, NULL, NULL),
 (1, 2, 13, NULL, NULL),
 (1, 3, 13, NULL, NULL),
 (1, 7, 6, '2018-01-20 09:00:31', '2018-01-20 09:00:31'),
 (1, 8, 6, '2018-01-20 09:00:35', '2018-01-20 09:00:35'),
 (1, 10, 6, '2018-01-20 09:00:39', '2018-01-20 09:00:39'),
 (1, 11, 6, '2018-01-20 09:00:43', '2018-01-20 09:00:43'),
-(2, 3, 33, NULL, NULL),
+(2, 3, 31, NULL, NULL),
 (2, 4, 12, NULL, NULL),
 (2, 7, 1, '2018-01-20 09:01:32', '2018-01-20 09:01:32'),
 (2, 8, 3, '2018-01-20 09:01:35', '2018-01-20 09:01:35'),
@@ -596,18 +714,18 @@ INSERT INTO `product_properties` (`product_id`, `size_id`, `quantity`, `created_
 (14, 8, 5, '2018-01-20 09:03:56', '2018-01-20 09:03:56'),
 (14, 10, 6, '2018-01-20 09:04:00', '2018-01-20 09:04:00'),
 (14, 11, 4, '2018-01-20 09:04:02', '2018-01-20 09:04:02'),
-(15, 6, 5, '2018-01-20 09:02:47', '2018-01-20 09:02:47'),
+(15, 6, 1, '2018-01-20 09:02:47', '2018-01-20 09:02:47'),
 (15, 7, 6, '2018-01-20 09:02:50', '2018-01-20 09:02:50'),
 (15, 8, 4, '2018-01-20 09:02:53', '2018-01-20 09:02:53'),
 (15, 10, 6, '2018-01-20 09:02:57', '2018-01-20 09:02:57'),
 (15, 11, 4, '2018-01-20 09:03:00', '2018-01-20 09:03:00'),
 (16, 6, 0, '2018-01-20 09:02:04', '2018-01-20 09:02:04'),
-(16, 7, 6, '2018-01-20 09:02:07', '2018-01-20 09:02:07'),
+(16, 7, 4, '2018-01-20 09:02:07', '2018-01-20 09:02:07'),
 (16, 8, 7, '2018-01-20 09:02:11', '2018-01-20 09:02:11'),
 (16, 10, 8, '2018-01-20 09:02:14', '2018-01-20 09:02:14'),
 (16, 11, 6, '2018-01-20 09:02:18', '2018-01-20 09:02:18'),
-(17, 5, 12, '2018-01-15 13:52:47', '2018-01-15 13:52:47'),
-(17, 6, 10, '2018-01-15 13:52:32', '2018-01-15 13:52:32'),
+(17, 5, 8, '2018-01-15 13:52:47', '2018-01-15 13:52:47'),
+(17, 6, 5, '2018-01-15 13:52:32', '2018-01-15 13:52:32'),
 (17, 7, 7, '2018-01-15 13:52:42', '2018-01-15 13:52:42'),
 (18, 5, 0, '2018-01-15 13:53:14', '2018-01-15 13:53:14'),
 (18, 6, 0, '2018-01-15 13:53:21', '2018-01-15 13:53:21'),
@@ -621,29 +739,29 @@ INSERT INTO `product_properties` (`product_id`, `size_id`, `quantity`, `created_
 (20, 3, 4, '2018-01-20 09:14:25', '2018-01-20 09:14:25'),
 (20, 4, 6, '2018-01-20 09:14:30', '2018-01-20 09:14:30'),
 (20, 5, 4, '2018-01-20 09:14:34', '2018-01-20 09:14:34'),
-(21, 1, 2, '2018-01-20 09:13:47', '2018-01-20 09:13:47'),
-(21, 2, 5, '2018-01-20 09:13:50', '2018-01-20 09:13:50'),
+(21, 1, 0, '2018-01-20 09:13:47', '2018-01-20 09:13:47'),
+(21, 2, 3, '2018-01-20 09:13:50', '2018-01-20 09:13:50'),
 (21, 3, 2, '2018-01-20 09:13:54', '2018-01-20 09:13:54'),
 (21, 4, 1, '2018-01-20 09:13:58', '2018-01-20 09:13:58'),
-(22, 1, 5, '2018-01-20 09:16:48', '2018-01-20 09:16:48'),
+(22, 1, 1, '2018-01-20 09:16:48', '2018-01-20 09:16:48'),
 (22, 2, 4, '2018-01-20 09:16:51', '2018-01-20 09:16:51'),
 (22, 3, 5, '2018-01-20 09:16:54', '2018-01-20 09:16:54'),
 (22, 4, 4, '2018-01-20 09:16:58', '2018-01-20 09:16:58'),
 (22, 5, 5, '2018-01-20 09:17:02', '2018-01-20 09:17:02'),
-(23, 1, 4, '2018-01-20 09:22:20', '2018-01-20 09:22:20'),
+(23, 1, 3, '2018-01-20 09:22:20', '2018-01-20 09:22:20'),
 (23, 2, 5, '2018-01-20 09:22:24', '2018-01-20 09:22:24'),
 (23, 3, 5, '2018-01-20 09:22:27', '2018-01-20 09:22:27'),
 (23, 4, 5, '2018-01-20 09:22:33', '2018-01-20 09:22:33'),
 (23, 5, 6, '2018-01-20 09:22:38', '2018-01-20 09:22:38'),
 (24, 6, 2, '2018-01-20 09:32:30', '2018-01-20 09:32:30'),
-(24, 7, 4, '2018-01-20 09:32:34', '2018-01-20 09:32:34'),
+(24, 7, 2, '2018-01-20 09:32:34', '2018-01-20 09:32:34'),
 (24, 8, 4, '2018-01-20 09:32:40', '2018-01-20 09:32:40'),
 (24, 10, 3, '2018-01-20 09:32:37', '2018-01-20 09:32:37'),
 (24, 11, 4, '2018-01-20 09:32:43', '2018-01-20 09:32:43'),
 (25, 6, 7, '2018-01-20 09:34:41', '2018-01-20 09:34:41'),
 (25, 7, 6, '2018-01-20 09:34:48', '2018-01-20 09:34:48'),
 (25, 8, 7, '2018-01-20 09:34:44', '2018-01-20 09:34:44'),
-(26, 7, 4, '2018-01-20 12:31:01', '2018-01-20 12:31:01'),
+(26, 7, 3, '2018-01-20 12:31:01', '2018-01-20 12:31:01'),
 (26, 8, 3, '2018-01-20 12:31:04', '2018-01-20 12:31:04'),
 (26, 10, 5, '2018-01-20 12:31:06', '2018-01-20 12:31:06'),
 (26, 11, 6, '2018-01-20 12:31:09', '2018-01-20 12:31:09');
@@ -703,14 +821,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `active`, `remember_token`, `created_at`, `updated_at`, `address`, `phone`, `level`) VALUES
-(1, 'duy', 'trung', 'duytrung@gmail.com', '$2y$10$68ZjwlJsAz3AETV1iEH9a.UMeLFQW9c9DBPY4woIMrKPE7GWs6B1C', 1, 'fAJ0RhpmvKBW2cF4VcgTEdEh9Rd8FiIWRT5ycut7nkmQtNnEB0c19AFiDE9y', '2017-12-29 09:09:30', '2017-12-29 09:29:27', NULL, NULL, 2),
-(2, 'duy', 'trung', 'Trung@gmail.com', '$2y$10$gUIrFbCVs/fdJQYKF7hNNOiNPHH8gBl1h4NxUWa4YbcuMjvAv5xNW', 1, '43LDYlOelBa8pBJkj7q6JGMI34qSRCN15xic4NuW5RWjtGq5yiQHmPSR2TaG', '2018-01-17 10:40:21', '2018-01-17 10:40:21', NULL, NULL, 2),
-(3, 'dolo', 'test', 'test@gmail.com', '$2y$10$p3tt9u8H7ZsMNBfxpsq4sOVqgaM3l3NC088cCOJIcnjuHWGqmEmJW', 1, '2NbmFSzuICOPuYoJYBabNAN0ujRvy03C5ZZsCAyFtikIeib5MCSG6vKVABlN', '2018-01-17 10:59:34', '2018-01-17 10:59:34', NULL, NULL, 1),
-(4, 'hihi', 'haha', 'hiahi@gmail.com', '$2y$10$QAc.SY4jwcboHYf96FoX2OoCeMfl83lPdFGx27MoC021tM0PiJ54a', 1, NULL, '2018-01-17 11:00:18', '2018-01-17 11:00:18', NULL, NULL, 1),
-(5, 'hihi', 'haha', 'dong@gmail.com', '$2y$10$IfdKa/qhxsny0KJL1VJ1JOnBhqdC.vyhLtr25xshVn4tXAPbcrrY2', 1, NULL, '2018-01-17 11:01:17', '2018-01-17 11:01:17', NULL, NULL, 1),
-(6, 'le van', 'nam', 'duy@gmail.com', '$2y$10$BcIeCXSOaLtRMtUuvkortOWC.ZgUJmIvwImGHgzu0nsgbq4rWg8He', 1, 'YH15Iicugi99lNJdjI8vfFlEZWvOh8owjTM1Wc67HE6GSmgSdEh9wKpMSksk', '2018-02-27 14:39:38', '2018-02-27 14:39:38', NULL, NULL, 1),
-(14, 'le', 'Duy Trung', 'trung3859@gmail.com', '$2y$10$qDuZn0wHOUMR8hnx8hEzJ.hu1LM8nvmOxikryjYmLnez.8CJ7pZiq', 1, 'DwtBZ393eZM1bq7ZPwSgiNBXROis8n6VqmWkOOu6ZH6Rk0dRWhx6RmoSXwlI', '2018-03-11 17:05:17', '2018-03-11 17:07:13', NULL, NULL, 1),
-(15, 'le duy', 'trung', 'ldtrung.steam@gmail.com', '$2y$10$5ird7B4cE3yAGwD1/a4Y..Qd0KrPk41/XpgmifBhH/eZ67gNi1dKG', 1, 'fvS6N5STnzfqpSHh3nRBDLFzHbxvQmDXF9DegYNeei2bfofV3J4Quj45wLpc', '2018-03-11 17:17:48', '2018-03-11 17:19:01', NULL, NULL, 1);
+(22, 'le', 'trung', 'ldtrung.steam@gmail.com', '$2y$10$QctypRm/X2Z/D65PL4.Wn.Udx3vLUYBleLQ86LVuqW4UzSTEMRmGC', 1, 'CHhiJnFKHERU3Jz1sHeU3n71aVsslqsd5CxaOhQeiBhnum7qoRwY6KA9xOgU', '2018-05-08 09:25:03', '2018-05-08 09:25:32', NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -724,6 +835,24 @@ CREATE TABLE `user_activations` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `bangso`
+--
+DROP TABLE IF EXISTS `bangso`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bangso`  AS  select ((((((`number1`.`so` * 10) * 10) * 10) + ((`number2`.`so` * 10) * 10)) + (`number3`.`so` * 10)) + `number4`.`so`) AS `so` from (((`number` `number1` join `number` `number2`) join `number` `number3`) join `number` `number4`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `dates`
+--
+DROP TABLE IF EXISTS `dates`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `dates`  AS  select ('2010-01-01' + interval `bangso`.`so` day) AS `date` from `bangso` ;
 
 --
 -- Indexes for dumped tables
@@ -842,7 +971,7 @@ ALTER TABLE `user_activations`
 -- AUTO_INCREMENT for table `bills`
 --
 ALTER TABLE `bills`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `brand`
 --
@@ -862,17 +991,17 @@ ALTER TABLE `coupon`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `detail_bill`
 --
 ALTER TABLE `detail_bill`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `image_product`
 --
@@ -882,12 +1011,12 @@ ALTER TABLE `image_product`
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `product`
 --
@@ -902,7 +1031,7 @@ ALTER TABLE `size`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- Constraints for dumped tables
 --

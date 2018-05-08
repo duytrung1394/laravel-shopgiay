@@ -20,6 +20,7 @@ use App\User;
 use Mail;
 use App\UserActivation;
 use App\Jobs\SendActivationMail;
+use App\Jobs\SendBillInfoMail;
 use App\Http\Requests\CheckoutRequests;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
@@ -179,8 +180,9 @@ class PageController extends Controller
 
                         //cập nhật lại số lượng hàng trong kho
                         $quantity = DB::table('product_properties')->where('product_id',$cart->id)->where('size_id',$cart->options->size_id)->update(['quantity'=>$quantity_remain]);
-
+                        
                     }
+                    dispatch(new SendBillInfoMail($customer, Cart::content(), $total_price, $coupon_value));
                     Cart::destroy();
                     session()->forget('coupon');
                     return redirect('thanh-toan')->with('success',"Thanh toán thành công. Nhấp vào <a href='' >đây</a> để về trang chủ");
