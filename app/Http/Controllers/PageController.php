@@ -47,28 +47,31 @@ class PageController extends Controller
     {   
         $cate = Category::find($id);
         if(!empty($cate)){
-            $cates = Category::where('parent_id',$id)->get();
+            // lay cac cate con cua cate_hientai
+            $cates_child = Category::where('parent_id',$id)->get();
+            // kiem tra ton tai cate cha khong
+            $cate_parent = Category::find($cate->parent_id);
             $brands = Brand::all();
             $sizes = Size::all();
             $cate_id = $id;
             $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
-            if(count($cates) > 0 )
+            if(count($cates_child) > 0 )
             {       
-                $parent_id = null;
-                foreach($cates as $cate)
+                $children_id = null;
+                foreach($cates_child as $cate)
                 {
-                    $parent_id[] = $cate->id;
+                    $children_id[] = $cate->id;
                     
                 }
-                $parent =  implode(',',$parent_id);
-                $products = Product::whereIn('cate_id',[$id,$parent])->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
                 //nếu là cate cha thi wherein id cate con, va cha
+                $children =  implode(',',$children_id);
+                $products = Product::whereIn('cate_id',[$id,$children])->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
+               
             }else{
                 $products = Product::where('cate_id',$id)->select(DB::raw($selectRaw))->orderBy('price','ASC')->paginate(8);
             }
-            if($request->ajax())
-            {
-                return view('page.paginate_view',compact('products'));
+            if(!empty($cate_parent)){
+                return view('page.category',compact('products','cate','cate_id','brands','sizes','cate_parent'));
             }
             return view('page.category',compact('products','cate','cate_id','brands','sizes'));
         } else {

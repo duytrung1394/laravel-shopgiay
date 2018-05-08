@@ -55,9 +55,11 @@
 			    	<a href="{{ route('trang-chu') }}" itemprop="url" title="Back to the homepage">
 			      	<span>Home</span>
 			    </a>
+				@if(!empty($cate_parent))
 			    	<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
 			  	</span>
-				Nam
+				  	{{ $cate_parent->name }}
+				@endif
 			</nav>
 			<div class="grid">
 				<div class='row'>
