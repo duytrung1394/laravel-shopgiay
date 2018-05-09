@@ -58,9 +58,9 @@ class PageController extends Controller
             if(count($cates_child) > 0 )
             {       
                 $children_id = null;
-                foreach($cates_child as $cate)
+                foreach($cates_child as $cate_c)
                 {
-                    $children_id[] = $cate->id;
+                    $children_id[] = $cate_c->id;
                     
                 }
                 //nếu là cate cha thi wherein id cate con, va cha
