@@ -39,8 +39,8 @@ class StatisticsController extends Controller
                 $query = "SELECT dates.date as day, YEAR(CAST(dates.date as date)) as year, ifnull(sum(bills.total_price),0) as total_price, ifnull(count(bills.id),0) as total_bill 
                 FROM dates LEFT JOIN bills on Cast(dates.date as date) = Cast(bills.created_at as date) 
                 WHERE dates.date >= :from_date  and dates.date <= :to_date
-                GROUP BY dates.date
-                ORDER BY dates.date ASC";
+                GROUP BY day
++               ORDER BY day ASC";
                 $title = "Lọc theo ngày từ ngày ".$from_date_format." đến ".$to_date_format;
                 break;
             case 'month' :
