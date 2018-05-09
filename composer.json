@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "7.1.17",
+        "php": "~7.1.0",
         "algolia/algoliasearch-client-php": "^1.25",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
@@ -52,7 +52,8 @@
         ], 
         "deploy": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "php artisan key:generate"
+            "php artisan key:generate",
+            "php artisan migrate"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
