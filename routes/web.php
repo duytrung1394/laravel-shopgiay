@@ -29,6 +29,10 @@ Route::get('dang-ky',['as'=>'dangky','uses'=>'PageController@getDangKy']);
 
 Route::post('dang-ky',['as'=>'dangky','uses'=>'PageController@postDangKy']);
 
+Route::get('thong-tin-ca-nhan',['as'=>'user_profile', 'uses'=>'PageController@getUserProfile']);
+
+Route::post('edit_profile/{id}',['as'=>'edit_profile', 'uses'=>'PageController@postEditProfile']);
+
 Route::get('kich-hoat/token/{token}',['as'=>'activation','uses'=>'PageController@getActivationUser']);
 // Route::get("danhsach","PageController@getDanhsach");
 Route::post('ajax/add-to-cart','AjaxController@postAjaxAddtoCart');

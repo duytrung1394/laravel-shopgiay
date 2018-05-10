@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CheckoutRequests extends FormRequest
+class CustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -41,7 +41,7 @@ class CheckoutRequests extends FormRequest
             "txtLastName.required"  => "Bạn chưa nhập Tên",
             "txtGender.required"    => "Bạn chưa chọn giới tính",
             "txtAddress.required"    => "Bạn chưa nhập địa chỉ",
-            "txtPhone.numeric"      => "Số điện thoại phải là sô",  
+            "txtPhone.numeric"      => "Số điện thoại phải là số",  
         ];
 
     }

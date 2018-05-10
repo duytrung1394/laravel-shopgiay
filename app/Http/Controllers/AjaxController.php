@@ -86,6 +86,7 @@ class AjaxController extends Controller
             $valid['success'] = true;
             $valid['messages'] = "Thành công";
             $cart_count  = Cart::count();
+            $price = number_format($price); // format_price
             //response
             echo json_encode(
                 array( 

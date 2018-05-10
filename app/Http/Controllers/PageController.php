@@ -21,7 +21,7 @@ use Mail;
 use App\UserActivation;
 use App\Jobs\SendActivationMail;
 use App\Jobs\SendBillInfoMail;
-use App\Http\Requests\CheckoutRequests;
+use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
@@ -101,7 +101,7 @@ class PageController extends Controller
         return view('page.checkout');
     }
 
-    public function postCheckout(CheckoutRequests $request){
+    public function postCheckout(CustomerRequest $request){
         
         //Kiêm tra xem số lượng mỗi sản phẩm có còn trong kho hàng nữa không
         $flag = true;
@@ -246,5 +246,30 @@ class PageController extends Controller
             Auth::logout();    
         }
         return redirect('/');
+    }
+
+    public function getUserProfile(){
+        if(Auth::check()){
+            return view('page.user_profile');
+        }else{
+            return redirect('/');
+        }
+    }
+    public function postEditProfile(CustomerRequest $request, $id){
+        $this->validate($request,[
+            'txtEmail' => 'unique:users,email,'.$id
+        ],[
+            "txtEmail.unique" => "Email của bạn đã tồn tại"
+        ]);
+        $user = User::find($id);
+        $user->email      = $request->txtEmail;
+        $user->first_name = $request->txtFirstName;
+        $user->last_name  = $request->txtLastName;
+        $user->gender     = $request->txtGender;
+        $user->address    = $request->txtAddress;
+        $user->phone      = $request->txtPhone;
+        $user->save();
+
+        return redirect(route('user_profile'))->with('message','Thành công');
     }
 }

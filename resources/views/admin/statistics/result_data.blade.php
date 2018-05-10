@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $stt }}</td>
                     <td>{{ displayTime($row, $type) }}</td>
-                    <td>{{ $row->total_price }}</td>
+                    <td>{{ number_format($row->total_price) }}</td>
                     <td>{{ $row->total_bill }}</td>
                 </tr>
                 <?php $stt++ ;?>

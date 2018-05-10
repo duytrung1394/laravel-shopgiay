@@ -59,14 +59,27 @@
 			    		@endif
 			    	</div>
 			    	<!-- end-cart-body-->
-			  	</li>
-			  	@if(Auth::check())
-			  	<li class="nav-item">
-			    	<a class="nav-link small-hidden" href="javascript:void(0)">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
-			 	</li>
-			 	<li class="nav-item">
-			    	<a class="nav-link small-hidden" href="dang-xuat">Đăng xuất</a>
-			 	</li>
+					</li>
+				@if(Auth::check())
+					<li class="nav-item login-link">
+						<a class="nav-link show-user-nav" href="javascript:void(0)">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</a>
+							<div class="dropdown-nav popup__user-nav">
+									<ul>
+											<li>
+													<a href="{{route('user_profile')}}">Thông tin cá nhân</a>
+											</li>
+											<li>
+													<a href="edit_password.html">Đổi mật khẩu</a>
+											</li>
+											<li>
+													<a href="list_bill.html">Danh sách đơn hàng</a>
+											</li>
+											<li>
+													<a href="dang-xuat">Đăng xuất</a>
+											</li>
+									</ul>
+							</div>
+					</li>		  	
 			 	@else
 			 	<li class="nav-item login-link">
 			    	<a class="nav-link small-hidden login-select" href="javascript:void(0)">Đăng nhập</a>

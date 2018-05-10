@@ -1355,3 +1355,46 @@ p.login-title{
 #price-checkbox{
 	font-size: 0.85em;
 }
+
+/* user-nav-css */
+.popup__user-nav{
+	width: 170px;
+	left: -100px;
+	padding: 0px;
+}
+.popup__user-nav li:last-child{
+	border-top: 1px solid #ddd;
+}
+.popup__user-nav a{
+	display: block;
+	padding: 0.5rem;
+	font-size: 0.88em;
+}
+.popup__user-nav li:hover a{
+	color: #fff;
+	-web-kit-transition: none;
+	-moz-transition: none;
+	transition: none;
+	
+}
+.popup__user-nav li:hover{
+	background: #0366d6;
+}
+
+.footer_profile{
+	margin-top: 20px;
+	margin-left: 10px;
+}
+.btn__small{
+	padding: 7px 10px;
+
+}
+.m-center{
+	margin: 10px auto;
+}
+.mg-20{
+	margin: 20px 0px;
+}
+.user_profile_nav .active a{
+	color: #006699;
+}

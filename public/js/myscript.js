@@ -2,7 +2,8 @@ $(document).ready(function (){
 
 	$(".cart-select").click(function(e){
 	    $('.popup__cart-body').fadeToggle();
-	     $('.popup__login-body').fadeOut();
+		$('.popup__login-body').fadeOut();
+		$(".popup__user-nav").fadeOut();
 	  	if($(".cart__list-item").height() < 200)
 		{
 			$(".cart__list-item").css('overflow-y',"hidden");
@@ -22,7 +23,8 @@ $(document).ready(function (){
 	$(document).click(function(){
 	    $(".popup__cart-body").fadeOut();
 	    $('.popup__login-body').fadeOut();
-	    $('.search-result').fadeOut();
+		$('.search-result').fadeOut();
+		$(".popup__user-nav").fadeOut();
 	    //ẩn các alert khi dong popup
 	    $('.popup__login-body .alert').fadeOut();
 	});
@@ -43,7 +45,12 @@ $(document).ready(function (){
 	$('.show-siderbar__main').click(function (){
 		$('.sidebar__main').slideToggle();
 	});
-
+	// hien nav user
+	$(".show-user-nav").click(function (e){
+		$(".popup__user-nav").fadeToggle();
+		$(".popup__cart-body").fadeOut();
+		e.stopPropagation();
+	});
 	//nav
 	$(".nav__sidebar a").click(function(){
 		//slide tất cả các ul con

@@ -45,7 +45,7 @@
 								<span class="product__price-on-sale">{{number_format($product->promotion_price)}}</span>
 								<s class="product__price--compare">{{number_format($product->unit_price)}}</s> vnđ
 							@else
-								<span>{{$product->unit_price}} vnđ</span>
+								<span>{{number_format($product->unit_price)}} vnđ</span>
 							@endif
 							
 						</p>
