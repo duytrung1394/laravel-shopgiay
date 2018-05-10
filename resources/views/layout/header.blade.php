@@ -69,7 +69,7 @@
 													<a href="{{route('user_profile')}}">Thông tin cá nhân</a>
 											</li>
 											<li>
-													<a href="edit_password.html">Đổi mật khẩu</a>
+													<a href="{{route('get.password')}}">Đổi mật khẩu</a>
 											</li>
 											<li>
 													<a href="list_bill.html">Danh sách đơn hàng</a>

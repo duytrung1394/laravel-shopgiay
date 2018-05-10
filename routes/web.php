@@ -29,9 +29,18 @@ Route::get('dang-ky',['as'=>'dangky','uses'=>'PageController@getDangKy']);
 
 Route::post('dang-ky',['as'=>'dangky','uses'=>'PageController@postDangKy']);
 
-Route::get('thong-tin-ca-nhan',['as'=>'user_profile', 'uses'=>'PageController@getUserProfile']);
 
-Route::post('edit_profile/{id}',['as'=>'edit_profile', 'uses'=>'PageController@postEditProfile']);
+
+Route::group(['prefix'=>'cai-dat','middleware'=>'userLogin'], function (){
+	Route::get('profile',['as'=>'user_profile', 'uses'=>'PageController@getUserProfile']);
+
+	Route::post('profile',['as'=>'user_profile', 'uses'=>'PageController@postEditProfile']);
+	
+	Route::get('password',['as'=>'get.password', 'uses'=>'PageController@getChangePassword']);
+
+	Route::post('password',['as'=>'post.password', 'uses'=>'PageController@postChangePassword']);
+});
+
 
 Route::get('kich-hoat/token/{token}',['as'=>'activation','uses'=>'PageController@getActivationUser']);
 // Route::get("danhsach","PageController@getDanhsach");

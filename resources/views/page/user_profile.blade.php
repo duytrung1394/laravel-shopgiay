@@ -4,19 +4,7 @@
 	<div class="row">
 		<div class="col-12 col-sm-2 col-md-2 col-lg-2 nav-left small--text-center">
 			<hr class="hr--border-top small-hidden"></hr>
-			<nav class="nav__sidebar user_profile_nav">
-				<ul>
-					<li @if(url()->current() == route('user_profile')) class='active' @endif>
-						<a href="{{ route('user_profile') }}">Thông tin cá nhân</a>
-					</li>
-					<li>
-						<a href="change_password.html">Đổi mật khẩu</a>
-					</li>
-					<li>
-						<a href="list_bill.html">Danh sách đơn hàng</a>
-					</li>
-				</ul>
-			</nav>
+			@include('layout.user_sider_nav')
 			<!--end-nav__sidebar-->
 		</div>
 
@@ -44,13 +32,19 @@
 								@endforeach
 							</div>
 						@endif
-						@if(session('message'))
+						@if(session('success'))
 							<div class="alert alert-success">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								{!!session('message')!!}
+								{!!session('success')!!}
 							</div>
 						@endif
-						<form action='{{ route('edit_profile', ['id'=>Auth::user()->id]) }}' method='post'>
+						@if(session('error'))
+							<div class="alert alert-warning">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								{!!session('error')!!}
+							</div>
+						@endif
+						<form action='{{ route('user_profile')}}' method='post'>
 							<div class="form-group">
 								<label for="inputAddress">Email</label>
 								<input type="email" class="form-control" id="inputAddress" placeholder="Nhập vào email" name="txtEmail" value="@if(Auth::check()){{Auth::user()->email}}@endif">

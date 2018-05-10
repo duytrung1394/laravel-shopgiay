@@ -24,6 +24,8 @@ use App\Jobs\SendBillInfoMail;
 use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class PageController extends Controller
 {
    protected $userActivation;
@@ -249,13 +251,10 @@ class PageController extends Controller
     }
 
     public function getUserProfile(){
-        if(Auth::check()){
-            return view('page.user_profile');
-        }else{
-            return redirect('/');
-        }
+        return view('page.user_profile');
     }
-    public function postEditProfile(CustomerRequest $request, $id){
+    public function postEditProfile(CustomerRequest $request){
+        $id = Auth::user()->id;
         $this->validate($request,[
             'txtEmail' => 'unique:users,email,'.$id
         ],[
@@ -270,6 +269,36 @@ class PageController extends Controller
         $user->phone      = $request->txtPhone;
         $user->save();
 
-        return redirect(route('user_profile'))->with('message','Thành công');
+        return redirect(route('user_profile'))->with('success','Thành công');
+    }
+
+    public function getChangePassword(){
+
+        return view('page.password');
+
+    }
+    public function PostChangePassword(Request $request){
+       $this->validate($request, [
+            "txtOldPassword" => "required",
+            "txtNewPassword" => "required|min:6",
+            "txtConfirmPass" => "required"
+       ],[
+            "txtOldPassword.required" => "Bạn phải nhập mật khẩu cũ",
+            "txtNewPassword.required" => "Bạn phải nhập mật khẩu mới",
+            "txtNewPassword.min" => "Mật khẩu mới phải có ít nhất 6 kí tự",
+            "txtConfirmPass.required" => "Bạn phải nhập lại mật khẩu mới",
+       ]);
+       if(Hash::check($request->txtOldPassword, Auth::user()->password)){
+           if($request->txtNewPassword == $request->txtConfirmPass){
+               $user = User::find(Auth::user()->id);
+               $user->password = bcrypt($request->txtNewPassword);
+               $user->save();
+               return redirect(route("get.password"))->with('success','Đổi mật khẩu thành công');
+           }else{
+               return redirect(route("get.password"))->with('error','Mật khẩu confirm phải trùng khớp');
+           }
+       }else{
+           return redirect(route("get.password"))->with('error','Mật khẩu cũ không chính xác');
+       }
     }
 }
