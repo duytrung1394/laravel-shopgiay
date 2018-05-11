@@ -93,6 +93,10 @@
 				
 					<div class="row filter-tag">
 					</div>
+					<div class="page_info"> 	
+						<p class="p__total_item">Hiện thị: <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span> của <span>{{ $products->total()}}</span> sản phẩm</p>
+					</div>
+					
 					@if(count($products) > 0 )
 					<div class="row clearfix" style="width: 100%;" id="list_product"> 
 						@foreach($products as $product) 

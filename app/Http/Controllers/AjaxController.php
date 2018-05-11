@@ -314,4 +314,17 @@ class AjaxController extends Controller
             )
         );
     }
+    
+    public function postAjaxShowBills(Request $request)
+    {
+        $bill_id = $request->bill_id;
+        // lay thong tin hoa don
+        $bills = Bills::find($bill_id);
+        // chi tiet hoa don
+        $bill_detail = $bills->billdetail;
+
+        $customer = Customer::find($bills->customer_id);
+      
+        return view('ajax_result.block_list_bill',compact('bills','bill_detail','customer'));
+    }
 }

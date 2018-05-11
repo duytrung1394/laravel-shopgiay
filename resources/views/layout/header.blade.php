@@ -66,13 +66,13 @@
 							<div class="dropdown-nav popup__user-nav">
 									<ul>
 											<li>
-													<a href="{{route('user_profile')}}">Thông tin cá nhân</a>
+													<a href="{{ route('user.profile') }}">Thông tin cá nhân</a>
 											</li>
 											<li>
-													<a href="{{route('get.password')}}">Đổi mật khẩu</a>
+													<a href="{{ route('get.password') }}">Đổi mật khẩu</a>
 											</li>
 											<li>
-													<a href="list_bill.html">Danh sách đơn hàng</a>
+													<a href="{{ route('list.bill') }}">Danh sách hóa đơn</a>
 											</li>
 											<li>
 													<a href="dang-xuat">Đăng xuất</a>
@@ -98,7 +98,7 @@
 				    			<p><a href="#">Quên mật khẩu?</a></p>
 				    		</div>
 				    		<div class="field__input-wrapper">
-				    			<p class="login-messages alert">Ban chua nhap</p>
+				    			<p class="login-messages alert">Bạn chưa nhập</p>
 				    			<input type="submit" name="login" value="Đăng nhập" class="btn__submit">
 				    		</div>
 				    		{{ csrf_field() }}
@@ -174,10 +174,10 @@
 			         <a class="nav-link" href="">Liên Hệ</a>
 			      	</li>
 			      <li class="nav-item">
-			        <a class="nav-link" href="#" id='register-nav-link'>Đâng kí</a>
+			        <a class="nav-link" href="{{route('dangky')}}" id='register-nav-link'>Đâng kí</a>
 			      </li>  
 			      <li class="nav-item">
-			        <a class="nav-link" href="#" id='login-nav-link'>Đăng nhập</a>
+			        <a class="nav-link" href="{{route('get.login')}}" id='login-nav-link'>Đăng nhập</a>
 			      </li>
 			    </ul>
 			  </div>

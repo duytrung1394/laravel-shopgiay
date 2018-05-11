@@ -35,14 +35,18 @@ Route::get('dang-xuat','PageController@getDangXuat');
 
 Route::get('kich-hoat/token/{token}',['as'=>'activation','uses'=>'PageController@getActivationUser']);
 
-Route::group(['prefix'=>'cai-dat','middleware'=>'userLogin'], function (){
-	Route::get('profile',['as'=>'user_profile', 'uses'=>'PageController@getUserProfile']);
+Route::group(['prefix'=>'user','middleware'=>'userLogin'], function (){
+	Route::get('profile',['as'=>'user.profile', 'uses'=>'PageController@getUserProfile']);
 
-	Route::post('profile',['as'=>'user_profile', 'uses'=>'PageController@postEditProfile']);
+	Route::post('profile',['as'=>'user.profile', 'uses'=>'PageController@postEditProfile']);
 	
 	Route::get('password',['as'=>'get.password', 'uses'=>'PageController@getChangePassword']);
 
 	Route::post('password',['as'=>'post.password', 'uses'=>'PageController@postChangePassword']);
+
+	Route::get('danh-sach-hoa-don',['as'=>'list.bill', 'uses'=>'PageController@getListBill']);
+
+	Route::post('danh-sach-hoa-don','AjaxController@postAjaxShowBills');
 });
 
 Route::group(['prefix'=>'ajax'],function (){

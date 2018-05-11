@@ -559,8 +559,7 @@ hr.hr--border-cart-popup{
 	margin-bottom: 10px;
 }
 select{
-	-webkit-appearance: none;
-    -moz-appearance: none;
+	appearance: none;
    	background-image: url('../images/arrow.png');
     background-repeat: no-repeat;
     background-position: right 7px center;
@@ -1220,7 +1219,7 @@ p.login-title{
 	border-left: 1px solid #ddd; 
 }
 .cart__total-info{
-	padding-left: 15px;
+	padding: 0px 15px;
 }
 .light{
 	color: #666;
@@ -1396,4 +1395,22 @@ p.login-title{
 }
 .user_profile_nav .active a{
 	color: #006699;
+}
+
+/*---modal-bill------*/
+.modal-body .user-info span{
+	margin: 0px 15px;
+}
+.label-bold{
+	font-weight: 600;
+}
+.user-info p{
+	margin-bottom: 8px;
+}
+
+.p__total_item{
+    font-size: 0.95em;
+}
+.p__total_item span{
+    font-weight: 600;
 }

@@ -17,7 +17,7 @@
 							<span itemprop="title">Home</span>
 						</a>
 						<span class="breadcrumb-nav__separator" aria-hidden="true">›</span>
-						<a href="{{route('user_profile')}}">Thông tin cá nhân</a>
+						<a href="{{route('user.profile')}}">Thông tin cá nhân</a>
 					</nav>
 				</div>
 
@@ -44,7 +44,7 @@
 								{!!session('error')!!}
 							</div>
 						@endif
-						<form action='{{ route('user_profile')}}' method='post'>
+						<form action="{{ route('user.profile') }}" method='post'>
 							<div class="form-group">
 								<label for="inputAddress">Email</label>
 								<input type="email" class="form-control" id="inputAddress" placeholder="Nhập vào email" name="txtEmail" value="@if(Auth::check()){{Auth::user()->email}}@endif">

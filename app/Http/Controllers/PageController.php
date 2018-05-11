@@ -329,4 +329,11 @@ class PageController extends Controller
             return redirect(route('get.login'))->with('error','Sai email, mật khẩu hoặc tài khoản của bạn chưa được kích hoạt');
         }
     }
+    public function getListBill(){
+        // get list bill of user 
+        $customers = Customer::where('user_id',Auth::user()->id)->paginate(5);
+
+        return view('page.list_bill',compact('customers'));
+        
+    }
 }
