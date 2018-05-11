@@ -11,9 +11,15 @@
 				<a class="remove-tag" data-tag='filter-size-{{$size->id}}'>{{$size->name}} <i class="fa fa-times" aria-hidden="true"></i></a>
 			@endforeach
 		@endif
+
+		@if(count($price_list) > 0)
+			@foreach($price_list as $price_node)
+				<a class="remove-tag" data-tag="filter-price-{{ $price_node['price_min'] }}-{{ $price_node['price_max'] }}">{{ number_format($price_node['price_min']) }} - {{ number_format($price_node['price_max']) }} vnđ <i class="fa fa-times" aria-hidden="true"></i></a>
+			@endforeach
+		@endif
 	</div>
 	<div class="page_info"> 	
-		<p class="p__total_item">Hiện thị: <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span> của <span>{{ $products->total()}}</span> sản phẩm</p>
+		<p class="p__total_item">@if(count($products) > 0) Hiển thị: <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span> trong @endif <span>{{ $products->total()}}</span> sản phẩm</p>
 	</div>
 @if(count($products) > 0 )
 	<div class="row clearfix"  style="width: 100%;" id="list_product">

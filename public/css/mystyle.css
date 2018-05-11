@@ -559,6 +559,8 @@ hr.hr--border-cart-popup{
 	margin-bottom: 10px;
 }
 select{
+	-webkit-appearance: none;
+	-moz-appearance: none;
 	appearance: none;
    	background-image: url('../images/arrow.png');
     background-repeat: no-repeat;

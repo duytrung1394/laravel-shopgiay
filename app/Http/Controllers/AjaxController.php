@@ -220,7 +220,7 @@ class AjaxController extends Controller
         $brand_list = $request->brand_list;
         $size_list = $request->size_list;
         $price_list = $request->price_list;
-        // echo "kh";
+        
         $brands = null;
         $sizes = null;
         $itemsOnPage = $request->itemsOnPage;
@@ -285,8 +285,9 @@ class AjaxController extends Controller
         $selectRaw = '*, case when promotion_price > 0 then promotion_price else unit_price end as price';
 
         $products = Product::selectRaw($selectRaw)->whereRaw("cate_id = $cate_id".$filter)->orderByRaw($sort)->paginate($itemsOnPage);
+        
         //response ajax
-        return view('ajax_result.block_product',compact('products','brands','sizes'));
+        return view('ajax_result.block_product',compact('products','brands','sizes','price_list'));
     }
 
     public function postAjaxSearch(Request $request){

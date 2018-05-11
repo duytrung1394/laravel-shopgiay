@@ -9,19 +9,19 @@
 				<div class="brand__checkbox check__group clearfix" id='price-checkbox'>
 					<h6>Giá</h6>
 						<label class="check_label">Dưới 500.000 vnđ
-							<input type="checkbox" data-price-min='0' data-price-max='499999' class="item-filter price ">
+							<input type="checkbox" data-price-min='0' data-price-max='499999' class="item-filter price filter-price-0-499999">
 							<span class="checkmark"></span>
 						</label>
 						<label class="check_label">Từ 500.000  đên 1.000.000 vnđ
-							<input type="checkbox" data-price-min='500000' data-price-max='999999' class="item-filter price">
+							<input type="checkbox" data-price-min='500000' data-price-max='999999' class="item-filter price filter-price-500000-999999">
 							<span class="checkmark"></span>
 						</label>
 						<label class="check_label">Từ 1.000.000 đến 5.000.000 vnđ
-							<input type="checkbox" data-price-min='1000000' data-price-max='5000000' class="item-filter price">
+							<input type="checkbox" data-price-min='1000000' data-price-max='5000000' class="item-filter price filter-price-1000000-5000000">
 							<span class="checkmark"></span>
 						</label>
 						<label class="check_label">Trên 5.000.000 vnđ
-							<input type="checkbox" data-price-min='5000000' data-price-max='100000000' class="item-filter price">
+							<input type="checkbox" data-price-min='5000000' data-price-max='100000000' class="item-filter price filter-price-5000000-100000000">
 							<span class="checkmark"></span>
 						</label>
 				</div>
@@ -94,7 +94,7 @@
 					<div class="row filter-tag">
 					</div>
 					<div class="page_info"> 	
-						<p class="p__total_item">Hiện thị: <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span> của <span>{{ $products->total()}}</span> sản phẩm</p>
+						<p class="p__total_item">@if(count($products) > 0) Hiển thị: <span>{{ $products->firstItem() }}</span> - <span>{{ $products->lastItem() }}</span> trong @endif <span>{{ $products->total()}}</span> sản phẩm</p>
 					</div>
 					
 					@if(count($products) > 0 )
@@ -181,13 +181,17 @@
 				e.preventDefault();
 				var  tag_id = $(this).attr('data-tag'); //lay id cua filter-item
 				$("."+tag_id).prop('checked', false); 	//Chuyển checkbox có data-tag thành false
+				console.log(tag_id);
 				var brand_list  = new Array();
 				var size_list   = new Array();
-				brand_list      = multi_checkbox("brand"); 
+				var price_list   = new Array();
+				brand_list      = multi_checkbox('brand'); 
 				size_list       = multi_checkbox('size');
+				price_list       = multi_checkbox('price');
 				data.page       = 1; 				
 				data.brand_list = brand_list;  
-				data.size_list  = size_list;	
+				data.size_list  = size_list;
+				data.price_list = price_list;	
 				ajax();
 			});
 
