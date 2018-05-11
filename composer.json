@@ -53,8 +53,7 @@
         "deploy": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "php artisan key:generate",
-            "php artisan migrate",
-            "php artisan queue:work"
+            "php artisan migrate"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
