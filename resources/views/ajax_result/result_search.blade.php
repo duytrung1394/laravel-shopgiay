@@ -1,4 +1,4 @@
-    @if(count($product) > 0)
+@if(count($product) > 0)
         @foreach($product as $value)
         <div class='view-item'>
             <div class="media">

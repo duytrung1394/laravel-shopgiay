@@ -27,8 +27,9 @@
                             @foreach($bills as $bill)
                             <tr class="odd gradeX" align="center">
                                 <td>{{$bill->id}}</td>
-                                <td>{{$bill->customer->first_name}} {{$bill->customer->last_name}}</td>
-                                <td>{{$bill->customer->email}}</td>
+                                <?php $customer = App\Customer::find($bill->customer_id);?>
+                                <td>{{$customer->first_name}} {{$customer->last_name}}</td>
+                                <td>{{$customer->email}}</td>
                                 <td>@if($bill->coupon_id)
                                         @if(isset($bill->coupon->name))
                                             {{$bill->coupon->name}}

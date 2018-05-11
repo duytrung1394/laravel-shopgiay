@@ -12,19 +12,19 @@
                         <table class="table__info-customer">
                             <tr>
                                 <td class='td-left'>Họ và tên:</td>
-                                <td>{{$bill->customer->first_name}} {{$bill->customer->last_name}}</td>
+                                <td>{{$customer->first_name}} {{$customer->last_name}}</td>
                             </tr>
                             <tr>
                                 <td>Số điện thoại:</td>
-                                <td>{{$bill->customer->phone}}</td>
+                                <td>{{$customer->phone}}</td>
                             </tr>
                             <tr>
                                 <td>Email:</td>
-                                <td>{{$bill->customer->email}}</td>
+                                <td>{{$customer->email}}</td>
                             </tr>
                             <tr>
                                 <td>Địa chỉ</td>
-                                <td>{{$bill->customer->address}}</td>
+                                <td>{{$customer->address}}</td>
                             </tr>
                             <tr>
                                 <td>Tổng tiền</td>
@@ -40,6 +40,7 @@
                                 <th>Sản phẩm</th>
                                 <th>Size</th>
                                 <th>Số lượng</th>
+                                <th>Đơn giá</th>
                                 <th>Tổng tiền</th>
                                 <th>Delete</th>
                               
@@ -60,7 +61,10 @@
                                     {{$item->quantity}}
                                 </td>
                                 <td>
-                                    {{number_format($item->price)}} vnđ
+                                    @if($item->unit_price != null) {{$item->unit_price}} vnđ @else Không xác định @endif
+                                </td>
+                                <td>
+                                    {{number_format($item->sub_total)}} vnđ
                                 </td>
                                
                                 <td class="center"><i class="fa fa-trash-o fa-fw "></i><a href="admin/don-hang/chi-tiet/xoa/{{$item->id}}" class='btn-del'> Delete</a></td>

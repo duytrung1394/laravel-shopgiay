@@ -70,7 +70,7 @@
 						</div>
 						<div class="field field__input-wrapper field--half">
 							<label class="field__label" for="input-ten">Tên</label>
-							<input class="field__input" id="input-ten" type="text" placeholder="Tên" name="txtLastName" value="@if(Auth::check()){{ Auth::user()->first_name }}@else{{ old('txtFirstName') }}@endif">
+							<input class="field__input" id="input-ten" type="text" placeholder="Tên" name="txtLastName" value="@if(Auth::check()){{ Auth::user()->last_name }}@else{{ old('txtLastName') }}@endif">
 						</div>
 						<div class="field field__input-wrapper field--three">
 							<label class="field__label" for="input-gender">Giới tính</label>

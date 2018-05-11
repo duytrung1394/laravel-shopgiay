@@ -175,9 +175,10 @@ class PageController extends Controller
                         $detail_bill->product_id = $cart->id;
                         $detail_bill->size_id    = $cart->options->size_id;
                         $detail_bill->quantity   = $cart->qty;
+                        $detail_bill->unit_price = $cart->price;
                         $price      = $cart->subtotal(0,'','');
                         $price     -= $price * $coupon_value; 
-                        $detail_bill->price      =  $price;
+                        $detail_bill->sub_price      =  $price;
                         $detail_bill->save();
 
                         $product_p = ProductProperties::where('product_id',$cart->id)->where('size_id',$cart->options->size_id)->select('quantity')->get()->first();

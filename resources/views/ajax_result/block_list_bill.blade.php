@@ -45,6 +45,7 @@
 					<th class="text-left cart__table-cell-image">Sản phẩm</th>
 					<th class="text-center cart__table-cell--meta"></th>
 					<th class="text-center cart__table-cell--quantity">Số lượng</th>
+					<th class="text-center cart__table-cell--quantity">Đơn giá</th>
 					<th class="text-right cart__table-cell--total-price">Tổng</th>
 				</tr>
 			</thead>
@@ -67,7 +68,8 @@
 					<td class='cart__table-cell--quantity medium-up--text-center' data-label='Số lượng'>
 						<span>{{ $row->quantity }}</span>
 					</td>
-					<td class='cart__table-cell--quantity text-right' data-label="Giá trả">{{ number_format($row->price) }} vnđ</td>
+					<td class="cart__table-cell--price medium-up--text-center" data-label='Đơn giá'>@if($row->unit_price == null) Không xác định @else{{ number_format($row->unit_price) }} @endif</td>
+					<td class='cart__table-cell--quantity text-right' data-label="Giá trả">{{ number_format($row->sub_price) }} vnđ</td>
 				</tr>
 				@endforeach
 			@else

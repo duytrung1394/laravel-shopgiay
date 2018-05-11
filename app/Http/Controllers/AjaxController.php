@@ -286,14 +286,14 @@ class AjaxController extends Controller
 
         $products = Product::selectRaw($selectRaw)->whereRaw("cate_id = $cate_id".$filter)->orderByRaw($sort)->paginate($itemsOnPage);
         //response ajax
-        return view('page.block_product',compact('products','brands','sizes'));
+        return view('ajax_result.block_product',compact('products','brands','sizes'));
     }
 
     public function postAjaxSearch(Request $request){
         $key_search = $request->key;
         $product = Product::search($key_search)->take(5)->get();
 
-        return view('page.result_search',compact('product','key_search'));
+        return view('ajax_result.result_search',compact('product','key_search'));
     }
     public function postAjaxDangnhap(Request $request)
     {
