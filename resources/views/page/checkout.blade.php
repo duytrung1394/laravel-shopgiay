@@ -14,6 +14,16 @@
 					    Thông tin khách hàng
 					  </span>
 					</nav>
+					<div class='login_step text-center'>
+						@if(Auth::check())
+							<p>Bạn đã đăng nhập với tài khoản email <span style="color:#336699">{{Auth::user()->email}}</span></p>
+						@else
+							<p>* Bạn nên đăng nhập để có thể theo dõi và quản lí đơn hàng một cách tốt hơn</p>
+							<div class='mg-20'>
+								<a href="{{ route('get.login') }}" class="btn__link btn__small ">Đăng nhập</a>
+							</div>
+						@endif
+					</div>
 				</div>
 				<div class='step__sections'>
 					<div class="section--contact-information">
@@ -21,7 +31,7 @@
 					<p class='section__title'>Thông tin khách hàng</p>
 					<div class="field field__input-wrapper">
 						<label class="field__label" for="input-email">Email</label>
-						<input class="field__input one-column-form__input--text" id="input-email" name='txtEmail' type="email" placeholder="Email" value="{{old('txtEmail')}}">
+						<input class="field__input one-column-form__input--text" id="input-email" name='txtEmail' type="email" placeholder="Email" value="@if(Auth::check()){{ Auth::user()->email }}@else{{ old('txtEmail') }}@endif">
 					</div>
 					<div style="clear: both;"></div>
 					@if(count($errors) > 0)
@@ -56,26 +66,28 @@
 						<p class='section__title'>Địa chỉ giao hàng</p>
 						<div class="field field__input-wrapper field--half">
 							<label class="field__label" for="input-ho">Họ</label>
-							<input class="field__input" id="input-ho" type="text" placeholder="Họ" name='txtFirstName' value="{{old('txtFirstName')}}">
+							<input class="field__input" id="input-ho" type="text" placeholder="Họ" name='txtFirstName' value="@if(Auth::check()){{ Auth::user()->first_name }}@else{{old('txtFirstName')}}@endif">
 						</div>
 						<div class="field field__input-wrapper field--half">
 							<label class="field__label" for="input-ten">Tên</label>
-							<input class="field__input" id="input-ten" type="text" placeholder="Tên" name="txtLastName" value="{{old('txtLastName')}}">
+							<input class="field__input" id="input-ten" type="text" placeholder="Tên" name="txtLastName" value="@if(Auth::check()){{ Auth::user()->first_name }}@else{{ old('txtFirstName') }}@endif">
 						</div>
 						<div class="field field__input-wrapper field--three">
 							<label class="field__label" for="input-gender">Giới tính</label>
 							<select class="field__input field__select" id='input-gender' name='txtGender'>
-								<option value="1">Nam</option>
-								<option value="2">Nữ</option>
+								<?php $gender = Auth::check()? Auth::user()->gender : old('txtGender'); ?>
+								<option value="0" @if($gender == 0) selected @endif>Chọn...</option>
+								<option value="1" @if($gender == 1) selected @endif>Nam</option>
+								<option value="2" @if($gender == 2) selected @endif>Nữ</option>
 							</select>
 						</div>
 						<div class="field field__input-wrapper field--seven">
 							<label class="field__label" for="input-phone">Số điện thoại</label>
-							<input class="field__input" id="input-phone" type="text" placeholder="Số điện thoại" name='txtPhone' value="{{old('txtPhone')}}" maxlength="13">
+							<input class="field__input" id="input-phone" type="text" placeholder="Số điện thoại" name='txtPhone' value="@if(Auth::check()){{ Auth::user()->phone }}@else{{ old('txtPhone') }}@endif" maxlength="13">
 						</div>
 						<div class="field field__input-wrapper">
 							<label class="field__label" for="input-address">Địa chỉ</label>
-							<input class="field__input" id="input-address" type="text" placeholder="Địa chỉ" name='txtAddress' value="{{old('txtAddress')}}" >
+							<input class="field__input" id="input-address" type="text" placeholder="Địa chỉ" name='txtAddress' value="@if(Auth::check()){{ Auth::user()->address }}@else{{ old('txtAddress') }}@endif" >
 						</div>
 						<div style="clear: both;"></div>
 					</div>

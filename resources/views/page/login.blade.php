@@ -19,7 +19,7 @@
 	</div>
 	<div class="container-fluid">
 	<div class='register-block form-register'>
-    		<p class="login-title text-center">Đăng kí</p>
+    		<p class="login-title text-center">Đăng nhập</p>
     		@if(count($errors)>0)
 	            <div class="alert alert-danger">
 	                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -29,10 +29,10 @@
 	            </div>
 	        @endif
             <!-- In Thông báo -->
-            @if(session('thongbao'))
+            @if(session('message'))
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    {!!session('thongbao')!!}
+                    {!!session('message')!!}
                 </div>
             @endif
             @if(session('error'))
@@ -42,36 +42,26 @@
                     {{session('error')}}
                 </div>
             @endif
-    		<form action="" method="post">
-    			<div class="field field__input-wrapper">
-				<label class="field__label" for="input-firstname">Họ</label>
-				<input class="field__input" id="input-firstname" type="text" placeholder="Họ" name="txtFirstName" value="{{old('txtFirstName')}}">
-				</div>
-				<div class="field field__input-wrapper">
-				<label class="field__label" for="input-lastname">Tên</label>
-				<input class="field__input" id="input-lastname" type="text" placeholder="Tên" name="txtLastName" value="{{old('txtLastName')}}">
-				</div>
+    		<form action="{{route('post.login')}}" method="post">
+    			
 				<div class="field field__input-wrapper">
 					<label class="field__label" for="input-email">Email</label>
-					<input class="field__input" id="input-email" type="email" placeholder="Email" name="txtEmail" value="{{old('txtEmail')}}">
+					<input class="field__input" id="input-email" type="email" placeholder="Email"
+					Name="txtEmail">
 				</div>
 				<div class="field field__input-wrapper">
-					<label class="field__label" for="input-password">Mật khẩu</label>
-					<input class="field__input" id="input-password" type="password" placeholder="Mật khẩu"  name="txtPass" value="{{old('txtPass')}}">
-				</div>
-				<div class="field field__input-wrapper">
-					<label class="field__label" for="input-repassword">Nhập lại mật khẩu</label>
-					<input class="field__input" id="input-repassword" type="password" placeholder="Nhập lại mật khẩu" name="txtConfirmPass" value="{{old('txtConfirmPass')}}">
+					<label class="field__label" for="input-email">Mật khẩu</label>
+					<input class="field__input" id="input-email" type="password" placeholder="Mật khẩu" name="txtPassword">
 				</div>
 				<div class="field__input-wrapper" style="margin-top: 15px;">
-	    			<input type="submit" name="login" value="Đăng kí" class="btn__submit" >
+	    			<input type="submit" name="login" value="Đăng Nhập" class="btn__submit" >
 	    		</div>
 	    		{{ csrf_field() }}
     		</form>
 			<div style="clear:both"></div>
 		</div>
 	<div class='register-block footer-register' style="margin-top: 10px !important;">
-		 	<p class="text-center">Bạn đã có tài khoản? <span><a href="">Trở về</a></p>
+		 	<p class="text-center">Bạn chưa có tài khoản? <span><a href="">Đăng ký</a></p>
 	</div>
 </div>
 	<script type="text/javascript" src='js/jquery.min.js'></script>

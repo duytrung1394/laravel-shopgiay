@@ -144,6 +144,7 @@ class PageController extends Controller
             $customer->gender     = $request->txtGender;
             $customer->address    = $request->txtAddress;
             $customer->phone      = $request->txtPhone;
+            if(Auth::check()) { $customer->user_id = Auth::user()->id;} 
             if($customer->save())
             {   //lưu thonong tin dơn hàng
                 $customer_id       = Customer::max('id');   
@@ -190,7 +191,7 @@ class PageController extends Controller
                     dispatch(new SendBillInfoMail($customer, Cart::content(), $total_price, $coupon_value));
                     Cart::destroy();
                     session()->forget('coupon');
-                    return redirect('thanh-toan')->with('success',"Thanh toán thành công. Nhấp vào <a href='' >đây</a> để về trang chủ");
+                    return redirect('thanh-toan')->with('success',"Thanh toán thành công. Bạn có thể kiểm tra email thanh toán để xem đơn hàng, Nhấp vào <a href='". route('trang-chu')."' style='color:#333' >đây</a> để về trang chủ");
                 }else{
                     return redirect('thanh-toan')->with('loi',"Không thể lưu lại thông tin đơn hàng");
                 }
@@ -300,5 +301,32 @@ class PageController extends Controller
        }else{
            return redirect(route("get.password"))->with('error','Mật khẩu cũ không chính xác');
        }
+    }
+    public function getLogin(){
+        if(Auth::check()){
+            return redirect(route('trang-chu'));
+        }else{
+            return view('page.login');
+        }
+    }
+    public function postLogin(Request $request){
+        $this->validate($request, [
+            "txtEmail" => "required|email",
+            "txtPassword" => "required"
+        ],[
+            "txtEmail.required" => "Bạn phải nhập email",
+            "txtEmail.required" => "Bạn phải nhập email",
+            "txtPassword.required" => "Bạn phải nhập mật khẩu"
+        ]);
+        $credentials = [
+            'email' => $request->txtEmail,
+            'password' => $request->txtPassword,
+            'active' => 1
+        ];
+        if(Auth::attempt($credentials)){
+            return redirect()->back();
+        }else{
+            return redirect(route('get.login'))->with('error','Sai email, mật khẩu hoặc tài khoản của bạn chưa được kích hoạt');
+        }
     }
 }

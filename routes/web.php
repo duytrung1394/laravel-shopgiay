@@ -27,9 +27,13 @@ Route::post('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@postCheckout
 
 Route::get('dang-ky',['as'=>'dangky','uses'=>'PageController@getDangKy']);
 
-Route::post('dang-ky',['as'=>'dangky','uses'=>'PageController@postDangKy']);
+Route::get('dang-nhap',['as'=>'get.login','uses'=>'PageController@getLogin']);
 
+Route::post('dang-nhap',['as'=>'post.login','uses'=>'PageController@postLogin']);
 
+Route::get('dang-xuat','PageController@getDangXuat');
+
+Route::get('kich-hoat/token/{token}',['as'=>'activation','uses'=>'PageController@getActivationUser']);
 
 Route::group(['prefix'=>'cai-dat','middleware'=>'userLogin'], function (){
 	Route::get('profile',['as'=>'user_profile', 'uses'=>'PageController@getUserProfile']);
@@ -41,24 +45,21 @@ Route::group(['prefix'=>'cai-dat','middleware'=>'userLogin'], function (){
 	Route::post('password',['as'=>'post.password', 'uses'=>'PageController@postChangePassword']);
 });
 
+Route::group(['prefix'=>'ajax'],function (){
+	Route::post('add-to-cart','AjaxController@postAjaxAddtoCart');
 
-Route::get('kich-hoat/token/{token}',['as'=>'activation','uses'=>'PageController@getActivationUser']);
-// Route::get("danhsach","PageController@getDanhsach");
-Route::post('ajax/add-to-cart','AjaxController@postAjaxAddtoCart');
+	Route::post('add-coupon','AjaxController@postAjaxAddCounpon');
 
-Route::post('ajax/add-coupon','AjaxController@postAjaxAddCounpon');
+	Route::post("remove/item",'AjaxController@postAjaxRemoveProduct');
 
-Route::post("ajax/remove/item",'AjaxController@postAjaxRemoveProduct');
+	Route::post('xuly-quantity','AjaxController@postAjaxXulyQuantity');
 
-Route::post('ajax/xuly-quantity','AjaxController@postAjaxXulyQuantity');
+	Route::post('filter','AjaxController@postAjaxFilterPaginate');
 
-Route::post('ajax/filter','AjaxController@postAjaxFilterPaginate');
+	Route::post('search','AjaxController@postAjaxSearch');
 
-Route::post('ajax/search','AjaxController@postAjaxSearch');
-
-Route::post('dang-nhap','AjaxController@postAjaxDangnhap');
-
-Route::get('dang-xuat','PageController@getDangXuat');
+	Route::post('dang-nhap',['as'=>'ajax.login','uses'=>'AjaxController@postAjaxDangnhap']);
+});
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin'],function(){
 	Route::get('/',['as'=>'admin-index','uses'=>'CategoryController@getIndexAdmin']);

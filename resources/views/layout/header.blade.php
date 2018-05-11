@@ -25,7 +25,7 @@
 							    	<?php 	$size = App\Size::find($row->options->size_id);
 							    			$size_name  = $size->name;
 							    	?>
-							    	<p class='product-price product-price__popup'><span>Size: {{$size_name}}</span> | <span class=''>{{$row->price}}</span> * {{$row->qty}}</p>
+							    	<p class='product-price product-price__popup'><span>Size: {{$size_name}}</span> | <span class=''>{{ number_format($row->price) }}</span> * {{$row->qty}} vnđ</p>
 							  	</div>
 							</div>
 							@endforeach
@@ -84,7 +84,7 @@
 			 	<li class="nav-item login-link">
 			    	<a class="nav-link small-hidden login-select" href="javascript:void(0)">Đăng nhập</a>
 			    	<div class="dropdown-nav popup__login-body small-hidden ">
-			    		<form action="dang-nhap" method="post" id='form-login'>
+			    		<form action="{{route('ajax.login')}}" method="post" id='form-login'>
 				    		<p class="login-title text-center">Đăng nhập</p>
 				    		<div class="field__input-wrapper">
 				    			<input type="text" name="txtEmail" placeholder="Email" class='input-email'>
