@@ -40,7 +40,7 @@ class StatisticsController extends Controller
                 FROM dates LEFT JOIN bills on Cast(dates.date as date) = Cast(bills.created_at as date) 
                 WHERE dates.date >= :from_date  and dates.date <= :to_date
                 GROUP BY day
-+               ORDER BY day ASC";
+                ORDER BY day ASC";
                 $title = "Lọc theo ngày từ ngày ".$from_date_format." đến ".$to_date_format;
                 break;
             case 'month' :

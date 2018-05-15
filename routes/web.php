@@ -27,6 +27,8 @@ Route::post('thanh-toan',['as'=>'thanhtoan','uses'=>'PageController@postCheckout
 
 Route::get('dang-ky',['as'=>'dangky','uses'=>'PageController@getDangKy']);
 
+Route::post('dang-ky',['as'=>'dangky','uses'=>'PageController@postDangKy']);
+
 Route::get('dang-nhap',['as'=>'get.login','uses'=>'PageController@getLogin']);
 
 Route::post('dang-nhap',['as'=>'post.login','uses'=>'PageController@postLogin']);
