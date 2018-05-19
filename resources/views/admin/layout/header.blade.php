@@ -14,6 +14,35 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>
+                    </a>
+                    @if(Auth::guard('admins')->user()->level == 2)
+                            <?php $user = Auth::guard('admins')->user();
+                            ?>
+                            @if(count($user->notifications) > 0 )
+                                <ul class="dropdown-menu dropdown-user dropdown-medium">
+                                @foreach($user->unreadNotifications as $key => $notification)
+                                    @if($key < 5)
+                                       <?php $data_noti = $notification->data;
+                                            $data_bill_Detail = $data_noti['billDetail'];
+                                            $date = $data_noti['billCreatedTime'];
+                                            $date = \Carbon\Carbon::parse($date['date']);
+                                            $after_format = $date->format('d-m-Y H:i:s');
+                                       ?>
+                                       <li><a href="{{route('admin.detail.bill',$data_bill_Detail['id'])}}">Đơn đặt hàng mới nhất vào lúc: {{$after_format}}</a></li>
+                                    @endif
+                                @endforeach
+                                </ul>
+                            @else 
+                                <ul class="dropdown-menu dropdown-user dropdown-medium">
+                                    <p class='text-center text-warning mr-top-10'>Chưa có thông báo nào</p>
+                                </ul>    
+                            @endif  
+                        @endif
+                    <!-- /.dropdown-user -->
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">

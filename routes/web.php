@@ -174,7 +174,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>'loginAdmin']
 
 		Route::get('xoa/{id}','BillController@getDelBill');
 
-		Route::get('chi-tiet/{id}','BillController@getDetailBill');
+		Route::get('chi-tiet/{id}',['as'=>'admin.detail.bill', 'uses'=>'BillController@getDetailBill']);
 
 		Route::get('chi-tiet/xoa/{id}','BillController@getDelDetailBill');
 	});

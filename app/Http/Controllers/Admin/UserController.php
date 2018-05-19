@@ -34,8 +34,17 @@ class UserController extends Controller
     }
     public function getListUser()
     {
-    	$users = User::all();
 
+    	$users = User::all();
+        $user = User::where('level',2)->get();
+        // $userx = User::find(24);
+        // foreach($userx->notifications as $noti)
+        // {            
+        //     $data = $noti->data;
+        //     $time = $data['billCreatedTime'];
+        //     echo $time['date'];
+        // }
+        // // dd($user->notifications);
     	return view('admin.user.list_user',compact('users'));
     }
 

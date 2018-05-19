@@ -36,17 +36,14 @@
                             </div>
                         @endif
                         <form action="" method="POST">
-                            <div class="form-group">
-                                <label>Tên</label>
-                                <input class="form-control" name="txtName" placeholder="Điền vào tên User"  value="{{ $user->name}}"/>
-                            </div>
+                            
                              <div class="form-group">
                                 <label>Tên</label>
-                                <input class="form-control" name="txtFirstName" placeholder="Điền vào họ User" value="{!! old('$user->first_name') !!}"/>
+                                <input class="form-control" name="txtFirstName" placeholder="Điền vào họ User" value="{!! $user->first_name !!}"/>
                             </div>
                             <div class="form-group">
                                 <label>Họ</label>
-                                <input class="form-control" name="txtLastName" placeholder="Điền vào tên User" value="{!! old('$user->last_name') !!}"/>
+                                <input class="form-control" name="txtLastName" placeholder="Điền vào tên User" value="{!! $user->last_name !!}"/>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

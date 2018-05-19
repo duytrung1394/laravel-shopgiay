@@ -23,6 +23,8 @@ use App\Jobs\SendActivationMail;
 use App\Jobs\SendBillInfoMail;
 use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\UserRequest;
+use App\Notifications\checkoutNoti;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -190,6 +192,16 @@ class PageController extends Controller
                         
                     }
                     dispatch(new SendBillInfoMail($customer, Cart::content(), $total_price, $coupon_value));
+                    // send notifications
+                    $users = User::where('level', 2)->get();
+                    
+                    $when = Carbon::now()->addMinutes(1);
+
+                    $bill = Bills::find($bill_id);
+                    
+                    // send notification
+                    \Notification::send($users, (new checkoutNoti($bill))->delay($when));
+
                     Cart::destroy();
                     session()->forget('coupon');
                     return redirect('thanh-toan')->with('success',"Thanh toán thành công. Bạn có thể kiểm tra email thanh toán để xem đơn hàng, Nhấp vào <a href='". route('trang-chu')."' style='color:#333' >đây</a> để về trang chủ");
@@ -271,7 +283,7 @@ class PageController extends Controller
         $user->phone      = $request->txtPhone;
         $user->save();
 
-        return redirect(route('user_profile'))->with('success','Thành công');
+        return redirect(route('user.profile'))->with('success','Thành công');
     }
 
     public function getChangePassword(){
