@@ -195,7 +195,7 @@ class PageController extends Controller
                     // send notifications
                     $users = User::where('level', 2)->get();
                     
-                    $when = Carbon::now()->addMinutes(1);
+                    $when = Carbon::now()->addSeconds(10);
 
                     $bill = Bills::find($bill_id);
                     
