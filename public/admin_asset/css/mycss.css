@@ -39,8 +39,14 @@
 .type-report span{
 	margin-left: 15px;
 }
+.dropdown-toggle i{
+	font-size: 1.2em;
+}
 .dropdown-medium{
-	width: 365px !important;
+	width: 370px !important;
+	height: 250px;
+	font-size: 0.95em;
+	overflow-y: auto;
 }
 .text-center{
 	text-align: center;
@@ -48,6 +54,46 @@
 .mr-top-10{
 	margin-top:10px;
 }
+.mr-bot-10{
+	margin-bottom: 10px;
+}
+.clear-float{
+	clear: both;
+}
 .text-warning{
 	color: rosybrown;
+}
+.btn-right{
+	float: right;
+}
+.btn-all-read{
+	margin: 4px;
+	background-color: steelblue;
+	color: white;
+	font-size: 0.95em;
+}
+.btn-all-read:hover{
+	background-color: white;
+	border: 1px solid #0099CC;
+}
+.noti_badge{
+    padding: 5px;
+    box-sizing: initial;
+    font-size: 0.95em !important;
+    text-align: center;
+    border-radius: 50%;    
+    line-height: 10px;
+    box-sizing: content-box;  
+	position: absolute;
+	top: 3px;
+	right: 3px;
+	background-color: lightslategrey;
+	color: #fff;
+}
+.noti_exists{
+	color: #fff;
+	background-color: #fa3e3e;
+}
+.dropdown-noti_icon{
+	position: relative;
 }

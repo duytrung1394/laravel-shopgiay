@@ -13,24 +13,32 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>
-                    </a>
                     @if(Auth::guard('admins')->user()->level == 2)
-                            <?php $user = Auth::guard('admins')->user();
-                            ?>
+                        <?php $user = Auth::guard('admins')->user();
+                        ?>
+                    <a class="dropdown-toggle dropdown-noti_icon" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i><span class='noti_badge @if(count($user->unreadNotifications) > 0)noti_exists @endif'>@if (count($user->unreadNotifications) > 0) {{ count($user->unreadNotifications) }}@else 0 @endif</span>
+                    </a>
                             @if(count($user->notifications) > 0 )
                                 <ul class="dropdown-menu dropdown-user dropdown-medium">
-                                @foreach($user->unreadNotifications as $key => $notification)
-                                    @if($key < 5)
-                                       <?php $data_noti = $notification->data;
-                                            $data_bill_Detail = $data_noti['billDetail'];
-                                            $date = $data_noti['billCreatedTime'];
-                                            $date = \Carbon\Carbon::parse($date['date']);
-                                            $after_format = $date->format('d-m-Y H:i:s');
-                                       ?>
-                                       <li><a href="{{route('admin.detail.bill',$data_bill_Detail['id'])}}">Đơn đặt hàng mới nhất vào lúc: {{$after_format}}</a></li>
-                                    @endif
+                                <li class="mr-bot-10">
+                                    <button class="btn btn-small btn-all-read btn-right">Đánh dấu tất cả đã đọc</button> 
+                                    <div class="clear-float"></div>
+                                </li>
+                                @foreach($user->notifications as $key => $notification)
+                                    <?php $data_noti = $notification->data;
+                                        $data_bill_Detail = $data_noti['billDetail'];
+                                        $date = $data_noti['billCreatedTime'];
+                                        $date = \Carbon\Carbon::parse($date['date']);
+                                        $after_format = $date->format('d-m-Y H:i:s');
+
+                                        $hightLigth = "color: #007f7f";
+                                        if($notification->read_at != null){
+                                            $hightLigth = "color: #7f7f7f";
+                                        }
+                                    ?>
+                                    <li><a href="{{route('admin.detail.bill',$data_bill_Detail['id'])}}" style="{{$hightLigth}}">Đơn đặt hàng mới nhất vào lúc: {{$after_format}}</a></li>
+                                    <?php $notification->markAsRead(); ?>
                                 @endforeach
                                 </ul>
                             @else 

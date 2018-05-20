@@ -36,7 +36,9 @@ class UserController extends Controller
     {
 
     	$users = User::all();
-        $user = User::where('level',2)->get();
+        
+        // user->notification is array;
+        // $user = User::where('level',2)->get();
         // $userx = User::find(24);
         // foreach($userx->notifications as $noti)
         // {            
